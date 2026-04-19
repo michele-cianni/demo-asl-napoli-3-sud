@@ -1,0 +1,92 @@
+// ─── Come fare per + Servizi ───
+
+const ServicesGrid = () => {
+  const services = [
+    { icon: "calendar", title: "Prenotare una visita", desc: "CUP online, Farmacup e numero verde 800 019 774", tone: "primary" },
+    { icon: "document", title: "Ritirare un referto", desc: "Accedi con SPID o CIE al FSE per scaricare gli esiti", tone: "primary" },
+    { icon: "users",    title: "Cambiare medico di base", desc: "Scegli o revoca il tuo medico di medicina generale", tone: "teal" },
+    { icon: "shield",   title: "Richiedere un'esenzione", desc: "Per reddito, patologia o invalidità", tone: "teal" },
+    { icon: "pill",     title: "Assistenza farmaceutica", desc: "Ricette dematerializzate, farmaci a distribuzione diretta", tone: "primary" },
+    { icon: "heart",    title: "Donare sangue o organi", desc: "Centri trasfusionali e dichiarazione di volontà", tone: "warm" },
+    { icon: "hospital", title: "Trovare una struttura", desc: "Distretti, presidi ospedalieri, consultori, SERT", tone: "teal" },
+    { icon: "phone",    title: "Segnalare un disservizio", desc: "URP — Ufficio Relazioni con il Pubblico", tone: "primary" },
+  ];
+
+  const tonesMap = {
+    primary: { bg: "var(--bi-primary-050)", fg: "var(--bi-primary)" },
+    teal:    { bg: "var(--bi-teal-100)",    fg: "var(--bi-teal-700)" },
+    warm:    { bg: "var(--bi-warm-100)",    fg: "var(--bi-warm)" },
+  };
+
+  return (
+    <Section bg="var(--bi-surface)" id="servizi">
+      <SectionHeading
+        eyebrow="Come fare per"
+        title="Le azioni più richieste dai cittadini"
+        subtitle="Percorsi guidati, passo per passo. Scopri come svolgere le pratiche più comuni con l'ASL."
+        action={<ArrowLink>Vedi tutti i servizi</ArrowLink>}
+      />
+
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(4, 1fr)",
+        gap: 16,
+      }}>
+        {services.map((s, i) => {
+          const t = tonesMap[s.tone];
+          return (
+            <a key={i} href="#" style={{
+              background: "var(--bi-surface)",
+              border: "1px solid var(--bi-border)",
+              borderRadius: 12,
+              padding: 24,
+              display: "flex", flexDirection: "column",
+              gap: 16, minHeight: 200,
+              transition: "all 0.2s ease",
+              color: "var(--bi-ink-900)",
+              position: "relative",
+              overflow: "hidden",
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = "var(--bi-primary)";
+              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = "var(--shadow-md)";
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = "var(--bi-border)";
+              e.currentTarget.style.transform = "translateY(0)";
+              e.currentTarget.style.boxShadow = "none";
+            }}>
+              <div style={{
+                width: 44, height: 44, borderRadius: 10,
+                background: t.bg, color: t.fg,
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <Icon name={s.icon} size={22} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div style={{
+                  fontFamily: "var(--ff-serif)", fontSize: 18, fontWeight: 500,
+                  color: "var(--bi-ink-900)", marginBottom: 6, lineHeight: 1.25,
+                }}>
+                  {s.title}
+                </div>
+                <div style={{ fontSize: 13, color: "var(--bi-ink-500)", lineHeight: 1.5 }}>
+                  {s.desc}
+                </div>
+              </div>
+              <div style={{
+                color: "var(--bi-primary)", display: "flex", alignItems: "center", gap: 4,
+                fontSize: 13, fontWeight: 700,
+              }}>
+                Scopri come <Icon name="arrow-right" size={14} />
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </Section>
+  );
+};
+
+Object.assign(window, { ServicesGrid });

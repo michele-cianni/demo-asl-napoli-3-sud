@@ -1,0 +1,12 @@
+# Cartella temporanea task (non versionata)
+temp/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dependencies (per eventuali sviluppi futuri)
+node_modules/
