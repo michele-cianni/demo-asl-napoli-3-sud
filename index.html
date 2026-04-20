@@ -24,101 +24,41 @@
 <script type="text/babel" src="src/waiting.jsx"></script>
 <script type="text/babel" src="src/screening.jsx"></script>
 <script type="text/babel" src="src/news.jsx"></script>
+<script type="text/babel" src="src/audience.jsx"></script>
+<script type="text/babel" src="src/tenders.jsx"></script>
+<script type="text/babel" src="src/feedback.jsx"></script>
 <script type="text/babel" src="src/footer.jsx"></script>
-<script type="text/babel" src="frames/ios-frame.jsx"></script>
-<script type="text/babel" src="src/mobile.jsx"></script>
-<script type="text/babel" src="src/tweaks.jsx"></script>
+<script type="text/babel" src="src/chatbot.jsx"></script>
+
+<script>
+(function(){
+  var p={primary:"#00798C",primary800:"#00606E",primary100:"#CCE4E8",primary050:"#E6F2F4"};
+  var r=document.documentElement.style;
+  r.setProperty("--bi-primary",p.primary);
+  r.setProperty("--bi-primary-800",p.primary800);
+  r.setProperty("--bi-primary-100",p.primary100);
+  r.setProperty("--bi-primary-050",p.primary050);
+})();
+</script>
 
 <script type="text/babel">
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
-  "theme": "light",
-  "primary": "teal",
-  "hero": "search",
-  "density": "regular"
-}/*EDITMODE-END*/;
-
-const primaryMap = {
-  blu:      { primary: "#0066CC", primary800: "#004080", primary100: "#D2E6F9", primary050: "#EDF4FC" },
-  teal:     { primary: "#00798C", primary800: "#00606E", primary100: "#CCE4E8", primary050: "#E6F2F4" },
-  campania: { primary: "#003D82", primary800: "#002957", primary100: "#C9D7EA", primary050: "#E8EEF7" },
-  magenta:  { primary: "#A31A57", primary800: "#7A1240", primary100: "#F0CFDD", primary050: "#F9E8EE" },
-};
-
 function App() {
-  const [tweaks, setTweaks] = React.useState(() => {
-    try {
-      const s = localStorage.getItem("asl-tweaks");
-      return s ? { ...TWEAK_DEFAULTS, ...JSON.parse(s) } : TWEAK_DEFAULTS;
-    } catch { return TWEAK_DEFAULTS; }
-  });
-  const [editMode, setEditMode] = React.useState(false);
-
-  // Apply tweaks
-  React.useEffect(() => {
-    document.documentElement.setAttribute("data-theme", tweaks.theme);
-    const p = primaryMap[tweaks.primary] || primaryMap.blu;
-    document.documentElement.style.setProperty("--bi-primary", p.primary);
-    document.documentElement.style.setProperty("--bi-primary-800", p.primary800);
-    document.documentElement.style.setProperty("--bi-primary-100", p.primary100);
-    document.documentElement.style.setProperty("--bi-primary-050", p.primary050);
-    try { localStorage.setItem("asl-tweaks", JSON.stringify(tweaks)); } catch {}
-  }, [tweaks]);
-
-  // Edit mode handshake
-  React.useEffect(() => {
-    const handler = (e) => {
-      if (!e.data) return;
-      if (e.data.type === "__activate_edit_mode") setEditMode(true);
-      if (e.data.type === "__deactivate_edit_mode") setEditMode(false);
-    };
-    window.addEventListener("message", handler);
-    window.parent.postMessage({ type: "__edit_mode_available" }, "*");
-    return () => window.removeEventListener("message", handler);
-  }, []);
-
-  const update = (patch) => {
-    setTweaks(t => {
-      const next = { ...t, ...patch };
-      try {
-        window.parent.postMessage({ type: "__edit_mode_set_keys", edits: patch }, "*");
-      } catch {}
-      return next;
-    });
-  };
-
-  const toggleTheme = () => update({ theme: tweaks.theme === "dark" ? "light" : "dark" });
-
-  const HeroVariant =
-    tweaks.hero === "actions"  ? HeroActions :
-    tweaks.hero === "campaign" ? HeroCampaign :
-    Hero;
-
   return (
     <div data-screen-label="01 Homepage desktop" style={{ background: "var(--bi-bg)" }}>
       <TopBar />
-      <BrandRow onToggleTheme={toggleTheme} theme={tweaks.theme} />
+      <BrandRow />
       <MainNav />
       <AlertBar />
-      <HeroVariant />
+      <Hero />
       <ServicesGrid />
-      <WaitingLists />
-      <Screening />
       <CTABand />
       <News />
+      <AudienceGrid />
+      <Tenders />
       <Facilities />
-      <MobilePreview />
+      <FeedbackWidget />
       <Footer />
-
-      {editMode && (
-        <TweaksPanel
-          tweaks={tweaks}
-          onChange={update}
-          onClose={() => {
-            setEditMode(false);
-            window.parent.postMessage({ type: "__edit_mode_deactivate" }, "*");
-          }}
-        />
-      )}
+      <Chatbot />
     </div>
   );
 }
