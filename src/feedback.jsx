@@ -1,44 +1,46 @@
 // ─── F3 — Valutazione chiarezza informativa (PRD §6.3, obbligatoria AGID) ───
 
 const FeedbackWidget = () => {
-  const [step, setStep] = React.useState("question"); // question | yes-detail | no-detail | thanks
-  const [answer, setAnswer] = React.useState(null);
+  const [step, setStep] = React.useState("rating"); // rating | options | comment | thanks
+  const [rating, setRating] = React.useState(0);
+  const [hoverRating, setHoverRating] = React.useState(0);
   const [selected, setSelected] = React.useState([]);
   const [comment, setComment] = React.useState("");
 
-  const yesOptions = [
-    "Le informazioni erano chiare e complete",
-    "Ho trovato facilmente ciò che cercavo",
-    "Il linguaggio era semplice e comprensibile",
-    "I passaggi erano ben spiegati",
+  const lowOptions = [
+    "Indicazioni non chiare",
+    "Indicazioni incomplete",
+    "Confusione sulla corretta procedura",
+    "Problemi tecnici",
+    "Altro",
   ];
 
-  const noOptions = [
-    "Le informazioni non erano sufficienti",
-    "Il linguaggio era difficile da capire",
-    "Non ho trovato quello che cercavo",
-    "Le istruzioni non erano chiare",
-    "Le informazioni sembrano non aggiornate",
+  const highOptions = [
+    "Indicazioni chiare",
+    "Indicazioni complete",
+    "Chiarezza procedurale",
+    "Nessun problema tecnico",
+    "Altro",
   ];
 
-  const toggleOption = (opt) => {
+  const isLow = rating <= 3;
+
+  const toggleOption = (opt) =>
     setSelected((prev) =>
       prev.includes(opt) ? prev.filter((o) => o !== opt) : [...prev, opt],
     );
-  };
 
-  const handlePrimary = (val) => {
-    setAnswer(val);
+  const handleStarClick = (r) => {
+    setRating(r);
     setSelected([]);
     setComment("");
-    setStep(val === "yes" ? "yes-detail" : "no-detail");
+    setStep("options");
   };
 
-  const handleSubmit = () => setStep("thanks");
-
   const handleReset = () => {
-    setStep("question");
-    setAnswer(null);
+    setStep("rating");
+    setRating(0);
+    setHoverRating(0);
     setSelected([]);
     setComment("");
   };
@@ -50,6 +52,45 @@ const FeedbackWidget = () => {
     padding: "32px 40px",
     marginTop: 0,
   };
+
+  const eyebrow = (
+    <div
+      style={{
+        fontSize: 11,
+        fontWeight: 700,
+        letterSpacing: 1.2,
+        textTransform: "uppercase",
+        color: "var(--bi-primary)",
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        marginBottom: 8,
+      }}
+    >
+      <span
+        style={{
+          width: 20,
+          height: 2,
+          background: "var(--bi-primary)",
+          display: "inline-block",
+        }}
+      />
+      Valutazione della pagina
+    </div>
+  );
+
+  const starRecap = (
+    <div style={{ display: "flex", gap: 4, marginBottom: 16 }}>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <span
+          key={star}
+          style={{ color: rating >= star ? "#F5A623" : "var(--bi-ink-300)" }}
+        >
+          <Icon name="star" size={20} />
+        </span>
+      ))}
+    </div>
+  );
 
   if (step === "thanks") {
     return (
@@ -87,7 +128,7 @@ const FeedbackWidget = () => {
                   marginBottom: 4,
                 }}
               >
-                Grazie per il tuo feedback!
+                Grazie, il tuo parere ci aiuterà a migliorare il sito!
               </div>
               <div style={{ fontSize: 14, color: "var(--bi-ink-500)" }}>
                 Il tuo contributo ci aiuta a migliorare la qualità delle
@@ -122,110 +163,73 @@ const FeedbackWidget = () => {
     <div style={{ background: "var(--bi-bg-alt)", padding: "40px 0" }}>
       <div className="container">
         <div style={containerStyle}>
-          {/* Titolo fisso */}
-          <div style={{ marginBottom: step === "question" ? 20 : 24 }}>
-            <div
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: 1.2,
-                textTransform: "uppercase",
-                color: "var(--bi-primary)",
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
-                marginBottom: 8,
-              }}
-            >
-              <span
-                style={{
-                  width: 20,
-                  height: 2,
-                  background: "var(--bi-primary)",
-                  display: "inline-block",
-                }}
-              />
-              Valutazione della pagina
-            </div>
-            <div
-              style={{
-                fontFamily: "var(--ff-serif)",
-                fontSize: 22,
-                fontWeight: 500,
-                color: "var(--bi-ink-900)",
-              }}
-            >
-              Queste informazioni ti sono state utili?
-            </div>
-          </div>
+          {eyebrow}
 
-          {step === "question" && (
-            <div style={{ display: "flex", gap: 12 }}>
-              <button
-                onClick={() => handlePrimary("yes")}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "10px 24px",
-                  borderRadius: 4,
-                  border: "2px solid var(--bi-primary)",
-                  background: "var(--bi-primary)",
-                  color: "#fff",
-                  fontWeight: 700,
-                  fontSize: 15,
-                  cursor: "pointer",
-                }}
-              >
-                <Icon name="check" size={16} />
-                Sì
-              </button>
-              <button
-                onClick={() => handlePrimary("no")}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "10px 24px",
-                  borderRadius: 4,
-                  border: "2px solid var(--bi-primary)",
-                  background: "transparent",
-                  color: "var(--bi-primary)",
-                  fontWeight: 700,
-                  fontSize: 15,
-                  cursor: "pointer",
-                }}
-              >
-                <Icon name="close" size={16} />
-                No
-              </button>
-            </div>
-          )}
-
-          {(step === "yes-detail" || step === "no-detail") && (
-            <div>
+          {step === "rating" && (
+            <>
               <div
                 style={{
-                  marginBottom: 16,
-                  fontWeight: 600,
-                  fontSize: 15,
-                  color: "var(--bi-ink-700)",
+                  fontFamily: "var(--ff-serif)",
+                  fontSize: 22,
+                  fontWeight: 500,
+                  color: "var(--bi-ink-900)",
+                  marginBottom: 20,
                 }}
               >
-                {step === "yes-detail"
-                  ? "Cosa ti è stato più utile? (puoi scegliere più opzioni)"
-                  : "Cosa non ti è risultato chiaro? (puoi scegliere più opzioni)"}
+                Quanto sono chiare le informazioni su questa pagina?
               </div>
+              <div style={{ display: "flex", gap: 4 }}>
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <button
+                    key={star}
+                    onClick={() => handleStarClick(star)}
+                    onMouseEnter={() => setHoverRating(star)}
+                    onMouseLeave={() => setHoverRating(0)}
+                    aria-label={`${star} stelle su 5`}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 4,
+                      color:
+                        (hoverRating || rating) >= star
+                          ? "#F5A623"
+                          : "var(--bi-ink-300)",
+                      transition: "color 0.1s",
+                    }}
+                  >
+                    <Icon name="star" size={32} />
+                  </button>
+                ))}
+              </div>
+            </>
+          )}
 
+          {step === "options" && (
+            <div>
+              {starRecap}
+              <div
+                style={{
+                  fontFamily: "var(--ff-serif)",
+                  fontSize: 22,
+                  fontWeight: 500,
+                  color: "var(--bi-ink-900)",
+                  marginBottom: 16,
+                }}
+              >
+                {isLow
+                  ? "Dove hai incontrato le maggiori difficoltà?"
+                  : "Quali sono stati gli aspetti che hai preferito?"}
+              </div>
               <div
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
                   gap: 10,
-                  marginBottom: 20,
+                  marginBottom: 24,
                 }}
               >
-                {(step === "yes-detail" ? yesOptions : noOptions).map((opt) => (
+                {(isLow ? lowOptions : highOptions).map((opt) => (
                   <button
                     key={opt}
                     onClick={() => toggleOption(opt)}
@@ -247,12 +251,63 @@ const FeedbackWidget = () => {
                         : "var(--bi-ink-700)",
                     }}
                   >
-                    {selected.includes(opt) && <Icon name="check" size={12} />}{" "}
+                    {selected.includes(opt) && (
+                      <Icon name="check" size={12} />
+                    )}{" "}
                     {opt}
                   </button>
                 ))}
               </div>
+              <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                <button
+                  onClick={() => setStep("comment")}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 8,
+                    padding: "10px 24px",
+                    borderRadius: 4,
+                    border: "2px solid var(--bi-primary)",
+                    background: "var(--bi-primary)",
+                    color: "#fff",
+                    fontWeight: 700,
+                    fontSize: 15,
+                    cursor: "pointer",
+                  }}
+                >
+                  Avanti
+                  <Icon name="arrow-right" size={16} />
+                </button>
+                <button
+                  onClick={() => setStep("comment")}
+                  style={{
+                    background: "none",
+                    border: "none",
+                    color: "var(--bi-ink-500)",
+                    fontSize: 14,
+                    cursor: "pointer",
+                  }}
+                >
+                  Salta
+                </button>
+              </div>
+            </div>
+          )}
 
+          {step === "comment" && (
+            <div>
+              {starRecap}
+              <div
+                style={{
+                  fontFamily: "var(--ff-serif)",
+                  fontSize: 22,
+                  fontWeight: 500,
+                  color: "var(--bi-ink-900)",
+                  marginBottom: 16,
+                }}
+              >
+                Vuoi aggiungere altri dettagli?
+              </div>
               <div style={{ marginBottom: 20 }}>
                 <label
                   style={{
@@ -299,10 +354,9 @@ const FeedbackWidget = () => {
                   {comment.length}/500 caratteri
                 </div>
               </div>
-
               <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
                 <button
-                  onClick={handleSubmit}
+                  onClick={() => setStep("thanks")}
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
