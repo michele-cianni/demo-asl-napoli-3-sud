@@ -102,75 +102,78 @@ const CTABand = () => (
 // ─── Footer ───
 const Footer = () => (
   <footer style={{ background: "var(--bi-ink-900)", color: "rgba(255,255,255,0.8)" }}>
-    <div className="container" style={{ padding: "64px 32px 24px" }}>
+    <div className="container" style={{ padding: "48px 32px 0" }}>
+
+      {/* Logo row */}
       <div style={{
-        display: "grid",
-        gridTemplateColumns: "1.4fr 1fr 1fr 1fr 1fr",
-        gap: 40, marginBottom: 48,
+        display: "flex", alignItems: "center", gap: 40,
+        paddingBottom: 40, borderBottom: "1px solid rgba(255,255,255,0.1)",
       }}>
-        <div>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-            <div style={{
-              width: 44, height: 44, borderRadius: 10,
-              background: "var(--bi-primary)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 3v18M3 12h18" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
-              </svg>
-            </div>
-            <div style={{ fontFamily: "var(--ff-serif)", color: "#fff", fontSize: 22, fontWeight: 500 }}>
-              ASL Napoli 3 Sud
-            </div>
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: 10,
+            background: "var(--bi-primary)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            flexShrink: 0,
+          }}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v18M3 12h18" stroke="#fff" strokeWidth="3" strokeLinecap="round"/>
+            </svg>
           </div>
-          <p style={{ fontSize: 14, lineHeight: 1.6, marginBottom: 24, maxWidth: 340 }}>
-            Via Marconi, 66 — 80059 Torre del Greco (NA)<br/>
-            C.F. / P.IVA 06321661211<br/>
-            PEC: protocollo@pec.aslnapoli3sud.it
-          </p>
-          <div style={{ display: "flex", gap: 10 }}>
-            {[
-              { n: "facebook" }, { n: "instagram" }, { n: "x" }, { n: "youtube" }, { n: "linkedin" },
-            ].map(s => (
-              <a key={s.n} href="#" style={{
-                width: 36, height: 36, borderRadius: "50%",
-                background: "rgba(255,255,255,0.08)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                color: "rgba(255,255,255,0.8)",
-              }}>
-                <Icon name={s.n} size={16} />
-              </a>
-            ))}
+          <div style={{ fontFamily: "var(--ff-serif)", color: "#fff", fontSize: 20, fontWeight: 500, lineHeight: 1.2 }}>
+            ASL Napoli 3 Sud
           </div>
         </div>
 
+        <div style={{ width: 1, height: 44, background: "rgba(255,255,255,0.2)", flexShrink: 0 }} />
+
+        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+          <div style={{
+            width: 44, height: 44, borderRadius: 10,
+            background: "rgba(255,255,255,0.10)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            flexShrink: 0,
+          }}>
+            <Icon name="shield" size={22} color="rgba(255,255,255,0.85)" />
+          </div>
+          <div style={{ fontFamily: "var(--ff-serif)", color: "#fff", fontSize: 20, fontWeight: 500, lineHeight: 1.2 }}>
+            Portale Sanitario Regionale
+          </div>
+        </div>
+      </div>
+
+      {/* 3 nav columns */}
+      <div style={{
+        display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 40,
+        padding: "48px 0",
+        borderBottom: "1px solid rgba(255,255,255,0.1)",
+      }}>
         {[
           {
-            title: "Servizi",
-            links: ["Prenotazione CUP", "Pagamenti PagoPA", "Ritiro referti online", "Cambio medico", "Liste d'attesa", "Fascicolo Sanitario"],
+            title: "Area Informativa",
+            links: ["Servizi e prestazioni", "Come fare per", "Strutture", "ASL Comunica"],
           },
           {
-            title: "L'ASL",
-            links: ["Chi siamo", "Direzione strategica", "Piano performance", "Bilancio", "Carta dei servizi", "Contatti"],
+            title: "Area Istituzionale",
+            links: ["Organizzazione", "Documenti", "Personale", "Lavora con noi", "Ufficio Relazioni con il Pubblico (URP)", "Centro Unico Prenotazioni (CUP)"],
           },
           {
             title: "Trasparenza",
-            links: ["Amministrazione Trasparente", "Albo Pretorio", "Bandi di gara", "Concorsi", "Privacy policy", "Cookie policy"],
-          },
-          {
-            title: "Aiuto",
-            links: ["URP", "Segnalazioni", "FAQ", "Accessibilità", "Dichiarazione di accessibilità", "Mappa del sito"],
+            links: ["Amministrazione trasparente", "Albo pretorio", "Carta dei servizi"],
           },
         ].map((col, i) => (
           <div key={i}>
             <div style={{
-              color: "#fff", fontWeight: 700, fontSize: 14,
-              textTransform: "uppercase", letterSpacing: 0.8, marginBottom: 16,
+              color: "#fff", fontWeight: 700, fontSize: 12,
+              textTransform: "uppercase", letterSpacing: 1, marginBottom: 20,
             }}>{col.title}</div>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 12 }}>
               {col.links.map(l => (
                 <li key={l}>
-                  <a href="#" style={{ color: "rgba(255,255,255,0.7)", fontSize: 14 }}>{l}</a>
+                  <a href="#" style={{ color: "rgba(255,255,255,0.7)", fontSize: 14, textDecoration: "none" }}
+                    onMouseEnter={e => e.currentTarget.style.textDecoration = "underline"}
+                    onMouseLeave={e => e.currentTarget.style.textDecoration = "none"}
+                  >{l}</a>
                 </li>
               ))}
             </ul>
@@ -178,17 +181,59 @@ const Footer = () => (
         ))}
       </div>
 
+      {/* CONTATTI + SEGUICI SU */}
       <div style={{
-        paddingTop: 24,
-        borderTop: "1px solid rgba(255,255,255,0.08)",
-        display: "flex", alignItems: "center", justifyContent: "space-between",
-        flexWrap: "wrap", gap: 16,
-        fontSize: 13, color: "rgba(255,255,255,0.55)",
+        display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40,
+        padding: "40px 0 48px",
       }}>
-        <div>© 2026 ASL Napoli 3 Sud · Azienda Sanitaria Locale</div>
-        <div style={{ display: "flex", gap: 20 }}>
-          <span>Sito realizzato seguendo le linee guida di Designers Italia</span>
-          <span>Powered by Bootstrap Italia</span>
+        <div>
+          <div style={{
+            color: "#fff", fontWeight: 700, fontSize: 12,
+            textTransform: "uppercase", letterSpacing: 1, marginBottom: 20,
+          }}>Contatti</div>
+          <p style={{ fontSize: 14, lineHeight: 1.8, margin: "0 0 12px" }}>
+            Via Marconi, 66 — 80059 Torre del Greco (NA)<br/>
+            C.F. / P.IVA 06321661211<br/>
+            PEC: protocollo@pec.aslnapoli3sud.it<br/>
+            +39 081 8727111
+          </p>
+          <a href="#" style={{ fontSize: 14, color: "rgba(255,255,255,0.7)", textDecoration: "underline" }}>
+            Invia una segnalazione
+          </a>
+        </div>
+        <div>
+          <div style={{
+            color: "#fff", fontWeight: 700, fontSize: 12,
+            textTransform: "uppercase", letterSpacing: 1, marginBottom: 20,
+          }}>Seguici su</div>
+          <div style={{ display: "flex", gap: 10 }}>
+            {["facebook", "instagram", "x", "youtube", "linkedin"].map(n => (
+              <a key={n} href="#" style={{
+                width: 40, height: 40, borderRadius: "50%",
+                background: "rgba(255,255,255,0.08)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                color: "rgba(255,255,255,0.8)",
+              }}>
+                <Icon name={n} size={18} />
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Bottom bar */}
+    <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+      <div className="container" style={{
+        padding: "20px 32px",
+        display: "flex", alignItems: "center", justifyContent: "space-between",
+        flexWrap: "wrap", gap: 12,
+        fontSize: 13, color: "rgba(255,255,255,0.5)",
+      }}>
+        <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+          {["Dichiarazione di accessibilità", "FAQ", "Informativa cookie", "Informativa privacy", "Note legali", "Mappa del sito"].map(l => (
+            <a key={l} href="#" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "underline", fontSize: 13 }}>{l}</a>
+          ))}
         </div>
       </div>
     </div>
