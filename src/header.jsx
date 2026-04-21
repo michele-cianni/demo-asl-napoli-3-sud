@@ -19,14 +19,7 @@ const TopBar = () => (
         gap: 24,
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 20,
-          flexWrap: "wrap",
-        }}
-      >
+      <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
         <a
           href="#"
           style={{
@@ -41,13 +34,6 @@ const TopBar = () => (
           Portale Regione Campania
           <Icon name="external" size={11} />
         </a>
-        <span style={{ opacity: 0.2 }}>|</span>
-        <a href="#" style={{ color: "rgba(255,255,255,0.85)", fontSize: 13 }}>
-          Amministrazione Trasparente
-        </a>
-        <a href="#" style={{ color: "rgba(255,255,255,0.85)", fontSize: 13 }}>
-          Albo Pretorio
-        </a>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <button
@@ -59,8 +45,7 @@ const TopBar = () => (
             fontSize: 13,
           }}
         >
-          <Icon name="globe" size={14} /> ITA{" "}
-          <Icon name="chevron-down" size={12} />
+          <Icon name="globe" size={14} /> ITA <Icon name="chevron-down" size={12} />
         </button>
         <span style={{ opacity: 0.2 }}>|</span>
         <button
@@ -95,179 +80,123 @@ const TopBar = () => (
 
 // ─── Brand row ───
 const BrandRow = () => (
-  <div
-    style={{
-      background: "var(--bi-surface)",
-      borderBottom: "1px solid var(--bi-border)",
-    }}
-  >
+  <div style={{ background: "var(--bi-surface)", borderBottom: "1px solid var(--bi-border)" }}>
     <div
       className="container"
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        height: 96,
+        height: 120,
         gap: 32,
       }}
     >
-      {/* Logo lockup */}
+      {/* Logo lockup — funge da link alla homepage */}
       <a
         href="index.html"
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 16,
-          color: "var(--bi-ink-900)",
+          gap: 18,
           textDecoration: "none",
         }}
       >
-        <div
-          style={{
-            width: 52,
-            height: 52,
-            borderRadius: 10,
-            background: "var(--bi-primary)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-            boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.2)",
-          }}
-        >
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
-            <path
-              d="M12 3v18M3 12h18"
-              stroke="#fff"
-              strokeWidth="3"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
-        <div style={{ lineHeight: 1.15 }}>
+        <img
+          src="https://www.aslnapoli3sud.it/o/na3theme-theme/images/logo_primario.png"
+          alt="ASL Napoli 3 Sud"
+          style={{ height: 68, width: "auto", objectFit: "contain" }}
+        />
+        <div style={{ lineHeight: 1.2 }}>
           <div
             style={{
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: 1.5,
-              color: "var(--bi-ink-500)",
-              textTransform: "uppercase",
-            }}
-          >
-            Regione Campania · Azienda Sanitaria Locale
-          </div>
-          <div
-            style={{
-              fontFamily: "var(--ff-serif)",
-              fontSize: 26,
-              fontWeight: 500,
+              fontFamily: "var(--ff-sans)",
+              fontSize: 30,
+              fontWeight: 700,
               color: "var(--bi-ink-900)",
-              marginTop: 2,
+              letterSpacing: -0.5,
             }}
           >
             ASL Napoli 3 Sud
           </div>
+          <div
+            style={{
+              fontSize: 12,
+              fontWeight: 600,
+              letterSpacing: 1.5,
+              color: "var(--bi-ink-500)",
+              textTransform: "uppercase",
+              marginTop: 4,
+            }}
+          >
+            Azienda Sanitaria Locale
+          </div>
         </div>
       </a>
 
-      {/* Right: urgent contacts + actions */}
-      <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
-        <div
+      {/* Destra: social + cerca */}
+      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span
+            style={{ fontSize: 13, color: "var(--bi-ink-500)", fontWeight: 600, whiteSpace: "nowrap" }}
+          >
+            Seguici su
+          </span>
+          {[
+            { name: "facebook", label: "Facebook" },
+            { name: "instagram", label: "Instagram" },
+            { name: "x", label: "X (Twitter)" },
+            { name: "youtube", label: "YouTube" },
+            { name: "linkedin", label: "LinkedIn" },
+          ].map((s) => (
+            <a
+              key={s.name}
+              href="#"
+              aria-label={s.label}
+              style={{ color: "var(--bi-ink-500)", display: "flex", lineHeight: 1 }}
+            >
+              <Icon name={s.name} size={22} />
+            </a>
+          ))}
+        </div>
+        <span style={{ width: 1, height: 24, background: "var(--bi-border)" }} />
+        <button
           style={{
-            display: "flex",
+            display: "inline-flex",
             alignItems: "center",
-            gap: 10,
-            paddingRight: 24,
-            borderRight: "1px solid var(--bi-border)",
+            gap: 8,
+            padding: "0 18px",
+            height: 40,
+            borderRadius: 20,
+            border: "1.5px solid var(--bi-primary)",
+            background: "transparent",
+            color: "var(--bi-primary)",
+            fontSize: 14,
+            fontWeight: 600,
+            cursor: "pointer",
           }}
         >
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              borderRadius: "50%",
-              background: "var(--bi-warm-100)",
-              color: "var(--bi-warm)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Icon name="ambulance" size={18} />
-          </div>
-          <div style={{ lineHeight: 1.15 }}>
-            <div
-              style={{
-                fontSize: 11,
-                color: "var(--bi-ink-500)",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: 0.6,
-              }}
-            >
-              Emergenza
-            </div>
-            <a
-              href="tel:112"
-              style={{
-                fontSize: 17,
-                fontWeight: 700,
-                color: "var(--bi-ink-900)",
-              }}
-            >
-              112 · 118
-            </a>
-          </div>
-        </div>
-
-        <Button variant="primary" icon="calendar">
-          Prenota con CUP
-        </Button>
+          <Icon name="search" size={16} />
+          Cerca nel sito
+        </button>
       </div>
     </div>
   </div>
 );
 
-// ─── Main navigation ───
+// ─── Main navigation (senza "Home" — il logo è il link alla homepage) ───
 const MainNav = ({ activeItem, active }) => {
-  activeItem = activeItem || active || "home";
+  activeItem = activeItem || active || "";
   const items = [
-    { id: "home", label: "Home", href: "index.html" },
-    {
-      id: "servizi",
-      label: "Servizi e prestazioni",
-      href: "page-servizi.html",
-      mega: true,
-    },
-    {
-      id: "come-fare-per",
-      label: "Come fare per",
-      href: "page-come-fare-per.html",
-      mega: true,
-    },
+    { id: "servizi", label: "Servizi e prestazioni", href: "page-servizi.html", mega: true },
+    { id: "come-fare-per", label: "Come fare per", href: "page-come-fare-per.html", mega: true },
     { id: "strutture", label: "Strutture", href: "#", mega: true },
     { id: "asl-comunica", label: "ASL comunica", href: "#" },
-    { id: "amministrazione", label: "Amministrazione", href: "#" },
   ];
   return (
-    <div
-      style={{
-        background: "var(--bi-primary)",
-        color: "#fff",
-        position: "sticky",
-        top: 0,
-        zIndex: 40,
-        boxShadow: "var(--shadow-sm)",
-      }}
-    >
+    <div style={{ background: "var(--bi-primary)", color: "#fff" }}>
       <div
         className="container"
-        style={{
-          display: "flex",
-          alignItems: "stretch",
-          justifyContent: "space-between",
-          height: 56,
-        }}
+        style={{ display: "flex", alignItems: "stretch", height: 56 }}
       >
         <nav style={{ display: "flex", alignItems: "stretch" }}>
           {items.map((item) => (
@@ -280,15 +209,13 @@ const MainNav = ({ activeItem, active }) => {
                 alignItems: "center",
                 gap: 8,
                 padding: "0 20px",
+                paddingTop: 3,
                 color: "#fff",
                 fontWeight: 600,
                 fontSize: 15,
-                borderBottom:
-                  activeItem === item.id
-                    ? "3px solid #fff"
-                    : "3px solid transparent",
-                paddingTop: 3,
                 textDecoration: "none",
+                borderBottom:
+                  activeItem === item.id ? "3px solid #fff" : "3px solid transparent",
               }}
             >
               {item.label}
@@ -296,40 +223,92 @@ const MainNav = ({ activeItem, active }) => {
             </a>
           ))}
         </nav>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <button
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-              padding: "0 16px",
-              height: 40,
-              borderRadius: 20,
-              background: "rgba(255,255,255,0.16)",
-              color: "#fff",
-              fontSize: 14,
-              fontWeight: 600,
-            }}
-          >
-            <Icon name="search" size={16} />
-            Cerca nel sito
-            <span
-              style={{
-                fontSize: 11,
-                padding: "2px 6px",
-                borderRadius: 4,
-                background: "rgba(255,255,255,0.18)",
-                fontFamily: "var(--ff-mono)",
-              }}
-            >
-              /{" "}
-            </span>
-          </button>
-        </div>
       </div>
     </div>
   );
 };
 
-Object.assign(window, { TopBar, BrandRow, MainNav });
+// ─── Banda CUP / URP sempre visibile ───
+const QuickActions = () => (
+  <div
+    style={{
+      background: "var(--bi-surface)",
+      borderTop: "2px solid var(--bi-primary)",
+      borderBottom: "1px solid var(--bi-border)",
+    }}
+  >
+    <div
+      className="container"
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 48,
+        height: 48,
+      }}
+    >
+      <a
+        href="#"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 10,
+          fontSize: 14,
+          textDecoration: "none",
+          color: "var(--bi-ink-900)",
+        }}
+      >
+        <Icon name="calendar" size={16} style={{ color: "var(--bi-primary)", flexShrink: 0 }} />
+        <span>Prenota servizi e prestazioni</span>
+        <span
+          style={{
+            fontWeight: 700,
+            color: "var(--bi-primary)",
+            fontSize: 13,
+            letterSpacing: 0.5,
+          }}
+        >
+          CUP
+        </span>
+        <span style={{ fontWeight: 600, color: "var(--bi-primary)" }}>06 01020304</span>
+        <Icon name="phone" size={14} style={{ color: "var(--bi-primary)" }} />
+      </a>
+      <span style={{ width: 1, height: 20, background: "var(--bi-border)", flexShrink: 0 }} />
+      <a
+        href="#"
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 10,
+          fontSize: 14,
+          textDecoration: "none",
+          color: "var(--bi-ink-900)",
+        }}
+      >
+        <Icon name="mail" size={16} style={{ color: "var(--bi-ink-500)", flexShrink: 0 }} />
+        <span>Richiedi informazioni o fai una segnalazione</span>
+        <span
+          style={{
+            fontWeight: 700,
+            color: "var(--bi-ink-700)",
+            fontSize: 13,
+            letterSpacing: 0.5,
+          }}
+        >
+          URP
+        </span>
+        <span style={{ fontWeight: 600, color: "var(--bi-ink-700)" }}>06 01020304</span>
+        <Icon name="phone" size={14} style={{ color: "var(--bi-ink-500)" }} />
+      </a>
+    </div>
+  </div>
+);
+
+// ─── Wrapper sticky: nav + banda CUP/URP ───
+const StickyHeader = ({ activeItem, active }) => (
+  <div style={{ position: "sticky", top: 0, zIndex: 40, boxShadow: "var(--shadow-sm)" }}>
+    <MainNav activeItem={activeItem} active={active} />
+    <QuickActions />
+  </div>
+);
+
+Object.assign(window, { TopBar, BrandRow, MainNav, QuickActions, StickyHeader });
