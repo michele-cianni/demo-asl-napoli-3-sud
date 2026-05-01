@@ -1,69 +1,73 @@
+import React from 'react';
+import { Icon } from './icons.jsx';
+import { Button, Badge, ArrowLink, Section, SectionHeading } from './ui.jsx';
+
 // ─── Come fare per + Servizi ───
 
 const ServicesGrid = () => {
   const services = [
     {
-      icon: "calendar",
-      title: "Prenotare una visita",
-      desc: "CUP online, Farmacup e numero verde 800 019 774",
-      tone: "primary",
-      href: "page-come-fare-per.html",
+      icon: 'calendar',
+      title: 'Prenotare una visita',
+      desc: 'CUP online, Farmacup e numero verde 800 019 774',
+      tone: 'primary',
+      href: 'page-come-fare-per.html',
     },
     {
-      icon: "document",
-      title: "Ritirare un referto",
-      desc: "Accedi con SPID o CIE al FSE per scaricare gli esiti",
-      tone: "primary",
-      href: "page-referti.html",
+      icon: 'document',
+      title: 'Ritirare un referto',
+      desc: 'Accedi con SPID o CIE al FSE per scaricare gli esiti',
+      tone: 'primary',
+      href: 'page-referti.html',
     },
     {
-      icon: "users",
-      title: "Cambiare medico di base",
-      desc: "Scegli o revoca il tuo medico di medicina generale",
-      tone: "teal",
-      href: "#",
+      icon: 'users',
+      title: 'Cambiare medico di base',
+      desc: 'Scegli o revoca il tuo medico di medicina generale',
+      tone: 'teal',
+      href: '#',
     },
     {
-      icon: "shield",
+      icon: 'shield',
       title: "Richiedere un'esenzione",
-      desc: "Per reddito, patologia o invalidità",
-      tone: "teal",
-      href: "#",
+      desc: 'Per reddito, patologia o invalidità',
+      tone: 'teal',
+      href: '#',
     },
     {
-      icon: "pill",
-      title: "Assistenza farmaceutica",
-      desc: "Ricette dematerializzate, farmaci a distribuzione diretta",
-      tone: "primary",
-      href: "#",
+      icon: 'pill',
+      title: 'Assistenza farmaceutica',
+      desc: 'Ricette dematerializzate, farmaci a distribuzione diretta',
+      tone: 'primary',
+      href: '#',
     },
     {
-      icon: "heart",
-      title: "Donare sangue o organi",
-      desc: "Centri trasfusionali e dichiarazione di volontà",
-      tone: "warm",
-      href: "#",
+      icon: 'heart',
+      title: 'Donare sangue o organi',
+      desc: 'Centri trasfusionali e dichiarazione di volontà',
+      tone: 'warm',
+      href: '#',
     },
     {
-      icon: "hospital",
-      title: "Trovare una struttura",
-      desc: "Distretti, presidi ospedalieri, consultori, SERT",
-      tone: "teal",
-      href: "#",
+      icon: 'hospital',
+      title: 'Trovare una struttura',
+      desc: 'Distretti, presidi ospedalieri, consultori, SERT',
+      tone: 'teal',
+      href: '#',
     },
     {
-      icon: "phone",
-      title: "Segnalare un disservizio",
-      desc: "URP — Ufficio Relazioni con il Pubblico",
-      tone: "primary",
-      href: "#",
+      icon: 'phone',
+      title: 'Segnalare un disservizio',
+      desc: 'URP — Ufficio Relazioni con il Pubblico',
+      tone: 'primary',
+      href: '#',
     },
   ];
 
   const tonesMap = {
-    primary: { bg: "var(--bi-primary-050)", fg: "var(--bi-primary)" },
-    teal: { bg: "var(--bi-teal-100)", fg: "var(--bi-teal-700)" },
-    warm: { bg: "var(--bi-warm-100)", fg: "var(--bi-warm)" },
+    primary: { bg: 'var(--bi-primary-050)', fg: 'var(--bi-primary)' },
+    teal: { bg: 'var(--bi-teal-100)', fg: 'var(--bi-teal-700)' },
+    warm: { bg: 'var(--bi-warm-100)', fg: 'var(--bi-warm)' },
   };
 
   return (
@@ -72,15 +76,13 @@ const ServicesGrid = () => {
         eyebrow="Come fare per"
         title="Le azioni più richieste dai cittadini"
         subtitle="Percorsi guidati, passo per passo. Scopri come svolgere le pratiche più comuni con l'ASL."
-        action={
-          <ArrowLink href="page-servizi.html">Vedi tutti i servizi</ArrowLink>
-        }
+        action={<ArrowLink href="page-servizi.html">Vedi tutti i servizi</ArrowLink>}
       />
 
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
           gap: 16,
         }}
       >
@@ -91,28 +93,28 @@ const ServicesGrid = () => {
               key={i}
               href={s.href}
               style={{
-                background: "var(--bi-surface)",
-                border: "1px solid var(--bi-border)",
+                background: 'var(--bi-surface)',
+                border: '1px solid var(--bi-border)',
                 borderRadius: 12,
                 padding: 24,
-                display: "flex",
-                flexDirection: "column",
+                display: 'flex',
+                flexDirection: 'column',
                 gap: 16,
                 minHeight: 200,
-                transition: "all 0.2s ease",
-                color: "var(--bi-ink-900)",
-                position: "relative",
-                overflow: "hidden",
+                transition: 'all 0.2s ease',
+                color: 'var(--bi-ink-900)',
+                position: 'relative',
+                overflow: 'hidden',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.borderColor = "var(--bi-primary)";
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow = "var(--shadow-md)";
+                e.currentTarget.style.borderColor = 'var(--bi-primary)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.borderColor = "var(--bi-border)";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "none";
+                e.currentTarget.style.borderColor = 'var(--bi-border)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <div
@@ -122,9 +124,9 @@ const ServicesGrid = () => {
                   borderRadius: 10,
                   background: t.bg,
                   color: t.fg,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}
               >
                 <Icon name={s.icon} size={22} />
@@ -132,10 +134,10 @@ const ServicesGrid = () => {
               <div style={{ flex: 1 }}>
                 <div
                   style={{
-                    fontFamily: "var(--ff-serif)",
+                    fontFamily: 'var(--ff-serif)',
                     fontSize: 18,
                     fontWeight: 500,
-                    color: "var(--bi-ink-900)",
+                    color: 'var(--bi-ink-900)',
                     marginBottom: 6,
                     lineHeight: 1.25,
                   }}
@@ -145,7 +147,7 @@ const ServicesGrid = () => {
                 <div
                   style={{
                     fontSize: 13,
-                    color: "var(--bi-ink-500)",
+                    color: 'var(--bi-ink-500)',
                     lineHeight: 1.5,
                   }}
                 >
@@ -154,9 +156,9 @@ const ServicesGrid = () => {
               </div>
               <div
                 style={{
-                  color: "var(--bi-primary)",
-                  display: "flex",
-                  alignItems: "center",
+                  color: 'var(--bi-primary)',
+                  display: 'flex',
+                  alignItems: 'center',
                   gap: 4,
                   fontSize: 13,
                   fontWeight: 700,
@@ -172,4 +174,4 @@ const ServicesGrid = () => {
   );
 };
 
-Object.assign(window, { ServicesGrid });
+export { ServicesGrid };

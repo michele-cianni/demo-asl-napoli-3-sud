@@ -12,24 +12,6 @@
 <body>
 <div id="root"></div>
 
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-
-<script type="text/babel" src="src/icons.jsx"></script>
-<script type="text/babel" src="src/ui.jsx"></script>
-<script type="text/babel" src="src/header.jsx"></script>
-<script type="text/babel" src="src/hero.jsx"></script>
-<script type="text/babel" src="src/services.jsx"></script>
-<script type="text/babel" src="src/waiting.jsx"></script>
-<script type="text/babel" src="src/screening.jsx"></script>
-<script type="text/babel" src="src/news.jsx"></script>
-<script type="text/babel" src="src/audience.jsx"></script>
-<script type="text/babel" src="src/tenders.jsx"></script>
-<script type="text/babel" src="src/feedback.jsx"></script>
-<script type="text/babel" src="src/footer.jsx"></script>
-<script type="text/babel" src="src/chatbot.jsx"></script>
-
 <script>
 (function(){
   var p={primary:"#00798C",primary800:"#00606E",primary100:"#CCE4E8",primary050:"#E6F2F4"};
@@ -41,29 +23,6 @@
 })();
 </script>
 
-<script type="text/babel">
-function App() {
-  return (
-    <div data-screen-label="01 Homepage desktop" style={{ background: "var(--bi-bg)" }}>
-      <TopBar />
-      <BrandRow />
-      <MainNav />
-      <AlertBar />
-      <Hero />
-      <ServicesGrid />
-      <CTABand />
-      <News />
-      <AudienceGrid />
-      <Tenders />
-      <Facilities />
-      <FeedbackWidget />
-      <Footer />
-      <Chatbot />
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-</script>
+<script type="module" src="/src/main.jsx"></script>
 </body>
 </html>

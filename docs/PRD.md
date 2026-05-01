@@ -161,6 +161,17 @@ Altre pagine trasversali (footer): Amministrazione Trasparente, Albo pretorio, D
 
 ## 5. Specifica pagine
 
+Il progetto di restyling copre **una homepage + 4 pagine interne**:
+
+- §5.1 Homepage
+- §5.2 Servizi e prestazioni (pagina lista 1° livello AGID)
+- §5.3 Come fare per (pagina foglia con video tutorial)
+- §5.4 Download referti (pagina foglia tipologia Servizio)
+- §5.5 Ospedali (pagina lista 2° livello AGID)
+- §5.6 Ospedale di Torre del Greco "Maresca" (pagina foglia tipologia Struttura, esempio concreto)
+
+La coppia §5.5 + §5.6 è conteggiata come un'unica pagina interna ("Ospedali") perché rappresenta la navigazione standard lista-dettaglio di una stessa sezione del sito.
+
 ### 5.1 Homepage
 
 **Obiettivo di pagina.** Orientare rapidamente l'utente verso le 3 operazioni più frequenti (trova un servizio, trova una struttura, scopri come fare per) ed esporre le comunicazioni istituzionali prioritarie.
@@ -289,6 +300,161 @@ Esempio concreto: **"Come fare per prenotare una visita specialistica"**.
 
 ---
 
+### 5.5 Pagina lista — Ospedali (pagina lista di 2° livello)
+
+**Obiettivo di pagina.** Permettere all'utente di trovare rapidamente, da mobile o da desktop, l'ospedale della rete ASL Napoli 3 Sud più adatto alle sue esigenze, con strumenti di ricerca e filtro e una panoramica visiva immediata.
+
+**URL:** `/strutture/ospedali/`
+**Breadcrumb:** Home → Strutture → Ospedali
+
+**Struttura a blocchi (mobile-first):**
+
+1. **Header + menu** ("Strutture" in stato attivo).
+2. **Breadcrumb**.
+3. **Hero compatto** — titolo "Ospedali" + sottotitolo di una riga. Senza immagine di sfondo: il contenuto visuale è nelle card sottostanti.
+4. **Barra di ricerca** — input a tutta larghezza con placeholder "Cerca per nome ospedale o specialità".
+5. **Filtri a chip** — due gruppi: *Comune* e *Specialità*. Su desktop sempre visibili; su mobile in bottom sheet apribile da bottoni `[Filtra per comune ▾]` `[Filtra per specialità ▾]` con applicazione tramite CTA sticky.
+6. **Toggle Lista / Mappa** — segmented control in alto a destra. Default: **Lista** (su mobile la mappa è frustrante come default).
+7. **Vista Lista** — griglia di card ospedale (2 colonne desktop, 1 colonna mobile). Ogni card contiene:
+   - Immagine reale dell'ospedale (proporzione 16:9)
+   - Badge "PS 24h" in sovraimpressione se il pronto soccorso è attivo
+   - Titolo, comune, distanza (se geolocalizzazione consentita)
+   - Descrizione breve (2 righe, troncata)
+   - Badge con fino a 3 specialità principali + "+N"
+   - CTA: link "Scopri di più" + icon button "Chiama" + icon button "Indicazioni"
+   - Card cliccabile per intero verso la pagina foglia.
+8. **Vista Mappa** (alternativa) — mappa con marker cluster. Popup al click: foto, nome, indirizzo, CTA scheda. Su desktop: barra laterale con lista degli ospedali nel viewport. Su mobile: carosello orizzontale di card compatte sotto la mappa.
+9. **Paginazione** — preferibile a "carica altri" per indicizzabilità SEO. Se ci sono pochi ospedali (tipicamente <15), la paginazione non serve.
+10. **Stato vuoto** — se nessun risultato: icona + "Nessun ospedale corrisponde ai filtri selezionati" + bottone "Azzera filtri".
+11. **Valutazione chiarezza informativa** (obbligatoria AGID).
+12. **Footer**.
+
+**Decisioni di design motivate:**
+
+- **Niente "Ospedali in evidenza"** sopra la lista: creerebbe una gerarchia editoriale tra strutture che è politicamente sensibile per un ente pubblico. Tutti gli ospedali sono trattati paritariamente; la differenziazione avviene tramite filtri scelti dall'utente.
+- **Default vista Lista, non Mappa**: su mobile la mappa richiede pinch-zoom, è lenta al primo caricamento, e se l'utente ha già in mente il comune la ricerca testuale è più veloce.
+- **Card con immagine reale protagonista**: coerente con la richiesta del verbale 17/3 ("utilizzo di immagini reali per ciascun ospedale"). Pattern simile a feed social, familiare all'utente.
+
+---
+
+### 5.6 Pagina foglia — Ospedale Maresca di Torre del Greco (tipologia Struttura)
+
+**Obiettivo di pagina.** Fornire all'utente tutte le informazioni di una singola struttura ospedaliera secondo lo schema **Tipologia Struttura** del Modello ASL di Designers Italia, mantenendo le funzionalità trasversali F1 (Prenota visita), F2 (Stato PS), F3 (Valutazione chiarezza).
+
+**URL:** `/strutture/ospedali/maresca-torre-del-greco/`
+**Breadcrumb:** Home → Strutture → Ospedali → Ospedale Maresca
+
+**Scelta dell'ospedale di riferimento.** Ospedale Maresca (Torre del Greco) è usato come esempio perché ha pronto soccorso attivo (necessario per esemplificare F2) ed è distinto dagli ospedali già trattati nei Figma CID precedenti. L'esistenza della struttura nella rete ASL Napoli 3 Sud va confermata con URP/ASL prima di portare il mockup in produzione.
+
+#### 5.6.1 Campi della Tipologia Struttura (aderenza al Modello AGID)
+
+La pagina implementa rigorosamente i campi previsti dal documento di architettura del Modello ASL per la tipologia Struttura. La tabella sottostante indica, per ciascun campo, se è necessario od opzionale, il tipo di contenuto e la sua collocazione in pagina.
+
+| # | Campo | Obbligatorietà | Tipo contenuto | Collocazione in pagina |
+| --- | ------- | ---------------- | ---------------- | ------------------------ |
+| 1 | Nome della struttura | Necessario | Testo (tassonomia Strutture) | Hero — titolo H1 |
+| 2 | Immagine | **Opzionale (incluso)** | File immagine | Hero — sfondo o affiancato al titolo |
+| 3 | Descrizione breve | Necessario | Testo breve (max 160 car.) | Hero — sottotitolo |
+| 4 | A chi è rivolto/a | Necessario | Testo breve (max 255 car.) + chip Utenti | Sezione dedicata dopo Hero |
+| 5 | Dove | Necessario | Testo breve (max 255 car.) | Sezione "Dove" con link "Apri in mappa" |
+| 6 | Come accedere | Necessario | Rich text | Sezione "Come accedere" |
+| 7 | Orari di apertura | Necessario | Rich text | Sezione "Orari di apertura" |
+| 8 | Contatti | Necessario | Testo breve (max 255 car.) | Sezione "Contatti" (vedi §5.6.3) |
+| 9 | Servizi e prestazioni | Necessario | Relazione con Tipologia Servizio | Sezione "Servizi e prestazioni" con Card Services |
+| 10 | Responsabile della struttura | Necessario | Relazione con Tipologia Persona | Sezione "Responsabile" con Card People |
+| 11 | Galleria | **Opzionale (incluso)** | Immagini/video con didascalie | Sezione "Galleria" |
+| 12 | Ultimo aggiornamento | Necessario | Datetime | Footer di pagina, prima del blocco Valutazione |
+
+**Campi opzionali esclusi** (non valorizzati in questa specifica): Sottotitolo, Cos'è, Coordinatore della struttura, Personale della struttura, Avvisi e notizie, Unità organizzativa di appartenenza, Strutture correlate, Ulteriori informazioni, Parliamo di (tag Argomenti). Possono essere reintrodotti in versioni successive senza modifiche strutturali al layout.
+
+**Nota sul campo "Reparti".** I reparti ospedalieri non sono trattati come elenco autonomo nella scheda Struttura. Coerentemente con il Modello ASL, le attività erogate dall'ospedale sono mappate nel campo **Servizi e prestazioni** (relazione con tipologia Servizio). Se in futuro l'ASL volesse rappresentare i reparti come entità organizzative, servirà valorizzare il campo **Unità organizzativa di appartenenza**, oggi escluso.
+
+#### 5.6.2 Struttura della pagina (blocchi)
+
+La pagina implementa esclusivamente i campi della tipologia Struttura previsti dal Modello AGID, senza aggiunta di blocchi funzionali estranei. Le funzionalità trasversali F1 (Prenota visita) e F2 (Stato PS) **non vivono in questa pagina** ma nelle rispettive pagine foglia dedicate (vedi §6.1 e §6.2). Nella scheda Struttura sono presenti solo **link contestuali** verso quelle pagine, dove è naturale collocarli (es. nel rich text di *Come accedere* o nell'Hero come badge cliccabile).
+
+1. **Header + menu principale** — voce "Strutture" in stato attivo.
+
+2. **Breadcrumb** — Home / Strutture / Ospedali / **Ospedale Maresca**.
+
+3. **Hero** — implementa i campi *Nome* (H1), *Descrizione breve* (max 160 caratteri, sotto-H1), *Immagine* (opzionale, di sfondo o affiancata). Include inoltre il campo *Dove* (indirizzo breve sotto il titolo). Se la struttura ha un PS attivo, badge cliccabile "PS attivo 24/7 — vedi stato in tempo reale →" che porta alla scheda Servizio *Pronto Soccorso* (dove vive F2). Due CTA secondarie scroll-to-anchor: "Dove" e "Contatti".
+
+4. **A chi è rivolto/a** — campo AGID necessario. Testo breve (max 255 caratteri) con linguaggio semplice; se rilevante, chip di tassonomia Utenti (es. Anziani, Donne, Bambini) usando il componente `chip` dell'UI Kit Italia. Omettere i chip se la struttura è rivolta a tutta l'utenza dell'ASL.
+
+5. **Dove** — campo AGID necessario. Testo breve (max 255 caratteri) con via e numero civico, CAP, città, eventualmente quartiere o circoscrizione. Link "Apri in mappa" verso Google Maps o OpenStreetMap, come richiesto dal modello. Sottoblocco con mappa embedded opzionale.
+
+6. **Come accedere** — campo AGID necessario. Rich text con attenzione particolare agli accessi per persone con disabilità, modalità di arrivo (auto, mezzi pubblici), costi e regole di accesso (es. normative per visitatori). Questo campo **assorbe** ciò che nella versione precedente del PRD era frammentato in "Come arrivare" + "Accessibilità" + "Parcheggi". Può contenere link contestuali a pagine correlate (es. "Per prenotare una visita vedi *[Come fare per prenotare](/come-fare-per/prenotare-visita/)*").
+
+7. **Orari di apertura** — campo AGID necessario. Rich text strutturato, con tabella o lista per giorni feriali/festivi. Indicare esplicitamente se alcuni servizi interni hanno orari differenti (rimandando alle rispettive schede Servizio).
+
+8. **Contatti** — campo AGID necessario, testo breve (max 255 caratteri). Vedi dettaglio in §5.6.3.
+
+9. **Servizi e prestazioni** — campo AGID necessario. Elenco di Card Services (componente UI Kit ASL) verso le pagine foglia Servizio erogate dall'ospedale, **tra cui la Card verso il Servizio "Pronto Soccorso"** dove è esposto lo stato di affollamento in tempo reale (F2). Raggruppabili per categoria di servizio (Visite specialistiche, Esami e analisi, ecc.) per migliorare la scansione visiva. Se la lista è lunga (>12 elementi), aggiungere barra di ricerca interna alla sezione.
+
+10. **Responsabile della struttura** — campo AGID necessario. Card People (componente UI Kit ASL) con nome, qualifica e link alla pagina foglia Persona.
+
+11. **Galleria** — campo AGID opzionale, incluso. Carosello di immagini reali + video con didascalie. Su desktop: griglia 3 colonne con eventuale primo elemento double-width per un video principale. Su mobile: carosello swipeable orizzontale. Tutti i video con sottotitoli e trascrizione scaricabile (WCAG 2.1 AA). Se alcuni video non sono ancora disponibili al go-live, la sezione si riduce alla sola parte foto senza placeholder.
+
+12. **Ultimo aggiornamento** — campo AGID necessario. Riga testuale prima del blocco valutazione, es. "Ultimo aggiornamento: 22 aprile 2026".
+
+13. **[F3] Valutazione chiarezza informativa** — obbligatoria AGID su ogni pagina (vedi §6.3).
+
+14. **Footer** — standard.
+
+#### 5.6.3 Campo "Contatti" — gestione del limite di 255 caratteri
+
+Il Modello AGID fissa per il campo *Contatti* un limite di 255 caratteri. Questo vincolo rende impossibile includere in un solo campo tutti i numeri dell'ospedale (centralino, URP, PS, direzione, CUP, accettazione, informazioni degenti).
+
+**Approccio scelto** (coerente con AGID, senza sforare il limite):
+
+- Nel campo *Contatti* compaiono solo i **punti di contatto diretti della struttura**: centralino, email istituzionale, eventualmente PEC. Esempio di composizione in 255 caratteri:
+
+  > "Centralino: 081 XXXXXXX (24/7) · Email: <ospedale.maresca@aslnapoli3sud.it> · PEC: <maresca.aslna3sud@pec.it> · URP ospedaliero: 081 YYYYYYY (Lun-Ven 9-13)"
+
+- Gli altri numeri (CUP, URP distrettuale, prenotazione referti, ecc.) **non** sono replicati nella scheda ospedale: sono raggiungibili tramite **link contestuali** dentro le sezioni pertinenti:
+  - Nella sezione *[F1] CTA Prenota visita*: link "Vai al CUP regionale" e numero del CUP telefonico.
+  - Nella sezione *Servizi e prestazioni*: ogni Card Service porta alla propria pagina foglia dove sono indicati i contatti specifici del servizio.
+  - Nel footer globale: link a *Contatti URP* di distretto e alla pagina *Segnalazioni*.
+
+Questo approccio rispetta la separazione AGID tra informazioni della struttura fisica e informazioni dei servizi erogati, evitando duplicazioni.
+
+#### 5.6.4 Componenti UI Kit ASL / Italia utilizzati
+
+Come indicato dal documento AGID per la tipologia Struttura:
+
+- **Chips dello UI Kit Italia** — per tassonomie Utenti (campo *A chi è rivolto/a*) e Argomenti (se attivato).
+- **Card Services dello UI Kit ASL** — per il campo *Servizi e prestazioni*.
+- **Card People dello UI Kit ASL** — per il campo *Responsabile della struttura*.
+- **Card Place dello UI Kit ASL** — non applicabile a questa pagina (si usa per riferimenti ad altre strutture correlate, campo opzionale escluso).
+
+#### 5.6.5 Gerarchia degli intent (razionale della composizione)
+
+Lo schema AGID definisce *quali campi* usare, ma lascia libertà sull'*ordine di presentazione*. L'ordine scelto in §5.6.2 segue il Modello ASL rispettando la logica informativa tipica di una scheda Struttura:
+
+1. **Identità della struttura** (Hero con Nome, Descrizione breve, Immagine, indirizzo essenziale).
+2. **A chi si rivolge** (A chi è rivolto/a) — chiarisce subito se la struttura è pertinente per l'utente.
+3. **Informazioni pratiche di accesso** (Dove, Come accedere, Orari, Contatti) — le info operative che servono a chi ha deciso di rivolgersi a questa struttura.
+4. **Cosa si fa qui** (Servizi e prestazioni) — il ventaglio di servizi erogati, ciascuno con link alla propria scheda.
+5. **Chi dirige la struttura** (Responsabile) — informazione istituzionale, meno urgente operativamente.
+6. **Contenuto visuale di approfondimento** (Galleria) — importante editorialmente ma non prioritario per l'intent operativo.
+7. **Metadati** (Ultimo aggiornamento) + **feedback** (valutazione chiarezza) prima del footer.
+
+Le funzionalità trasversali F1 e F2 **non sono in questa pagina** e hanno la propria collocazione naturale:
+
+- **F2 (Stato PS)** vive nella pagina foglia Servizio "Pronto Soccorso", coerentemente con l'indicazione AGID secondo cui lo stato di affollamento è un attributo della **scheda servizio PS**, non della scheda struttura. La scheda ospedale rimanda alla scheda PS tramite: (a) badge cliccabile in Hero se il PS è attivo, (b) Card Service del Pronto Soccorso nella sezione *Servizi e prestazioni*.
+- **F1 (Prenota visita)** vive nella pagina *Come fare per prenotare una visita* (§5.3), accessibile dai chip di ricerca rapida in homepage, dal menu *Come fare per*, e da link contestuali nel rich text di *Come accedere*.
+
+Questa separazione rispetta il principio AGID di mono-responsabilità delle schede: la scheda Struttura informa **sulla struttura fisica**, la scheda Servizio informa **sul servizio** (incluso il suo stato operativo se dinamico).
+
+#### 5.6.6 Open point specifici
+
+- **Q1 del PRD** (stato PS via API) resta critica ma non impatta direttamente questa pagina: F2 vive nella scheda Servizio *Pronto Soccorso*. Qui l'unica conseguenza è sul badge in Hero, che dovrà gestire gli stati "PS attivo", "PS attivo ma stato non disponibile", "PS non presente".
+- Video reparti / video tour — se non prodotti al go-live, la galleria mostra solo foto. Da verificare timeline produzione con Dott.ssa Meo Colombo (grafica CID) e team social.
+- Elenco effettivo dei servizi erogati dall'Ospedale Maresca — da verificare con Dott.ssa Cannella (revisione contenuti ASL) e URP.
+- Esistenza dell'Ospedale Maresca nella rete ASL Napoli 3 Sud — da confermare formalmente (ipotesi basata su contesto territoriale, non su fonte ASL diretta).
+
+---
+
 ## 6. Specifica funzionalità nuove
 
 Il progetto introduce **5 nuove funzionalità**, numerate da F1 a F5.
@@ -309,10 +475,11 @@ Il progetto introduce **5 nuove funzionalità**, numerate da F1 a F5.
 
 **Requisiti funzionali:**
 
-- RF1.1 La CTA verso il CUP è visibile in homepage (chip di ricerca rapida), nel menu, e nelle pagine rilevanti.
-- RF1.2 Il link esterno è marcato come tale (icona `external-link` di Bootstrap Italia) e apre in `target="_blank"` con `rel="noopener noreferrer"`.
-- RF1.3 Se il portale CUP regionale è indisponibile (pagina di errore), il sito ASL mostra in pagina un fallback con numeri di telefono del CUP e orari.
-- RF1.4 Sono indicati sempre i **canali alternativi**: CUP telefonico, farmacie abilitate, app Campania Salute.
+- RF1.1 La CTA verso il CUP è visibile nella homepage (chip di ricerca rapida), nel menu *Come fare per*, nella pagina *Come fare per prenotare una visita* (§5.3), e come link contestuale dal rich text di *Come accedere* nelle schede Struttura degli ospedali.
+- RF1.2 La funzionalità **non è presente come blocco autonomo** nelle schede Struttura (ospedali): le schede Struttura rimandano alla pagina *Come fare per prenotare* tramite link contestuali, coerentemente con la separazione AGID tra scheda struttura e scheda servizio/procedura.
+- RF1.3 Il link esterno al CUP è marcato come tale (icona `external-link` di Bootstrap Italia) e apre in `target="_blank"` con `rel="noopener noreferrer"`.
+- RF1.4 Se il portale CUP regionale è indisponibile (pagina di errore), il sito ASL mostra in pagina un fallback con numeri di telefono del CUP e orari.
+- RF1.5 Sono indicati sempre i **canali alternativi**: CUP telefonico, farmacie abilitate, app Campania Salute.
 
 **Edge case da gestire:**
 
@@ -330,23 +497,33 @@ Il progetto introduce **5 nuove funzionalità**, numerate da F1 a F5.
 
 ### 6.2 F2 — Stato affollamento Pronto Soccorso in tempo reale
 
-**Razionale.** Richiesta implicitamente supportata dal Modello ASL AGID, che rende **obbligatorio** rendere disponibile l'informazione sullo stato di affollamento del PS nella scheda servizio dedicata.
+**Razionale.** Richiesta esplicitamente supportata dal Modello ASL AGID, che rende **obbligatorio** rendere disponibile l'informazione sullo stato di affollamento del PS **nella scheda servizio dedicata** (pagina foglia tipologia Servizio "Pronto Soccorso"), non nella scheda struttura ospedaliera. Questa separazione è intenzionale: l'affollamento è un attributo dinamico del servizio PS, non della struttura fisica che lo ospita.
 
 **User story.** Come cittadino o caregiver, voglio sapere prima di recarmi in un Pronto Soccorso dell'ASL quanti pazienti ci sono in attesa e il codice triage, per scegliere la sede meno affollata o orientarmi su un canale alternativo (guardia medica, 116117).
 
+**Collocazione della funzionalità:**
+
+- Vive nella pagina foglia Servizio *Pronto Soccorso* dentro la sezione *Servizi e prestazioni*.
+- Le schede Struttura degli ospedali (§5.6) **non** ospitano il widget: contengono solo un badge cliccabile in Hero ("PS attivo 24/7 — vedi stato in tempo reale →") e una Card Service del Pronto Soccorso nella sezione *Servizi e prestazioni* dell'ospedale.
+
 **Flow:**
 
-1. L'utente accede alla pagina *Pronto Soccorso* dal menu *Servizi* o da banner dedicato in pagina *Servizi e prestazioni*.
-2. Vede un elenco dei PS dell'ASL (Boscoreale, Castellammare, altri).
-3. Per ciascuno vede: numero di pazienti in attesa, suddivisione per codice triage (bianco/verde/azzurro/arancione/rosso), timestamp ultimo aggiornamento.
-4. Può approfondire sulla pagina *Struttura* di ciascun ospedale.
+1. L'utente accede alla pagina *Pronto Soccorso* attraverso uno dei seguenti percorsi:
+   - Menu principale *Servizi e prestazioni* → Card *Pronto Soccorso*.
+   - Homepage → banner/chip rapido *Pronto Soccorso*.
+   - Scheda Struttura di un singolo ospedale → badge PS in Hero o Card Service *Pronto Soccorso*.
+   - Chatbot F4 → ramo "Pronto Soccorso".
+2. Vede nella pagina un elenco dei PS della rete ASL.
+3. Per ciascun PS vede: numero di pazienti in attesa, suddivisione per codice triage (bianco/verde/azzurro/arancione/rosso), timestamp ultimo aggiornamento.
+4. Può approfondire sulla pagina *Struttura* dell'ospedale che ospita il PS (per informazioni pratiche: indirizzo, come accedere, ecc.).
 
 **Requisiti funzionali:**
 
-- RF2.1 Il dato è aggiornato automaticamente a intervalli regolari (frequenza da concordare: suggerito max 5 minuti).
-- RF2.2 Se il dato non è disponibile per una sede, il box della sede mostra messaggio "Dato non disponibile — ultimo aggiornamento: [timestamp]" + link al portale regionale, se esiste.
-- RF2.3 L'informazione è accompagnata da un disclaimer chiaro: "I dati sono indicativi. In caso di emergenza chiama il 118."
-- RF2.4 È presente in pagina un box esplicativo dei codici triage.
+- RF2.1 Il widget di stato PS è presente esclusivamente nella pagina foglia Servizio *Pronto Soccorso*. Non deve essere duplicato nelle schede Struttura.
+- RF2.2 Il dato è aggiornato automaticamente a intervalli regolari (frequenza da concordare: suggerito max 5 minuti).
+- RF2.3 Se il dato non è disponibile per una sede, il box della sede mostra messaggio "Dato non disponibile — ultimo aggiornamento: [timestamp]" + link al portale regionale, se esiste.
+- RF2.4 L'informazione è accompagnata da un disclaimer chiaro: "I dati sono indicativi. In caso di emergenza chiama il 118."
+- RF2.5 È presente in pagina un box esplicativo dei codici triage.
 
 **Edge case:**
 
@@ -530,7 +707,7 @@ La pagina è descritta in dettaglio in §5.4. Qui si raccolgono i requisiti funz
 ### 8.1 Fasi di progetto
 
 | Fase | Deliverable | Durata indicativa |
-| ------ | ------------- | ------------------- |
+|------|-------------|-------------------|
 | 1. Kick-off e convalida PRD | Questo documento approvato | 1 settimana |
 | 2. Content audit | Mappa contenuti attuali vs nuovi (a cura Dott.ssa Cannella + Teoli) | 2 settimane |
 | 3. Wireframe low-fi (Figma) | 4 pagine + componenti F1-F5 | 2 settimane |
@@ -569,7 +746,7 @@ Le durate sono indicative e dovranno essere raffinate nella pianificazione con l
 ### 9.1 Rischi
 
 | ID | Rischio | Impatto | Mitigazione |
-| ---- | --------- | --------- | ------------- |
+|----|---------|---------|-------------|
 | R1 | API stato PS non disponibile o inaffidabile | Alto (F2 potrebbe non essere fattibile) | Fallback a link portale regionale. Verifica tecnica in fase 2. |
 | R2 | Disallineamento tra contenuti del sito e dati Google/URP | Medio | Processo di revisione Teoli già in atto, da formalizzare in nota ufficiale come da verbale 17/3. |
 | R3 | Contenuti editoriali non pronti entro fase 6 | Medio | Content audit precoce in fase 2, task force Cannella + Teoli. |

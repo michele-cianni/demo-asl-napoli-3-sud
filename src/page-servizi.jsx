@@ -1,42 +1,49 @@
+import React from 'react';
+import { Icon } from './icons.jsx';
+import { Button, Badge, ArrowLink, Section, SectionHeading, Breadcrumb, Eyebrow } from './ui.jsx';
+import { TopBar, BrandRow, StickyHeader } from './header.jsx';
+import { CTABand, Footer } from './footer.jsx';
+import { FeedbackWidget } from './feedback.jsx';
+
 // ─── Pagina Servizi e prestazioni (PRD §5.2) ───
 
 // (Breadcrumb è definito in ui.jsx)
 
 // ── Barra di ricerca interna ──
 const ServiceSearch = () => {
-  const [query, setQuery] = React.useState("");
+  const [query, setQuery] = React.useState('');
   const chips = [
-    "Visite specialistiche",
-    "Esami e analisi",
-    "Prevenzione",
-    "Pronto soccorso",
-    "Chirurgia",
+    'Visite specialistiche',
+    'Esami e analisi',
+    'Prevenzione',
+    'Pronto soccorso',
+    'Chirurgia',
   ];
 
   return (
     <div
       style={{
-        background: "var(--bi-primary-050)",
-        padding: "32px 0",
-        borderBottom: "1px solid var(--bi-border)",
+        background: 'var(--bi-primary-050)',
+        padding: '32px 0',
+        borderBottom: '1px solid var(--bi-border)',
       }}
     >
       <div className="container">
         <div style={{ maxWidth: 640 }}>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              background: "var(--bi-surface)",
-              border: "2px solid var(--bi-primary)",
+              display: 'flex',
+              alignItems: 'center',
+              background: 'var(--bi-surface)',
+              border: '2px solid var(--bi-primary)',
               borderRadius: 8,
-              overflow: "hidden",
+              overflow: 'hidden',
             }}
           >
             <span
               style={{
-                padding: "0 16px",
-                color: "var(--bi-primary)",
+                padding: '0 16px',
+                color: 'var(--bi-primary)',
                 flexShrink: 0,
               }}
             >
@@ -49,24 +56,24 @@ const ServiceSearch = () => {
               onChange={(e) => setQuery(e.target.value)}
               style={{
                 flex: 1,
-                border: "none",
-                outline: "none",
-                padding: "14px 0",
+                border: 'none',
+                outline: 'none',
+                padding: '14px 0',
                 fontSize: 16,
-                background: "transparent",
-                color: "var(--bi-ink-900)",
-                fontFamily: "var(--ff-sans)",
+                background: 'transparent',
+                color: 'var(--bi-ink-900)',
+                fontFamily: 'var(--ff-sans)',
               }}
             />
             <button
               style={{
-                padding: "10px 20px",
-                background: "var(--bi-primary)",
-                color: "#fff",
+                padding: '10px 20px',
+                background: 'var(--bi-primary)',
+                color: '#fff',
                 fontWeight: 700,
                 fontSize: 14,
-                border: "none",
-                cursor: "pointer",
+                border: 'none',
+                cursor: 'pointer',
                 flexShrink: 0,
                 margin: 4,
                 borderRadius: 5,
@@ -75,22 +82,20 @@ const ServiceSearch = () => {
               Cerca
             </button>
           </div>
-          <div
-            style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 12 }}
-          >
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
             {chips.map((c) => (
               <button
                 key={c}
                 onClick={() => setQuery(c)}
                 style={{
-                  padding: "5px 14px",
+                  padding: '5px 14px',
                   borderRadius: 99,
-                  border: "1.5px solid var(--bi-primary-100)",
-                  background: "var(--bi-surface)",
-                  color: "var(--bi-primary-800)",
+                  border: '1.5px solid var(--bi-primary-100)',
+                  background: 'var(--bi-surface)',
+                  color: 'var(--bi-primary-800)',
                   fontSize: 13,
                   fontWeight: 600,
-                  cursor: "pointer",
+                  cursor: 'pointer',
                 }}
               >
                 {c}
@@ -107,32 +112,32 @@ const ServiceSearch = () => {
 const ServicesHighlights = () => {
   const items = [
     {
-      badge: "Campagna vaccinale",
-      tone: "warm",
-      title: "Vaccino antinfluenzale 2026–2027",
+      badge: 'Campagna vaccinale',
+      tone: 'warm',
+      title: 'Vaccino antinfluenzale 2026–2027',
       desc: "Prenotazioni aperte per over 60 e categorie a rischio presso tutti i distretti dell'ASL.",
-      icon: "shield",
+      icon: 'shield',
     },
     {
-      badge: "Prevenzione",
-      tone: "teal",
-      title: "Screening mammografico — inviti in corso",
-      desc: "Se hai ricevuto una lettera di invito, prenota la mammografia gratuita.",
-      icon: "heart",
+      badge: 'Prevenzione',
+      tone: 'teal',
+      title: 'Screening mammografico — inviti in corso',
+      desc: 'Se hai ricevuto una lettera di invito, prenota la mammografia gratuita.',
+      icon: 'heart',
     },
     {
-      badge: "Novità",
-      tone: "primary",
-      title: "Nuovo ambulatorio terapia del dolore",
-      desc: "Dal 5 maggio attivo al Presidio San Leonardo di Castellammare di Stabia.",
-      icon: "stethoscope",
+      badge: 'Novità',
+      tone: 'primary',
+      title: 'Nuovo ambulatorio terapia del dolore',
+      desc: 'Dal 5 maggio attivo al Presidio San Leonardo di Castellammare di Stabia.',
+      icon: 'stethoscope',
     },
   ];
 
   const tones = {
-    primary: { bg: "var(--bi-primary-100)", fg: "var(--bi-primary-800)" },
-    teal: { bg: "var(--bi-teal-100)", fg: "var(--bi-teal-700)" },
-    warm: { bg: "var(--bi-warm-100)", fg: "var(--bi-warm)" },
+    primary: { bg: 'var(--bi-primary-100)', fg: 'var(--bi-primary-800)' },
+    teal: { bg: 'var(--bi-teal-100)', fg: 'var(--bi-teal-700)' },
+    warm: { bg: 'var(--bi-warm-100)', fg: 'var(--bi-warm)' },
   };
 
   return (
@@ -144,8 +149,8 @@ const ServicesHighlights = () => {
       />
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3,1fr)",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3,1fr)',
           gap: 24,
         }}
       >
@@ -156,59 +161,53 @@ const ServicesHighlights = () => {
               key={i}
               href="#"
               style={{
-                display: "flex",
-                flexDirection: "column",
-                border: "1px solid var(--bi-border)",
+                display: 'flex',
+                flexDirection: 'column',
+                border: '1px solid var(--bi-border)',
                 borderRadius: 8,
-                overflow: "hidden",
-                textDecoration: "none",
-                color: "inherit",
-                transition: "box-shadow 0.15s",
+                overflow: 'hidden',
+                textDecoration: 'none',
+                color: 'inherit',
+                transition: 'box-shadow 0.15s',
               }}
               onMouseEnter={(e) =>
-                (e.currentTarget.style.boxShadow =
-                  "0 4px 20px rgba(0,0,0,0.10)")
+                (e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.10)')
               }
-              onMouseLeave={(e) => (e.currentTarget.style.boxShadow = "none")}
+              onMouseLeave={(e) => (e.currentTarget.style.boxShadow = 'none')}
             >
               {/* Placeholder immagine */}
               <div
                 style={{
                   height: 160,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   background:
-                    "linear-gradient(135deg, var(--bi-primary-050), var(--bi-primary-100))",
+                    'linear-gradient(135deg, var(--bi-primary-050), var(--bi-primary-100))',
                 }}
               >
-                <Icon
-                  name={item.icon}
-                  size={56}
-                  color="var(--bi-primary)"
-                  stroke={1.2}
-                />
+                <Icon name={item.icon} size={56} color="var(--bi-primary)" stroke={1.2} />
               </div>
               <div
                 style={{
-                  padding: "20px",
+                  padding: '20px',
                   flex: 1,
-                  display: "flex",
-                  flexDirection: "column",
+                  display: 'flex',
+                  flexDirection: 'column',
                 }}
               >
                 <span
                   style={{
-                    display: "inline-flex",
-                    alignSelf: "flex-start",
-                    padding: "3px 10px",
+                    display: 'inline-flex',
+                    alignSelf: 'flex-start',
+                    padding: '3px 10px',
                     borderRadius: 99,
                     marginBottom: 10,
                     background: t.bg,
                     color: t.fg,
                     fontSize: 11,
                     fontWeight: 700,
-                    textTransform: "uppercase",
+                    textTransform: 'uppercase',
                     letterSpacing: 0.4,
                   }}
                 >
@@ -218,7 +217,7 @@ const ServicesHighlights = () => {
                   style={{
                     fontWeight: 700,
                     fontSize: 17,
-                    color: "var(--bi-ink-900)",
+                    color: 'var(--bi-ink-900)',
                     marginBottom: 8,
                     lineHeight: 1.35,
                   }}
@@ -228,7 +227,7 @@ const ServicesHighlights = () => {
                 <div
                   style={{
                     fontSize: 14,
-                    color: "var(--bi-ink-500)",
+                    color: 'var(--bi-ink-500)',
                     lineHeight: 1.5,
                     flex: 1,
                   }}
@@ -238,11 +237,11 @@ const ServicesHighlights = () => {
                 <div
                   style={{
                     marginTop: 16,
-                    color: "var(--bi-primary)",
+                    color: 'var(--bi-primary)',
                     fontWeight: 700,
                     fontSize: 14,
-                    display: "flex",
-                    alignItems: "center",
+                    display: 'flex',
+                    alignItems: 'center',
                     gap: 4,
                   }}
                 >
@@ -261,44 +260,44 @@ const ServicesHighlights = () => {
 const CategoryGrid = () => {
   const cats = [
     {
-      icon: "stethoscope",
-      title: "Visite specialistiche",
-      desc: "Cardiologia, ortopedia, dermatologia e altre specialità.",
+      icon: 'stethoscope',
+      title: 'Visite specialistiche',
+      desc: 'Cardiologia, ortopedia, dermatologia e altre specialità.',
     },
     {
-      icon: "document",
-      title: "Esami e analisi",
-      desc: "Esami di laboratorio, diagnostica per immagini, prelievi.",
+      icon: 'document',
+      title: 'Esami e analisi',
+      desc: 'Esami di laboratorio, diagnostica per immagini, prelievi.',
     },
     {
-      icon: "shield",
-      title: "Prevenzione e vaccini",
-      desc: "Screening oncologici, vaccinazioni e programmi di prevenzione.",
+      icon: 'shield',
+      title: 'Prevenzione e vaccini',
+      desc: 'Screening oncologici, vaccinazioni e programmi di prevenzione.',
     },
     {
-      icon: "heart",
-      title: "Percorsi di cura e assistenza",
-      desc: "ADI, cure palliative, riabilitazione e percorsi cronicità.",
+      icon: 'heart',
+      title: 'Percorsi di cura e assistenza',
+      desc: 'ADI, cure palliative, riabilitazione e percorsi cronicità.',
     },
     {
-      icon: "target",
-      title: "Igiene pubblica e animali",
-      desc: "Sanità veterinaria, igiene degli alimenti, igiene ambientale.",
+      icon: 'target',
+      title: 'Igiene pubblica e animali',
+      desc: 'Sanità veterinaria, igiene degli alimenti, igiene ambientale.',
     },
     {
-      icon: "pill",
-      title: "Interventi di chirurgia",
-      desc: "Chirurgia programmata e day surgery nei presidi ASL.",
+      icon: 'pill',
+      title: 'Interventi di chirurgia',
+      desc: 'Chirurgia programmata e day surgery nei presidi ASL.',
     },
     {
-      icon: "ambulance",
-      title: "Pronto Soccorso",
-      desc: "Presidi di Pronto Soccorso e stato affollamento in tempo reale.",
+      icon: 'ambulance',
+      title: 'Pronto Soccorso',
+      desc: 'Presidi di Pronto Soccorso e stato affollamento in tempo reale.',
     },
     {
-      icon: "document",
-      title: "Fascicolo Sanitario Elettronico",
-      desc: "Referti, prescrizioni e storia clinica su FSE Campania.",
+      icon: 'document',
+      title: 'Fascicolo Sanitario Elettronico',
+      desc: 'Referti, prescrizioni e storia clinica su FSE Campania.',
     },
   ];
 
@@ -311,8 +310,8 @@ const CategoryGrid = () => {
       />
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))',
           gap: 16,
         }}
       >
@@ -321,24 +320,24 @@ const CategoryGrid = () => {
             key={i}
             href="#"
             style={{
-              display: "flex",
-              alignItems: "flex-start",
+              display: 'flex',
+              alignItems: 'flex-start',
               gap: 16,
-              padding: "20px",
+              padding: '20px',
               borderRadius: 8,
-              background: "var(--bi-surface)",
-              border: "1px solid var(--bi-border)",
-              textDecoration: "none",
-              color: "inherit",
-              transition: "box-shadow 0.15s, transform 0.15s",
+              background: 'var(--bi-surface)',
+              border: '1px solid var(--bi-border)',
+              textDecoration: 'none',
+              color: 'inherit',
+              transition: 'box-shadow 0.15s, transform 0.15s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "0 4px 16px rgba(0,0,0,0.09)";
-              e.currentTarget.style.transform = "translateY(-2px)";
+              e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.09)';
+              e.currentTarget.style.transform = 'translateY(-2px)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "none";
-              e.currentTarget.style.transform = "none";
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = 'none';
             }}
           >
             <div
@@ -346,11 +345,11 @@ const CategoryGrid = () => {
                 width: 44,
                 height: 44,
                 borderRadius: 10,
-                background: "var(--bi-primary-050)",
-                color: "var(--bi-primary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                background: 'var(--bi-primary-050)',
+                color: 'var(--bi-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 flexShrink: 0,
               }}
             >
@@ -361,7 +360,7 @@ const CategoryGrid = () => {
                 style={{
                   fontWeight: 700,
                   fontSize: 15,
-                  color: "var(--bi-ink-900)",
+                  color: 'var(--bi-ink-900)',
                   marginBottom: 4,
                 }}
               >
@@ -370,7 +369,7 @@ const CategoryGrid = () => {
               <div
                 style={{
                   fontSize: 13,
-                  color: "var(--bi-ink-500)",
+                  color: 'var(--bi-ink-500)',
                   lineHeight: 1.5,
                 }}
               >
@@ -388,34 +387,34 @@ const CategoryGrid = () => {
 const PSWidget = () => {
   const presidii = [
     {
-      name: "P.O. Santa Maria della Pietà — Boscoreale",
+      name: 'P.O. Santa Maria della Pietà — Boscoreale',
       total: 18,
       triage: { bianco: 3, verde: 8, azzurro: 4, arancione: 2, rosso: 1 },
-      updated: "oggi alle 11:48",
+      updated: 'oggi alle 11:48',
       stale: false,
     },
     {
-      name: "P.O. San Leonardo — Castellammare di Stabia",
+      name: 'P.O. San Leonardo — Castellammare di Stabia',
       total: 31,
       triage: { bianco: 5, verde: 12, azzurro: 8, arancione: 5, rosso: 1 },
-      updated: "oggi alle 11:51",
+      updated: 'oggi alle 11:51',
       stale: false,
     },
     {
-      name: "P.O. Maresca — Torre del Greco",
+      name: 'P.O. Maresca — Torre del Greco',
       total: null,
       triage: null,
-      updated: "35 minuti fa",
+      updated: '35 minuti fa',
       stale: true,
     },
   ];
 
   const triageColors = {
-    bianco: { bg: "#f0f0f0", fg: "#444", label: "Bianco" },
-    verde: { bg: "#d4edda", fg: "#1a5c2e", label: "Verde" },
-    azzurro: { bg: "#cce5ff", fg: "#004085", label: "Azzurro" },
-    arancione: { bg: "#ffe0b2", fg: "#7a3e00", label: "Arancione" },
-    rosso: { bg: "#f8d7da", fg: "#721c24", label: "Rosso" },
+    bianco: { bg: '#f0f0f0', fg: '#444', label: 'Bianco' },
+    verde: { bg: '#d4edda', fg: '#1a5c2e', label: 'Verde' },
+    azzurro: { bg: '#cce5ff', fg: '#004085', label: 'Azzurro' },
+    arancione: { bg: '#ffe0b2', fg: '#7a3e00', label: 'Arancione' },
+    rosso: { bg: '#f8d7da', fg: '#721c24', label: 'Rosso' },
   };
 
   return (
@@ -429,13 +428,13 @@ const PSWidget = () => {
       {/* Disclaimer */}
       <div
         style={{
-          display: "flex",
-          alignItems: "flex-start",
+          display: 'flex',
+          alignItems: 'flex-start',
           gap: 12,
-          background: "var(--bi-warm-100)",
-          border: "1px solid var(--bi-warm)",
+          background: 'var(--bi-warm-100)',
+          border: '1px solid var(--bi-warm)',
           borderRadius: 6,
-          padding: "12px 16px",
+          padding: '12px 16px',
           marginBottom: 28,
         }}
       >
@@ -445,18 +444,17 @@ const PSWidget = () => {
           color="var(--bi-warm)"
           style={{ flexShrink: 0, marginTop: 1 }}
         />
-        <div style={{ fontSize: 14, color: "var(--bi-ink-700)" }}>
-          <strong>I dati sono indicativi e aggiornati ogni 5 minuti.</strong> In
-          caso di emergenza chiama il <strong>118</strong>. Non presentarti al
-          Pronto Soccorso per problemi non urgenti: rivolgiti al medico di base
-          o alla guardia medica (<strong>116117</strong>).
+        <div style={{ fontSize: 14, color: 'var(--bi-ink-700)' }}>
+          <strong>I dati sono indicativi e aggiornati ogni 5 minuti.</strong> In caso di emergenza
+          chiama il <strong>118</strong>. Non presentarti al Pronto Soccorso per problemi non
+          urgenti: rivolgiti al medico di base o alla guardia medica (<strong>116117</strong>).
         </div>
       </div>
 
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
           gap: 20,
           marginBottom: 32,
         }}
@@ -465,14 +463,10 @@ const PSWidget = () => {
           <div
             key={i}
             style={{
-              border: ps.stale
-                ? "1.5px dashed var(--bi-ink-300)"
-                : "1px solid var(--bi-border)",
+              border: ps.stale ? '1.5px dashed var(--bi-ink-300)' : '1px solid var(--bi-border)',
               borderRadius: 8,
-              padding: "20px",
-              background: ps.stale
-                ? "var(--bi-ink-050, #f8f9fa)"
-                : "var(--bi-surface)",
+              padding: '20px',
+              background: ps.stale ? 'var(--bi-ink-050, #f8f9fa)' : 'var(--bi-surface)',
               opacity: ps.stale ? 0.8 : 1,
             }}
           >
@@ -480,7 +474,7 @@ const PSWidget = () => {
               style={{
                 fontWeight: 700,
                 fontSize: 15,
-                color: "var(--bi-ink-900)",
+                color: 'var(--bi-ink-900)',
                 marginBottom: 4,
               }}
             >
@@ -489,41 +483,36 @@ const PSWidget = () => {
             {ps.stale || ps.total === null ? (
               <div
                 style={{
-                  color: "var(--bi-ink-500)",
+                  color: 'var(--bi-ink-500)',
                   fontSize: 14,
-                  padding: "12px 0",
-                  display: "flex",
-                  flexDirection: "column",
+                  padding: '12px 0',
+                  display: 'flex',
+                  flexDirection: 'column',
                   gap: 8,
                 }}
               >
                 <span
                   style={{
-                    color: "var(--bi-warn, #C97A00)",
+                    color: 'var(--bi-warn, #C97A00)',
                     fontWeight: 600,
-                    display: "flex",
-                    alignItems: "center",
+                    display: 'flex',
+                    alignItems: 'center',
                     gap: 6,
                   }}
                 >
-                  <Icon
-                    name="alert"
-                    size={14}
-                    color="var(--bi-warn, #C97A00)"
-                  />
+                  <Icon name="alert" size={14} color="var(--bi-warn, #C97A00)" />
                   Dato non disponibile
                 </span>
                 <span>Ultimo aggiornamento: {ps.updated}</span>
                 <a
                   href="#"
                   style={{
-                    color: "var(--bi-primary)",
+                    color: 'var(--bi-primary)',
                     fontWeight: 600,
                     fontSize: 13,
                   }}
                 >
-                  Verifica sul portale regionale{" "}
-                  <Icon name="external" size={12} />
+                  Verifica sul portale regionale <Icon name="external" size={12} />
                 </a>
               </div>
             ) : (
@@ -532,7 +521,7 @@ const PSWidget = () => {
                   style={{
                     fontSize: 36,
                     fontWeight: 800,
-                    color: "var(--bi-primary)",
+                    color: 'var(--bi-primary)',
                     lineHeight: 1,
                     marginBottom: 4,
                   }}
@@ -542,7 +531,7 @@ const PSWidget = () => {
                     style={{
                       fontSize: 15,
                       fontWeight: 400,
-                      color: "var(--bi-ink-500)",
+                      color: 'var(--bi-ink-500)',
                       marginLeft: 6,
                     }}
                   >
@@ -551,8 +540,8 @@ const PSWidget = () => {
                 </div>
                 <div
                   style={{
-                    display: "flex",
-                    flexWrap: "wrap",
+                    display: 'flex',
+                    flexWrap: 'wrap',
                     gap: 6,
                     marginBottom: 10,
                   }}
@@ -565,7 +554,7 @@ const PSWidget = () => {
                         <span
                           key={key}
                           style={{
-                            padding: "3px 9px",
+                            padding: '3px 9px',
                             borderRadius: 99,
                             background: tc.bg,
                             color: tc.fg,
@@ -581,9 +570,9 @@ const PSWidget = () => {
                 <div
                   style={{
                     fontSize: 12,
-                    color: "var(--bi-ink-400)",
-                    display: "flex",
-                    alignItems: "center",
+                    color: 'var(--bi-ink-400)',
+                    display: 'flex',
+                    alignItems: 'center',
                     gap: 4,
                   }}
                 >
@@ -598,33 +587,31 @@ const PSWidget = () => {
       {/* Box esplicativo codici triage */}
       <details
         style={{
-          border: "1px solid var(--bi-border)",
+          border: '1px solid var(--bi-border)',
           borderRadius: 6,
-          padding: "12px 16px",
-          background: "var(--bi-bg-alt)",
+          padding: '12px 16px',
+          background: 'var(--bi-bg-alt)',
         }}
       >
         <summary
           style={{
-            cursor: "pointer",
+            cursor: 'pointer',
             fontWeight: 600,
             fontSize: 14,
-            color: "var(--bi-ink-700)",
+            color: 'var(--bi-ink-700)',
           }}
         >
           Significato dei codici triage
         </summary>
-        <div
-          style={{ marginTop: 12, display: "flex", flexWrap: "wrap", gap: 10 }}
-        >
+        <div style={{ marginTop: 12, display: 'flex', flexWrap: 'wrap', gap: 10 }}>
           {Object.entries(triageColors).map(([key, tc]) => (
             <div
               key={key}
               style={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 gap: 8,
-                padding: "6px 12px",
+                padding: '6px 12px',
                 borderRadius: 6,
                 background: tc.bg,
                 color: tc.fg,
@@ -636,21 +623,21 @@ const PSWidget = () => {
                 style={{
                   width: 10,
                   height: 10,
-                  borderRadius: "50%",
+                  borderRadius: '50%',
                   background: tc.fg,
-                  display: "inline-block",
+                  display: 'inline-block',
                 }}
               />
-              {tc.label} —{" "}
-              {key === "bianco"
-                ? "non urgente"
-                : key === "verde"
-                  ? "poco urgente"
-                  : key === "azzurro"
-                    ? "urgente"
-                    : key === "arancione"
-                      ? "molto urgente"
-                      : "emergenza"}
+              {tc.label} —{' '}
+              {key === 'bianco'
+                ? 'non urgente'
+                : key === 'verde'
+                  ? 'poco urgente'
+                  : key === 'azzurro'
+                    ? 'urgente'
+                    : key === 'arancione'
+                      ? 'molto urgente'
+                      : 'emergenza'}
             </div>
           ))}
         </div>
@@ -662,21 +649,21 @@ const PSWidget = () => {
 // ── Tag cloud "Parliamo di" ──
 const TopicCloud = () => {
   const topics = [
-    "Diabete",
-    "Oncologia",
-    "Maternità",
-    "Cardiologia",
-    "Ortopedia",
-    "Salute mentale",
-    "Pediatria",
-    "Allergologia",
-    "Neurologia",
-    "Riabilitazione",
-    "Oculistica",
-    "Otorinolaringoiatria",
-    "Dermatologia",
-    "Endocrinologia",
-    "Urologia",
+    'Diabete',
+    'Oncologia',
+    'Maternità',
+    'Cardiologia',
+    'Ortopedia',
+    'Salute mentale',
+    'Pediatria',
+    'Allergologia',
+    'Neurologia',
+    'Riabilitazione',
+    'Oculistica',
+    'Otorinolaringoiatria',
+    'Dermatologia',
+    'Endocrinologia',
+    'Urologia',
   ];
 
   return (
@@ -689,10 +676,10 @@ const TopicCloud = () => {
       />
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
+          display: 'flex',
+          flexWrap: 'wrap',
           gap: 10,
-          justifyContent: "center",
+          justifyContent: 'center',
         }}
       >
         {topics.map((t) => (
@@ -700,25 +687,25 @@ const TopicCloud = () => {
             key={t}
             href="#"
             style={{
-              padding: "8px 18px",
+              padding: '8px 18px',
               borderRadius: 99,
-              border: "1.5px solid var(--bi-border)",
-              background: "var(--bi-surface)",
-              color: "var(--bi-ink-700)",
+              border: '1.5px solid var(--bi-border)',
+              background: 'var(--bi-surface)',
+              color: 'var(--bi-ink-700)',
               fontWeight: 600,
               fontSize: 14,
-              textDecoration: "none",
-              transition: "all 0.15s",
+              textDecoration: 'none',
+              transition: 'all 0.15s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = "var(--bi-primary-050)";
-              e.currentTarget.style.borderColor = "var(--bi-primary)";
-              e.currentTarget.style.color = "var(--bi-primary)";
+              e.currentTarget.style.background = 'var(--bi-primary-050)';
+              e.currentTarget.style.borderColor = 'var(--bi-primary)';
+              e.currentTarget.style.color = 'var(--bi-primary)';
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = "var(--bi-surface)";
-              e.currentTarget.style.borderColor = "var(--bi-border)";
-              e.currentTarget.style.color = "var(--bi-ink-700)";
+              e.currentTarget.style.background = 'var(--bi-surface)';
+              e.currentTarget.style.borderColor = 'var(--bi-border)';
+              e.currentTarget.style.color = 'var(--bi-ink-700)';
             }}
           >
             {t}
@@ -733,19 +720,19 @@ const TopicCloud = () => {
 const ServicesHowTo = () => {
   const guides = [
     {
-      icon: "calendar",
-      title: "Prenotare una visita specialistica",
-      href: "page-come-fare-per.html",
+      icon: 'calendar',
+      title: 'Prenotare una visita specialistica',
+      href: 'page-come-fare-per.html',
     },
     {
-      icon: "document",
-      title: "Ritirare un referto online",
-      href: "page-referti.html",
+      icon: 'document',
+      title: 'Ritirare un referto online',
+      href: 'page-referti.html',
     },
-    { icon: "users", title: "Cambiare il medico di base", href: "#" },
-    { icon: "shield", title: "Richiedere un'esenzione ticket", href: "#" },
-    { icon: "pill", title: "Assistenza farmaceutica", href: "#" },
-    { icon: "heart", title: "Iscrizione al SSN", href: "#" },
+    { icon: 'users', title: 'Cambiare il medico di base', href: '#' },
+    { icon: 'shield', title: "Richiedere un'esenzione ticket", href: '#' },
+    { icon: 'pill', title: 'Assistenza farmaceutica', href: '#' },
+    { icon: 'heart', title: 'Iscrizione al SSN', href: '#' },
   ];
 
   return (
@@ -758,8 +745,8 @@ const ServicesHowTo = () => {
       />
       <div
         style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))',
           gap: 12,
         }}
       >
@@ -768,36 +755,32 @@ const ServicesHowTo = () => {
             key={i}
             href={g.href}
             style={{
-              display: "flex",
-              alignItems: "center",
+              display: 'flex',
+              alignItems: 'center',
               gap: 14,
-              padding: "14px 18px",
+              padding: '14px 18px',
               borderRadius: 6,
-              border: "1px solid var(--bi-border)",
-              background: "var(--bi-surface)",
-              textDecoration: "none",
-              color: "var(--bi-ink-900)",
+              border: '1px solid var(--bi-border)',
+              background: 'var(--bi-surface)',
+              textDecoration: 'none',
+              color: 'var(--bi-ink-900)',
               fontWeight: 600,
               fontSize: 14,
-              transition: "background 0.12s",
+              transition: 'background 0.12s',
             }}
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.background = "var(--bi-primary-050)")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.background = "var(--bi-surface)")
-            }
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--bi-primary-050)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--bi-surface)')}
           >
             <span
               style={{
                 width: 36,
                 height: 36,
                 borderRadius: 8,
-                background: "var(--bi-primary-050)",
-                color: "var(--bi-primary)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
+                background: 'var(--bi-primary-050)',
+                color: 'var(--bi-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 flexShrink: 0,
               }}
             >
@@ -814,30 +797,24 @@ const ServicesHowTo = () => {
 
 // ── Pagina completa ──
 const PageServizi = () => (
-  <div
-    data-screen-label="02 Servizi e prestazioni"
-    style={{ background: "var(--bi-bg)" }}
-  >
+  <div data-screen-label="02 Servizi e prestazioni" style={{ background: 'var(--bi-bg)' }}>
     <TopBar />
     <BrandRow />
-    <MainNav active="servizi" />
+    <StickyHeader active="servizi" />
     <Breadcrumb
-      items={[
-        { label: "Home", href: "index.html" },
-        { label: "Servizi e prestazioni" },
-      ]}
+      items={[{ label: 'Home', href: 'index.html' }, { label: 'Servizi e prestazioni' }]}
     />
 
     {/* Titolo pagina */}
-    <div style={{ background: "var(--bi-surface)", padding: "32px 0 0" }}>
+    <div style={{ background: 'var(--bi-surface)', padding: '32px 0 0' }}>
       <div className="container">
         <h1
           style={{
-            fontFamily: "var(--ff-serif)",
-            fontSize: "clamp(32px, 4vw, 52px)",
+            fontFamily: 'var(--ff-serif)',
+            fontSize: 'clamp(32px, 4vw, 52px)',
             fontWeight: 500,
             lineHeight: 1.1,
-            color: "var(--bi-ink-900)",
+            color: 'var(--bi-ink-900)',
             marginBottom: 12,
           }}
         >
@@ -846,15 +823,15 @@ const PageServizi = () => (
         <p
           style={{
             fontSize: 18,
-            color: "var(--bi-ink-500)",
+            color: 'var(--bi-ink-500)',
             maxWidth: 680,
             marginBottom: 0,
             lineHeight: 1.6,
           }}
         >
-          Scopri tutte le prestazioni sanitarie erogate dall'ASL Napoli 3 Sud:
-          visite specialistiche, esami diagnostici, screening, chirurgia e molto
-          altro. Cerca per nome o esplora per categoria.
+          Scopri tutte le prestazioni sanitarie erogate dall'ASL Napoli 3 Sud: visite
+          specialistiche, esami diagnostici, screening, chirurgia e molto altro. Cerca per nome o
+          esplora per categoria.
         </p>
       </div>
     </div>
@@ -871,4 +848,4 @@ const PageServizi = () => (
   </div>
 );
 
-window.PageServizi = PageServizi;
+export { PageServizi };
