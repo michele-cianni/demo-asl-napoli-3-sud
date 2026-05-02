@@ -1,10 +1,12 @@
 import React from 'react';
 import { Icon } from './icons.jsx';
-import { Button, Badge, ArrowLink, Section, SectionHeading } from './ui.jsx';
+import { ArrowLink, Section, SectionHeading } from './ui.jsx';
+import { useResponsive } from './responsive.jsx';
 
 // ─── Come fare per + Servizi ───
 
 const ServicesGrid = () => {
+  const { isMobile, isCompact } = useResponsive();
   const services = [
     {
       icon: 'calendar',
@@ -82,7 +84,7 @@ const ServicesGrid = () => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: isMobile ? '1fr' : isCompact ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)',
           gap: 16,
         }}
       >
@@ -96,11 +98,11 @@ const ServicesGrid = () => {
                 background: 'var(--bi-surface)',
                 border: '1px solid var(--bi-border)',
                 borderRadius: 12,
-                padding: 24,
+                padding: isMobile ? 20 : 24,
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 16,
-                minHeight: 200,
+                minHeight: isMobile ? 'auto' : 200,
                 transition: 'all 0.2s ease',
                 color: 'var(--bi-ink-900)',
                 position: 'relative',

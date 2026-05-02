@@ -1,10 +1,12 @@
 import React from 'react';
 import { Icon } from './icons.jsx';
-import { Button, Badge, ArrowLink, Section, SectionHeading } from './ui.jsx';
+import { ArrowLink, Section, SectionHeading } from './ui.jsx';
+import { useResponsive } from './responsive.jsx';
 
 // ─── Bandi e concorsi (PRD §5.1 blocco 10) ───
 
 const Tenders = () => {
+  const { isMobile, isCompact } = useResponsive();
   const bandi = [
     {
       type: 'Bando di gara',
@@ -107,6 +109,7 @@ const Tenders = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 8,
+                flexWrap: 'wrap',
               }}
             >
               <Icon name="clock" size={13} />
@@ -147,8 +150,8 @@ const Tenders = () => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 48,
+          gridTemplateColumns: isCompact ? '1fr' : '1fr 1fr',
+          gap: isCompact ? 32 : 48,
         }}
       >
         {/* Bandi di gara */}
@@ -158,6 +161,8 @@ const Tenders = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
+              flexWrap: isMobile ? 'wrap' : 'nowrap',
+              gap: 12,
               marginBottom: 4,
             }}
           >
@@ -186,6 +191,8 @@ const Tenders = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
+              flexWrap: isMobile ? 'wrap' : 'nowrap',
+              gap: 12,
               marginBottom: 4,
             }}
           >

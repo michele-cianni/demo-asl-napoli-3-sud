@@ -1,10 +1,12 @@
 import React from 'react';
 import { Icon } from './icons.jsx';
-import { Button, Badge, ArrowLink, Section, SectionHeading, Eyebrow } from './ui.jsx';
+import { Button, Badge, ArrowLink, Section, SectionHeading } from './ui.jsx';
+import { useResponsive } from './responsive.jsx';
 
 // ─── In evidenza (news) + Strutture ───
 
 const News = () => {
+  const { isMobile, isCompact } = useResponsive();
   const items = [
     {
       badge: 'Avviso',
@@ -52,7 +54,13 @@ const News = () => {
         action={<ArrowLink>Tutte le notizie</ArrowLink>}
       />
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1.3fr 1fr', gap: 24 }}>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: isCompact ? '1fr' : '1.3fr 1fr',
+          gap: 24,
+        }}
+      >
         {/* Featured */}
         <article
           style={{
@@ -75,12 +83,13 @@ const News = () => {
           >
             PLACEHOLDER IMG · Ambulatorio terapia del dolore · 1600×900
           </div>
-          <div style={{ padding: 32, flex: 1 }}>
+          <div style={{ padding: isMobile ? 20 : 32, flex: 1 }}>
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 gap: 12,
+                flexWrap: 'wrap',
                 marginBottom: 16,
               }}
             >
@@ -92,7 +101,7 @@ const News = () => {
             <h3
               style={{
                 fontFamily: 'var(--ff-serif)',
-                fontSize: 28,
+                fontSize: isMobile ? 24 : 28,
                 fontWeight: 500,
                 lineHeight: 1.2,
                 margin: '0 0 12px',
@@ -112,7 +121,7 @@ const News = () => {
             >
               {feat.desc}
             </p>
-            <ArrowLink>Leggi l'avviso</ArrowLink>
+            <ArrowLink>Leggi l&apos;avviso</ArrowLink>
           </div>
         </article>
 
@@ -126,7 +135,7 @@ const News = () => {
                 background: 'var(--bi-surface)',
                 borderRadius: 12,
                 border: '1px solid var(--bi-border)',
-                padding: 20,
+                padding: isMobile ? 18 : 20,
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 8,
@@ -181,6 +190,7 @@ const News = () => {
 
 // ─── Strutture — presidi e distretti ───
 const Facilities = () => {
+  const { isMobile, isCompact } = useResponsive();
   const tabs = ['Presidi ospedalieri', 'Distretti sanitari', 'Consultori', 'Punti prelievo'];
   const [active, setActive] = React.useState(0);
   const presidi = [
@@ -243,12 +253,14 @@ const Facilities = () => {
 
       {/* tabs */}
       <div
+        className={isCompact ? 'h-scroll' : undefined}
         style={{
           display: 'flex',
           gap: 4,
           marginBottom: 24,
           borderBottom: '1px solid var(--bi-border)',
-          flexWrap: 'wrap',
+          flexWrap: isCompact ? 'nowrap' : 'wrap',
+          overflowX: isCompact ? 'auto' : 'visible',
         }}
       >
         {tabs.map((t, i) => (
@@ -256,12 +268,13 @@ const Facilities = () => {
             key={t}
             onClick={() => setActive(i)}
             style={{
-              padding: '14px 20px',
+              padding: isMobile ? '14px 16px' : '14px 20px',
               fontSize: 14,
               fontWeight: 600,
               color: active === i ? 'var(--bi-primary)' : 'var(--bi-ink-500)',
               borderBottom: active === i ? '3px solid var(--bi-primary)' : '3px solid transparent',
               marginBottom: -1,
+              whiteSpace: 'nowrap',
             }}
           >
             {t}
@@ -272,7 +285,7 @@ const Facilities = () => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: isMobile ? '1fr' : isCompact ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
           gap: 16,
         }}
       >
@@ -281,7 +294,7 @@ const Facilities = () => {
             key={i}
             href="#"
             style={{
-              padding: 24,
+              padding: isMobile ? 20 : 24,
               borderRadius: 12,
               border: '1px solid var(--bi-border)',
               background: 'var(--bi-surface)',
@@ -336,10 +349,11 @@ const Facilities = () => {
             <div
               style={{
                 display: 'flex',
-                gap: 20,
+                gap: isMobile ? 16 : 20,
                 paddingTop: 16,
                 borderTop: '1px solid var(--bi-border)',
                 fontSize: 13,
+                flexWrap: isMobile ? 'wrap' : 'nowrap',
               }}
             >
               <div>
@@ -384,7 +398,14 @@ const Facilities = () => {
                   Reparti
                 </div>
               </div>
-              <div style={{ flex: 1, textAlign: 'right', alignSelf: 'center' }}>
+              <div
+                style={{
+                  flex: 1,
+                  minWidth: isMobile ? '100%' : 0,
+                  textAlign: isMobile ? 'left' : 'right',
+                  alignSelf: 'center',
+                }}
+              >
                 <div
                   style={{
                     fontSize: 13,

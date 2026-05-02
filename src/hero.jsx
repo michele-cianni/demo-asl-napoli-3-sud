@@ -1,11 +1,13 @@
 import React from 'react';
 import { Icon } from './icons.jsx';
 import { Button, Badge, Eyebrow } from './ui.jsx';
+import { useResponsive } from './responsive.jsx';
 
 // ─── Hero with search ───
 const Hero = () => {
   const [query, setQuery] = React.useState('');
   const [focused, setFocused] = React.useState(false);
+  const { isMobile, isCompact } = useResponsive();
 
   const suggestions = [
     {
@@ -46,7 +48,7 @@ const Hero = () => {
         position: 'relative',
         background: 'linear-gradient(160deg, var(--bi-primary-050) 0%, var(--bi-surface) 70%)',
         overflow: 'hidden',
-        padding: '80px 0 100px',
+        padding: isMobile ? '48px 0 56px' : isCompact ? '64px 0 80px' : '80px 0 100px',
       }}
     >
       {/* decorative geometry */}
@@ -91,8 +93,8 @@ const Hero = () => {
         style={{
           position: 'relative',
           display: 'grid',
-          gridTemplateColumns: '1.15fr 1fr',
-          gap: 72,
+          gridTemplateColumns: isCompact ? '1fr' : '1.15fr 1fr',
+          gap: isCompact ? 40 : 72,
           alignItems: 'center',
         }}
       >
@@ -103,7 +105,7 @@ const Hero = () => {
             style={{
               fontFamily: 'var(--ff-serif)',
               fontWeight: 500,
-              fontSize: 'clamp(40px, 5vw, 64px)',
+              fontSize: 'clamp(32px, 6vw, 64px)',
               lineHeight: 1.05,
               letterSpacing: -1,
               margin: '0 0 24px',
@@ -116,11 +118,11 @@ const Hero = () => {
           </h1>
           <p
             style={{
-              fontSize: 19,
+              fontSize: isMobile ? 17 : 19,
               lineHeight: 1.55,
               color: 'var(--bi-ink-700)',
               marginBottom: 32,
-              maxWidth: 560,
+              maxWidth: isCompact ? '100%' : 560,
             }}
           >
             Prenota prestazioni, scarica referti, trova il presidio più vicino. Cerca un servizio o
@@ -144,8 +146,9 @@ const Hero = () => {
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                padding: '6px 6px 6px 20px',
-                gap: 12,
+                flexWrap: isMobile ? 'wrap' : 'nowrap',
+                padding: isMobile ? '12px 14px' : '6px 6px 6px 20px',
+                gap: isMobile ? 10 : 12,
               }}
             >
               <Icon name="search" size={22} color="var(--bi-primary)" />
@@ -158,46 +161,52 @@ const Hero = () => {
                 onBlur={() => setTimeout(() => setFocused(false), 200)}
                 style={{
                   flex: 1,
+                  minWidth: isMobile ? 'calc(100% - 34px)' : 0,
                   border: 'none',
                   outline: 'none',
                   fontFamily: 'var(--ff-sans)',
-                  fontSize: 17,
-                  padding: '16px 0',
+                  fontSize: isMobile ? 16 : 17,
+                  padding: isMobile ? '6px 0 2px' : '16px 0',
                   background: 'transparent',
                   color: 'var(--bi-ink-900)',
                 }}
               />
-              <button
-                style={{
-                  width: 36,
-                  height: 36,
-                  borderRadius: '50%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'var(--bi-ink-500)',
-                }}
-              >
-                <Icon name="microphone" size={18} />
-              </button>
-              <Button variant="primary" iconRight="arrow-right" size="md">
-                Cerca
-              </Button>
+              {!isMobile && (
+                <button
+                  style={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '50%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--bi-ink-500)',
+                  }}
+                >
+                  <Icon name="microphone" size={18} />
+                </button>
+              )}
+              <div style={{ width: isMobile ? '100%' : 'auto' }}>
+                <Button variant="primary" iconRight="arrow-right" size="md" block={isMobile}>
+                  Cerca
+                </Button>
+              </div>
             </div>
 
             {focused && (
               <div
                 style={{
-                  position: 'absolute',
-                  top: 'calc(100% + 8px)',
-                  left: 0,
-                  right: 0,
+                  position: isMobile ? 'static' : 'absolute',
+                  top: isMobile ? 'auto' : 'calc(100% + 8px)',
+                  left: isMobile ? 'auto' : 0,
+                  right: isMobile ? 'auto' : 0,
                   background: '#fff',
                   borderRadius: 12,
                   border: '1px solid var(--bi-border)',
                   boxShadow: 'var(--shadow-lg)',
                   padding: 8,
                   zIndex: 30,
+                  marginTop: isMobile ? 8 : 0,
                 }}
               >
                 <div
@@ -259,6 +268,7 @@ const Hero = () => {
                 color: 'var(--bi-ink-500)',
                 alignSelf: 'center',
                 marginRight: 4,
+                width: isMobile ? '100%' : 'auto',
               }}
             >
               Ricerca rapida:
@@ -291,14 +301,16 @@ const Hero = () => {
 };
 
 // Synthetic hero visual — evocative "dashboard" card, no photo needed
-const HeroVisual = () => (
-  <div style={{ position: 'relative', minHeight: 480 }}>
-    {/* background placeholder image */}
+const HeroVisual = () => {
+  const { isMobile, isCompact } = useResponsive();
+
+  const placeholder = (
     <div
       className="placeholder-img"
       style={{
-        position: 'absolute',
-        inset: 0,
+        position: isMobile ? 'relative' : 'absolute',
+        inset: isMobile ? 'auto' : 0,
+        aspectRatio: isMobile ? '16 / 11' : undefined,
         borderRadius: 20,
         fontSize: 11,
         background:
@@ -308,15 +320,16 @@ const HeroVisual = () => (
     >
       PLACEHOLDER IMG · Medico con paziente · 1200×900
     </div>
+  );
 
-    {/* card 1 — CUP next appointment */}
+  const appointmentCard = (
     <div
       style={{
-        position: 'absolute',
-        top: 40,
-        left: -40,
-        width: 300,
-        padding: 20,
+        position: isMobile ? 'relative' : 'absolute',
+        top: isMobile ? 'auto' : isCompact ? 24 : 40,
+        left: isMobile ? 'auto' : isCompact ? 16 : -40,
+        width: isMobile ? '100%' : isCompact ? 280 : 300,
+        padding: isMobile ? 18 : 20,
         background: '#fff',
         borderRadius: 14,
         boxShadow: 'var(--shadow-lg)',
@@ -397,15 +410,16 @@ const HeroVisual = () => (
         </div>
       </div>
     </div>
+  );
 
-    {/* card 2 — waiting list micro-widget */}
+  const waitingCard = (
     <div
       style={{
-        position: 'absolute',
-        bottom: 30,
-        right: -30,
-        width: 280,
-        padding: 20,
+        position: isMobile ? 'relative' : 'absolute',
+        bottom: isMobile ? 'auto' : isCompact ? 24 : 30,
+        right: isMobile ? 'auto' : isCompact ? 16 : -30,
+        width: isMobile ? '100%' : isCompact ? 260 : 280,
+        padding: isMobile ? 18 : 20,
         background: '#fff',
         borderRadius: 14,
         boxShadow: 'var(--shadow-lg)',
@@ -439,7 +453,7 @@ const HeroVisual = () => (
             letterSpacing: 0.5,
           }}
         >
-          Liste d'attesa · oggi
+          Liste d&apos;attesa · oggi
         </span>
       </div>
       {[
@@ -453,6 +467,7 @@ const HeroVisual = () => (
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
+            gap: 12,
             padding: '10px 0',
             borderTop: i > 0 ? '1px solid var(--bi-border)' : 'none',
           }}
@@ -462,7 +477,25 @@ const HeroVisual = () => (
         </div>
       ))}
     </div>
-  </div>
-);
+  );
+
+  if (isMobile) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+        {placeholder}
+        {appointmentCard}
+        {waitingCard}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ position: 'relative', minHeight: isCompact ? 520 : 480 }}>
+      {placeholder}
+      {appointmentCard}
+      {waitingCard}
+    </div>
+  );
+};
 
 export { Hero };

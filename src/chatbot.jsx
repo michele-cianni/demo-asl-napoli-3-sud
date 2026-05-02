@@ -1,6 +1,6 @@
 import React from 'react';
 import { Icon } from './icons.jsx';
-import { Button } from './ui.jsx';
+import { useResponsive } from './responsive.jsx';
 
 // ─── Chatbot F4 — Assistente orientativo ASL (PRD §6.4) ───
 // RF4.1 FAB fisso | RF4.2 solo opzioni, no free input iniziale
@@ -203,6 +203,7 @@ const TREE = {
 
 // ── Chatbot component ──
 const Chatbot = () => {
+  const { isMobile } = useResponsive();
   const [open, setOpen] = React.useState(false);
   const [node, setNode] = React.useState('root');
   const [history, setHistory] = React.useState([]);
@@ -240,11 +241,6 @@ const Chatbot = () => {
     setNode(prev);
   };
 
-  const handleReset = () => {
-    setHistory([]);
-    setNode('root');
-  };
-
   return (
     <>
       {/* ── FAB ── */}
@@ -253,13 +249,13 @@ const Chatbot = () => {
         aria-label={open ? 'Chiudi assistente' : 'Apri assistente virtuale'}
         style={{
           position: 'fixed',
-          bottom: 24,
-          right: 24,
+          bottom: isMobile ? 16 : 24,
+          right: isMobile ? 16 : 24,
           zIndex: 9999,
           display: 'flex',
           alignItems: 'center',
           gap: 10,
-          padding: '14px 22px',
+          padding: isMobile ? '14px' : '14px 22px',
           borderRadius: 99,
           background: 'var(--bi-primary)',
           color: '#fff',
@@ -285,7 +281,7 @@ const Chatbot = () => {
         ) : (
           <Icon name="microphone" size={20} color="#fff" />
         )}
-        {!open && 'Aiuto'}
+        {!open && !isMobile && 'Aiuto'}
       </button>
 
       {/* ── Pannello slide-in ── */}
@@ -296,13 +292,14 @@ const Chatbot = () => {
           aria-modal="true"
           style={{
             position: 'fixed',
-            bottom: 88,
-            right: 24,
+            bottom: isMobile ? 76 : 88,
+            right: isMobile ? 16 : 24,
+            left: isMobile ? 16 : 'auto',
             zIndex: 9998,
-            width: 'min(380px, calc(100vw - 32px))',
-            maxHeight: 'calc(100vh - 120px)',
+            width: isMobile ? 'auto' : 'min(380px, calc(100vw - 32px))',
+            maxHeight: isMobile ? 'calc(100vh - 104px)' : 'calc(100vh - 120px)',
             background: 'var(--bi-surface)',
-            borderRadius: 12,
+            borderRadius: isMobile ? 16 : 12,
             overflow: 'hidden',
             boxShadow: '0 8px 40px rgba(0,0,0,0.22)',
             display: 'flex',
@@ -397,11 +394,11 @@ const Chatbot = () => {
                 borderRadius: 10,
                 borderBottomLeftRadius: 2,
                 fontSize: 14,
-                color: 'var(--bi-ink-800)',
+                color: 'var(--bi-ink-700)',
                 lineHeight: 1.6,
                 marginBottom: 16,
                 whiteSpace: 'pre-line',
-                maxWidth: '90%',
+                maxWidth: isMobile ? '100%' : '90%',
               }}
             >
               {currentNode && currentNode.msg}
@@ -461,6 +458,7 @@ const Chatbot = () => {
               padding: '10px 14px',
               display: 'flex',
               gap: 8,
+              flexWrap: isMobile ? 'wrap' : 'nowrap',
             }}
           >
             {history.length > 0 && (
@@ -488,6 +486,7 @@ const Chatbot = () => {
               href="tel:0818722111"
               style={{
                 flex: 1,
+                minWidth: isMobile ? '100%' : 0,
                 padding: '8px 14px',
                 borderRadius: 6,
                 background: 'var(--bi-primary)',

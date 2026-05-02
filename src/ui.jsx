@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from './icons.jsx';
+import { useResponsive } from './responsive.jsx';
 
 // ─── UI primitives — Bootstrap Italia–inspired ───
 
@@ -34,6 +35,7 @@ const Button = ({
   href,
   block,
 }) => {
+  const { isCompact } = useResponsive();
   const variants = {
     primary: {
       background: 'var(--bi-primary)',
@@ -78,18 +80,24 @@ const Button = ({
     xl: { padding: '20px 32px', fontSize: 18 },
   };
 
+  const resolvedSize = isCompact && (size === 'lg' || size === 'xl') ? 'md' : size;
+
   const style = {
     ...btnStyles.base,
     ...variants[variant],
-    ...sizes[size],
+    ...sizes[resolvedSize],
     width: block ? '100%' : 'auto',
+    whiteSpace: block || isCompact ? 'normal' : 'nowrap',
+    textAlign: 'center',
   };
 
   const content = (
     <>
-      {icon && <Icon name={icon} size={size === 'lg' || size === 'xl' ? 20 : 16} />}
+      {icon && <Icon name={icon} size={resolvedSize === 'lg' || resolvedSize === 'xl' ? 20 : 16} />}
       <span>{children}</span>
-      {iconRight && <Icon name={iconRight} size={size === 'lg' || size === 'xl' ? 20 : 16} />}
+      {iconRight && (
+        <Icon name={iconRight} size={resolvedSize === 'lg' || resolvedSize === 'xl' ? 20 : 16} />
+      )}
     </>
   );
 
@@ -161,11 +169,30 @@ const ArrowLink = ({ children, href = '#', color = 'var(--bi-primary)' }) => (
 );
 
 // ─── Section wrapper ───
-const Section = ({ children, bg, pad = '80px 0', style, id }) => (
-  <section id={id} style={{ background: bg, padding: pad, position: 'relative', ...style }}>
-    <div className="container">{children}</div>
-  </section>
-);
+const Section = ({ children, bg, pad, style, id }) => {
+  const { isMobile, isCompact } = useResponsive();
+
+  let resolvedPad = isMobile ? '56px 0' : isCompact ? '72px 0' : '80px 0';
+
+  if (typeof pad === 'string' || typeof pad === 'number') {
+    resolvedPad = pad;
+  } else if (pad && typeof pad === 'object') {
+    resolvedPad =
+      (isMobile ? pad.mobile : isCompact ? pad.compact : pad.desktop) ??
+      (isCompact ? pad.compact : pad.desktop) ??
+      pad.mobile ??
+      resolvedPad;
+  }
+
+  return (
+    <section
+      id={id}
+      style={{ background: bg, padding: resolvedPad, position: 'relative', ...style }}
+    >
+      <div className="container">{children}</div>
+    </section>
+  );
+};
 
 // ─── Eyebrow ───
 const Eyebrow = ({ children, color = 'var(--bi-teal)' }) => (
@@ -195,51 +222,56 @@ const Eyebrow = ({ children, color = 'var(--bi-teal)' }) => (
 );
 
 // ─── Section heading ───
-const SectionHeading = ({ eyebrow, title, subtitle, align = 'left', action }) => (
-  <div
-    style={{
-      display: 'flex',
-      flexDirection: align === 'center' ? 'column' : 'row',
-      alignItems: align === 'center' ? 'center' : 'flex-end',
-      justifyContent: 'space-between',
-      textAlign: align,
-      gap: 24,
-      marginBottom: 40,
-    }}
-  >
-    <div style={{ maxWidth: align === 'center' ? 720 : 680 }}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2
-        style={{
-          fontFamily: 'var(--ff-serif)',
-          fontWeight: 500,
-          fontSize: 'clamp(32px, 3.4vw, 48px)',
-          lineHeight: 1.1,
-          letterSpacing: -0.5,
-          margin: 0,
-          color: 'var(--bi-ink-900)',
-        }}
-      >
-        {title}
-      </h2>
-      {subtitle && (
-        <p
+const SectionHeading = ({ eyebrow, title, subtitle, align = 'left', action }) => {
+  const { isCompact } = useResponsive();
+  const isCentered = align === 'center';
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: isCentered || isCompact ? 'column' : 'row',
+        alignItems: isCentered ? 'center' : isCompact ? 'flex-start' : 'flex-end',
+        justifyContent: 'space-between',
+        textAlign: isCentered ? 'center' : 'left',
+        gap: isCompact ? 16 : 24,
+        marginBottom: isCompact ? 32 : 40,
+      }}
+    >
+      <div style={{ maxWidth: isCentered ? 720 : 680 }}>
+        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+        <h2
           style={{
-            marginTop: 16,
-            marginBottom: 0,
-            color: 'var(--bi-ink-500)',
-            fontSize: 18,
-            lineHeight: 1.55,
-            maxWidth: 620,
+            fontFamily: 'var(--ff-serif)',
+            fontWeight: 500,
+            fontSize: 'clamp(32px, 3.4vw, 48px)',
+            lineHeight: 1.1,
+            letterSpacing: -0.5,
+            margin: 0,
+            color: 'var(--bi-ink-900)',
           }}
         >
-          {subtitle}
-        </p>
-      )}
+          {title}
+        </h2>
+        {subtitle && (
+          <p
+            style={{
+              marginTop: 16,
+              marginBottom: 0,
+              color: 'var(--bi-ink-500)',
+              fontSize: isCompact ? 16 : 18,
+              lineHeight: 1.55,
+              maxWidth: 620,
+            }}
+          >
+            {subtitle}
+          </p>
+        )}
+      </div>
+      {action && <div style={{ width: isCompact ? '100%' : 'auto' }}>{action}</div>}
     </div>
-    {action}
-  </div>
-);
+  );
+};
 
 // ─── Breadcrumb ───
 const Breadcrumb = ({ items }) => (

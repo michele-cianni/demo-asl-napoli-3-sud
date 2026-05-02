@@ -1,10 +1,11 @@
 import React from 'react';
 import { Icon } from './icons.jsx';
-import { Button, Section } from './ui.jsx';
+import { useResponsive } from './responsive.jsx';
 
 // ─── F3 — Valutazione chiarezza informativa (PRD §6.3, obbligatoria AGID) ───
 
 const FeedbackWidget = () => {
+  const { isMobile } = useResponsive();
   const [step, setStep] = React.useState('rating'); // rating | options | comment | thanks
   const [rating, setRating] = React.useState(0);
   const [hoverRating, setHoverRating] = React.useState(0);
@@ -51,7 +52,7 @@ const FeedbackWidget = () => {
     background: 'var(--bi-primary-050)',
     borderTop: '3px solid var(--bi-primary)',
     borderRadius: '0 0 8px 8px',
-    padding: '32px 40px',
+    padding: isMobile ? '24px 20px' : '32px 40px',
     marginTop: 0,
   };
 
@@ -99,8 +100,9 @@ const FeedbackWidget = () => {
             style={{
               ...containerStyle,
               display: 'flex',
-              alignItems: 'center',
-              gap: 24,
+              alignItems: isMobile ? 'flex-start' : 'center',
+              flexDirection: isMobile ? 'column' : 'row',
+              gap: isMobile ? 16 : 24,
             }}
           >
             <div
@@ -131,13 +133,12 @@ const FeedbackWidget = () => {
               </div>
               <div style={{ fontSize: 14, color: 'var(--bi-ink-500)' }}>
                 Il tuo contributo ci aiuta a migliorare la qualità delle informazioni sul sito
-                dell'ASL Napoli 3 Sud.
+                dell&apos;ASL Napoli 3 Sud.
               </div>
             </div>
             <button
               onClick={handleReset}
               style={{
-                marginLeft: 'auto',
                 background: 'none',
                 border: 'none',
                 color: 'var(--bi-primary)',
@@ -148,6 +149,7 @@ const FeedbackWidget = () => {
                 alignItems: 'center',
                 gap: 4,
                 flexShrink: 0,
+                marginLeft: isMobile ? 0 : 'auto',
               }}
             >
               Invia un altro feedback
@@ -177,7 +179,7 @@ const FeedbackWidget = () => {
               >
                 Quanto sono chiare le informazioni su questa pagina?
               </div>
-              <div style={{ display: 'flex', gap: 4 }}>
+              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                 {[1, 2, 3, 4, 5].map((star) => (
                   <button
                     key={star}
@@ -249,7 +251,14 @@ const FeedbackWidget = () => {
                   </button>
                 ))}
               </div>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 12,
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                }}
+              >
                 <button
                   onClick={() => setStep('comment')}
                   style={{
@@ -264,6 +273,8 @@ const FeedbackWidget = () => {
                     fontWeight: 700,
                     fontSize: 15,
                     cursor: 'pointer',
+                    width: isMobile ? '100%' : 'auto',
+                    justifyContent: 'center',
                   }}
                 >
                   Avanti
@@ -322,7 +333,7 @@ const FeedbackWidget = () => {
                   rows={3}
                   style={{
                     width: '100%',
-                    maxWidth: 560,
+                    maxWidth: '100%',
                     padding: '10px 14px',
                     borderRadius: 4,
                     border: '1.5px solid var(--bi-border)',
@@ -338,14 +349,21 @@ const FeedbackWidget = () => {
                 <div
                   style={{
                     fontSize: 12,
-                    color: 'var(--bi-ink-400)',
+                    color: 'var(--bi-ink-500)',
                     marginTop: 4,
                   }}
                 >
                   {comment.length}/500 caratteri
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  gap: 12,
+                  alignItems: 'center',
+                  flexWrap: 'wrap',
+                }}
+              >
                 <button
                   onClick={() => setStep('thanks')}
                   style={{
@@ -360,6 +378,8 @@ const FeedbackWidget = () => {
                     fontWeight: 700,
                     fontSize: 15,
                     cursor: 'pointer',
+                    width: isMobile ? '100%' : 'auto',
+                    justifyContent: 'center',
                   }}
                 >
                   Invia feedback
