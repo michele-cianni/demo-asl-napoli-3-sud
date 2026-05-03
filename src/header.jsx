@@ -1,4 +1,5 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { Icon } from './icons.jsx';
 import { useResponsive } from './responsive.jsx';
 
@@ -341,30 +342,57 @@ const BrandRow = () => {
   );
 };
 
-const MobileMainNav = ({ items, activeItem }) => {
+const MobileMainNav = ({ items, activeItem, onOpenChange }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [panelTop, setPanelTop] = React.useState(0);
   const mobileMenuId = React.useId();
+  const menuBtnRef = React.useRef(null);
+  const firstItemRef = React.useRef(null);
+  const barRef = React.useRef(null);
+  const hasMounted = React.useRef(false);
 
+  const setMenu = React.useCallback((val) => {
+    setIsMenuOpen(val);
+    onOpenChange?.(val);
+  }, [onOpenChange]);
+
+  // Escape key + body scroll lock
   React.useEffect(() => {
-    if (!isMenuOpen || typeof window === 'undefined') return undefined;
-
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        setIsMenuOpen(false);
-      }
+    if (typeof window === 'undefined') return undefined;
+    document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+    if (!isMenuOpen) return () => { document.body.style.overflow = ''; };
+    const onKey = (e) => { if (e.key === 'Escape') setMenu(false); };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.body.style.overflow = '';
     };
+  }, [isMenuOpen, setMenu]);
 
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => window.removeEventListener('keydown', handleKeyDown);
+  // Focus management: primo item all'apertura, pulsante alla chiusura (salta il mount iniziale)
+  React.useEffect(() => {
+    if (!hasMounted.current) { hasMounted.current = true; return; }
+    if (isMenuOpen) {
+      firstItemRef.current?.focus();
+    } else {
+      menuBtnRef.current?.focus();
+    }
   }, [isMenuOpen]);
 
-  const renderNavLink = (item) => {
+  const handleToggle = () => {
+    if (!isMenuOpen && barRef.current) {
+      setPanelTop(barRef.current.getBoundingClientRect().bottom);
+    }
+    setMenu((open) => !open);
+  };
+
+  const renderNavLink = (item, ref) => {
     const isActive = activeItem === item.id;
 
     return (
       <a
         key={item.id}
+        ref={ref}
         href={item.href}
         aria-current={isActive ? 'page' : undefined}
         style={{
@@ -385,7 +413,7 @@ const MobileMainNav = ({ items, activeItem }) => {
           transition: 'background 0.15s',
           whiteSpace: 'nowrap',
         }}
-        onClick={() => setIsMenuOpen(false)}
+        onClick={() => setMenu(false)}
       >
         <span>{item.label}</span>
         <Icon name="chevron-right" size={16} />
@@ -396,6 +424,7 @@ const MobileMainNav = ({ items, activeItem }) => {
   return (
     <>
       <div
+        ref={barRef}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -422,11 +451,12 @@ const MobileMainNav = ({ items, activeItem }) => {
           </span>
         </div>
         <button
+          ref={menuBtnRef}
           type="button"
           aria-expanded={isMenuOpen}
           aria-controls={mobileMenuId}
           aria-label={isMenuOpen ? 'Chiudi il menu principale' : 'Apri il menu principale'}
-          onClick={() => setIsMenuOpen((open) => !open)}
+          onClick={handleToggle}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -448,26 +478,38 @@ const MobileMainNav = ({ items, activeItem }) => {
           {isMenuOpen ? 'Chiudi' : 'Menu'}
         </button>
       </div>
-      {isMenuOpen && (
+      {isMenuOpen && createPortal(
         <nav
           id={mobileMenuId}
+          role="dialog"
+          aria-modal="true"
           aria-label="Menu principale"
           style={{
+            position: 'fixed',
+            top: panelTop,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            overflowY: 'auto',
+            zIndex: 35,
+            background: 'var(--bi-primary)',
             display: 'flex',
             flexDirection: 'column',
             gap: 10,
-            padding: '0 0 14px',
+            padding: '14px 16px',
+            paddingBottom: 'env(safe-area-inset-bottom, 16px)',
           }}
         >
-          {items.map((item) => renderNavLink(item))}
-        </nav>
+          {items.map((item, i) => renderNavLink(item, i === 0 ? firstItemRef : undefined))}
+        </nav>,
+        document.body
       )}
     </>
   );
 };
 
 // ─── Main navigation (senza "Home" — il logo è il link alla homepage) ───
-const MainNav = ({ activeItem, active }) => {
+const MainNav = ({ activeItem, active, onMenuOpenChange }) => {
   const { isCompact, isMobile } = useResponsive();
   activeItem = activeItem || active || '';
 
@@ -543,7 +585,7 @@ const MainNav = ({ activeItem, active }) => {
         }}
       >
         {isMobile ? (
-          <MobileMainNav items={items} activeItem={activeItem} />
+          <MobileMainNav items={items} activeItem={activeItem} onOpenChange={onMenuOpenChange} />
         ) : (
           <nav
             aria-label="Menu principale"
@@ -569,6 +611,70 @@ const MainNav = ({ activeItem, active }) => {
 const QuickActions = () => {
   const { isCompact, isMobile } = useResponsive();
 
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          background: 'var(--bi-surface)',
+          borderTop: '2px solid var(--bi-primary)',
+          borderBottom: '1px solid var(--bi-border)',
+        }}
+      >
+        <div
+          className="container"
+          style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, padding: '10px 16px' }}
+        >
+          {/* CUP */}
+          <a
+            href="#"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4,
+              padding: '10px 12px',
+              borderRadius: 10,
+              background: 'var(--bi-bg)',
+              border: '1px solid var(--bi-border)',
+              textDecoration: 'none',
+              color: 'var(--bi-ink-900)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <Icon name="calendar" size={14} style={{ color: 'var(--bi-primary)', flexShrink: 0 }} />
+              <span style={{ fontWeight: 700, color: 'var(--bi-primary)', fontSize: 12, letterSpacing: 0.4 }}>CUP</span>
+              <Icon name="phone" size={12} style={{ color: 'var(--bi-primary)', marginLeft: 'auto' }} />
+            </div>
+            <span style={{ fontWeight: 600, fontSize: 13, color: 'var(--bi-primary)' }}>06 01020304</span>
+            <span style={{ fontSize: 11, color: 'var(--bi-ink-500)', lineHeight: 1.3 }}>Prenota servizi e prestazioni</span>
+          </a>
+          {/* URP */}
+          <a
+            href="#"
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 4,
+              padding: '10px 12px',
+              borderRadius: 10,
+              background: 'var(--bi-bg)',
+              border: '1px solid var(--bi-border)',
+              textDecoration: 'none',
+              color: 'var(--bi-ink-900)',
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+              <Icon name="mail" size={14} style={{ color: 'var(--bi-ink-500)', flexShrink: 0 }} />
+              <span style={{ fontWeight: 700, color: 'var(--bi-ink-700)', fontSize: 12, letterSpacing: 0.4 }}>URP</span>
+              <Icon name="phone" size={12} style={{ color: 'var(--bi-ink-500)', marginLeft: 'auto' }} />
+            </div>
+            <span style={{ fontWeight: 600, fontSize: 13, color: 'var(--bi-ink-700)' }}>06 01020304</span>
+            <span style={{ fontSize: 11, color: 'var(--bi-ink-500)', lineHeight: 1.3 }}>Richiedi informazioni o segnalazione</span>
+          </a>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
@@ -581,8 +687,8 @@ const QuickActions = () => {
         className="container"
         style={{
           display: 'flex',
-          alignItems: isMobile ? 'stretch' : 'center',
-          flexDirection: isMobile ? 'column' : 'row',
+          alignItems: 'center',
+          flexDirection: 'row',
           gap: isCompact ? 12 : 48,
           minHeight: isCompact ? 'auto' : 48,
           paddingTop: isCompact ? 10 : 0,
@@ -594,10 +700,7 @@ const QuickActions = () => {
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            justifyContent: isMobile ? 'space-between' : 'flex-start',
             gap: 10,
-            flexWrap: 'wrap',
-            width: isMobile ? '100%' : 'auto',
             fontSize: 14,
             textDecoration: 'none',
             color: 'var(--bi-ink-900)',
@@ -609,38 +712,19 @@ const QuickActions = () => {
         >
           <Icon name="calendar" size={16} style={{ color: 'var(--bi-primary)', flexShrink: 0 }} />
           <span>Prenota servizi e prestazioni</span>
-          <span
-            style={{
-              fontWeight: 700,
-              color: 'var(--bi-primary)',
-              fontSize: 13,
-              letterSpacing: 0.5,
-            }}
-          >
-            CUP
-          </span>
+          <span style={{ fontWeight: 700, color: 'var(--bi-primary)', fontSize: 13, letterSpacing: 0.5 }}>CUP</span>
           <span style={{ fontWeight: 600, color: 'var(--bi-primary)' }}>06 01020304</span>
           <Icon name="phone" size={14} style={{ color: 'var(--bi-primary)' }} />
         </a>
         {!isCompact && (
-          <span
-            style={{
-              width: 1,
-              height: 20,
-              background: 'var(--bi-border)',
-              flexShrink: 0,
-            }}
-          />
+          <span style={{ width: 1, height: 20, background: 'var(--bi-border)', flexShrink: 0 }} />
         )}
         <a
           href="#"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            justifyContent: isMobile ? 'space-between' : 'flex-start',
             gap: 10,
-            flexWrap: 'wrap',
-            width: isMobile ? '100%' : 'auto',
             fontSize: 14,
             textDecoration: 'none',
             color: 'var(--bi-ink-900)',
@@ -652,16 +736,7 @@ const QuickActions = () => {
         >
           <Icon name="mail" size={16} style={{ color: 'var(--bi-ink-500)', flexShrink: 0 }} />
           <span>Richiedi informazioni o fai una segnalazione</span>
-          <span
-            style={{
-              fontWeight: 700,
-              color: 'var(--bi-ink-700)',
-              fontSize: 13,
-              letterSpacing: 0.5,
-            }}
-          >
-            URP
-          </span>
+          <span style={{ fontWeight: 700, color: 'var(--bi-ink-700)', fontSize: 13, letterSpacing: 0.5 }}>URP</span>
           <span style={{ fontWeight: 600, color: 'var(--bi-ink-700)' }}>06 01020304</span>
           <Icon name="phone" size={14} style={{ color: 'var(--bi-ink-500)' }} />
         </a>
@@ -672,19 +747,20 @@ const QuickActions = () => {
 
 // ─── Wrapper sticky: nav + banda CUP/URP ───
 const StickyHeader = ({ activeItem, active }) => {
-  const { isCompact } = useResponsive();
+  const { isMobile } = useResponsive();
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   return (
     <div
       style={{
-        position: isCompact ? 'relative' : 'sticky',
+        position: 'sticky',
         top: 0,
         zIndex: 40,
         boxShadow: 'var(--shadow-sm)',
       }}
     >
-      <MainNav activeItem={activeItem} active={active} />
-      <QuickActions />
+      <MainNav activeItem={activeItem} active={active} onMenuOpenChange={setMenuOpen} />
+      {!(isMobile && menuOpen) && <QuickActions />}
     </div>
   );
 };
