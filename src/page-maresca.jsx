@@ -26,7 +26,7 @@ const SERVIZI = [
     items: [
       {
         nome: 'Pronto Soccorso',
-        desc: 'Assistenza di emergenza-urgenza 24 ore su 24, con area pediatrica dedicata. Vedi stato affollamento in tempo reale →',
+        desc: 'Assistenza di emergenza-urgenza 24 ore su 24, con area pediatrica dedicata.',
         href: '#',
         ps: true,
       },
@@ -542,7 +542,7 @@ const ServiziBlock = () => (
     <SectionHeading
       eyebrow="Struttura"
       title="Servizi e prestazioni"
-      subtitle="Servizi erogati dall'Ospedale Maresca. Per lo stato di affollamento del Pronto Soccorso consulta la scheda servizio dedicata."
+      subtitle="Servizi erogati dall'Ospedale Maresca."
     />
     {SERVIZI.map((cat) => (
       <div key={cat.cat} style={{ marginBottom: 36 }}>
