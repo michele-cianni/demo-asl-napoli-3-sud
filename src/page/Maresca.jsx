@@ -12,6 +12,7 @@ import {
 import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
 import { Footer } from '../component/Footer.jsx';
 import { FeedbackWidget } from '../component/Feedback.jsx';
+import { useResponsive } from '../hooks/useResponsive.js';
 
 // ─── Pagina foglia — Ospedale Maresca di Torre del Greco (PRD §5.6) ───
 // Conforme al Modello AGID Tipologia Struttura (§5.6.2)
@@ -149,12 +150,14 @@ const ACHIBlock = () => (
 );
 
 // ── 5. Dove (campo AGID necessario) ──
-const DoveBlock = () => (
+const DoveBlock = () => {
+  const { isMobile } = useResponsive();
+  return (
   <Section bg="var(--bi-surface)" id="dove">
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr',
+        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
         gap: 40,
         alignItems: 'start',
       }}
@@ -226,27 +229,30 @@ const DoveBlock = () => (
       </div>
 
       {/* Mappa placeholder */}
-      <div
-        className="placeholder-img"
-        style={{
-          aspectRatio: '4/3',
-          borderRadius: 12,
-          fontSize: 12,
-          color: 'var(--bi-primary-800)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: 8,
-        }}
-      >
-        <Icon name="hospital" size={36} />
-        <div style={{ fontWeight: 700 }}>Mappa — Via Montedoro, Torre del Greco</div>
-        <div style={{ opacity: 0.7, fontSize: 11 }}>OpenStreetMap / Leaflet.js — da integrare</div>
-      </div>
+      {!isMobile && (
+        <div
+          className="placeholder-img"
+          style={{
+            aspectRatio: '4/3',
+            borderRadius: 12,
+            fontSize: 12,
+            color: 'var(--bi-primary-800)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+          }}
+        >
+          <Icon name="hospital" size={36} />
+          <div style={{ fontWeight: 700 }}>Mappa — Via Montedoro, Torre del Greco</div>
+          <div style={{ opacity: 0.7, fontSize: 11 }}>OpenStreetMap / Leaflet.js — da integrare</div>
+        </div>
+      )}
     </div>
   </Section>
-);
+  );
+};
 
 // ── 6. Come accedere (campo AGID necessario — assorbe auto/treno/accessibilità/parcheggi) ──
 const ComeAccedereBlock = () => (
@@ -367,7 +373,9 @@ const ComeAccedereBlock = () => (
 );
 
 // ── 7. Orari di apertura (campo AGID necessario) ──
-const OrariAperturaBlock = () => (
+const OrariAperturaBlock = () => {
+  const { isMobile } = useResponsive();
+  return (
   <Section bg="var(--bi-surface)" id="orari">
     <div style={{ maxWidth: 680 }}>
       <SectionHeading eyebrow="Struttura" title="Orari di apertura" />
@@ -406,8 +414,10 @@ const OrariAperturaBlock = () => (
           <div
             key={i}
             style={{
-              display: 'grid',
+              display: isMobile ? 'flex' : 'grid',
+              flexDirection: 'column',
               gridTemplateColumns: '1.4fr 1.6fr',
+              gap: isMobile ? 2 : undefined,
               padding: '14px 24px',
               borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
               background: i % 2 === 0 ? 'transparent' : 'var(--bi-surface)',
@@ -422,7 +432,7 @@ const OrariAperturaBlock = () => (
             >
               {row.servizio}
             </span>
-            <span style={{ fontSize: 14, color: 'var(--bi-ink-700)' }}>{row.orari}</span>
+            <span style={{ fontSize: 14, color: isMobile ? 'var(--bi-ink-500)' : 'var(--bi-ink-700)' }}>{row.orari}</span>
           </div>
         ))}
       </div>
@@ -445,10 +455,13 @@ const OrariAperturaBlock = () => (
       </div>
     </div>
   </Section>
-);
+  );
+};
 
 // ── 8. Contatti (campo AGID necessario, max 255 car. per item) ──
-const ContattiBlock = () => (
+const ContattiBlock = () => {
+  const { isMobile } = useResponsive();
+  return (
   <Section bg="var(--bi-bg-alt)" id="contatti">
     <SectionHeading eyebrow="Struttura" title="Contatti" />
     <div
@@ -477,11 +490,12 @@ const ContattiBlock = () => (
           key={i}
           style={{
             display: 'flex',
-            alignItems: 'center',
+            flexDirection: isMobile ? 'column' : 'row',
+            alignItems: isMobile ? 'flex-start' : 'center',
             justifyContent: 'space-between',
             padding: '16px 24px',
             borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
-            gap: 24,
+            gap: isMobile ? 8 : 24,
           }}
         >
           <div>
@@ -542,7 +556,8 @@ const ContattiBlock = () => (
       ))}
     </div>
   </Section>
-);
+  );
+};
 
 // ── 9. Servizi e prestazioni (campo AGID necessario — Card Services) ──
 const ServiziBlock = () => (
@@ -716,13 +731,15 @@ const ResponsabileBlock = () => (
 );
 
 // ── 11. Galleria (campo AGID opzionale, incluso — griglia 3 colonne desktop) ──
-const GalleriaBlock = () => (
+const GalleriaBlock = () => {
+  const { isMobile, isCompact } = useResponsive();
+  return (
   <Section bg="var(--bi-surface)" id="galleria">
     <SectionHeading eyebrow="Struttura" title="Galleria" />
     <div
       style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(3, 1fr)',
+        gridTemplateColumns: isMobile ? '1fr' : isCompact ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
         gap: 12,
       }}
     >
@@ -731,8 +748,8 @@ const GalleriaBlock = () => (
           key={i}
           className="placeholder-img"
           style={{
-            gridColumn: `span ${Math.min(g.span, 3)}`,
-            aspectRatio: g.span === 2 ? '16/7' : '16/9',
+            gridColumn: isMobile ? 'span 1' : `span ${Math.min(g.span, 3)}`,
+            aspectRatio: !isMobile && g.span === 2 ? '16/7' : '16/9',
             borderRadius: 10,
             fontSize: 11,
             color: 'var(--bi-primary-800)',
@@ -743,7 +760,8 @@ const GalleriaBlock = () => (
       ))}
     </div>
   </Section>
-);
+  );
+};
 
 // ── Pagina principale ──
 const PageMaresca = () => (

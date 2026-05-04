@@ -1,4 +1,5 @@
 import React from 'react';
+import { useResponsive } from '../hooks/useResponsive.js';
 import { Icon } from '../icons.jsx';
 import {
   Button,
@@ -370,6 +371,7 @@ const EmptyState = ({ onReset }) => (
 
 // ── Pagina principale ──
 const PageOspedali = () => {
+  const { isMobile } = useResponsive();
   const [search, setSearch] = React.useState('');
   const [comuneFilter, setComuneFilter] = React.useState(null);
   const [specFilter, setSpecFilter] = React.useState(null);
@@ -432,7 +434,7 @@ const PageOspedali = () => {
             {/* Search input */}
             <div
               style={{
-                flex: '1 1 300px',
+                flex: isMobile ? '1 1 100%' : '1 1 300px',
                 display: 'flex',
                 alignItems: 'center',
                 background: 'var(--bi-bg)',
@@ -526,7 +528,7 @@ const PageOspedali = () => {
             style={{
               marginTop: 16,
               display: 'flex',
-              gap: 24,
+              gap: isMobile ? 16 : 24,
               flexWrap: 'wrap',
             }}
           >
@@ -632,7 +634,7 @@ const PageOspedali = () => {
 
       {/* ── Vista lista ── */}
       {view === 'lista' && (
-        <div style={{ padding: '48px 0 80px' }}>
+        <div style={{ padding: isMobile ? '24px 0 48px' : '48px 0 80px' }}>
           <div className="container">
             {filtered.length === 0 ? (
               <div style={{ display: 'grid' }}>
@@ -642,7 +644,7 @@ const PageOspedali = () => {
               <div
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+                  gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(300px, 1fr))',
                   gap: 24,
                 }}
               >
@@ -657,12 +659,12 @@ const PageOspedali = () => {
 
       {/* ── Vista mappa (placeholder) ── */}
       {view === 'mappa' && (
-        <div style={{ padding: '48px 0 80px' }}>
+        <div style={{ padding: isMobile ? '24px 0 48px' : '48px 0 80px' }}>
           <div className="container">
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: '1fr 340px',
+                gridTemplateColumns: isMobile ? '1fr' : '1fr 340px',
                 gap: 24,
                 alignItems: 'start',
               }}

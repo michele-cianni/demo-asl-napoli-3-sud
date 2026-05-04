@@ -133,12 +133,12 @@ img {
   }
 }
 
-/* focus ring Designers Italia style */
+/* focus ring */
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 select:focus-visible {
-  outline: 3px solid #f2b705;
+  outline: 3px solid var(--bi-primary);
   outline-offset: 2px;
   border-radius: 2px;
 }
