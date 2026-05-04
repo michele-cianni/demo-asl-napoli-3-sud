@@ -3,9 +3,9 @@ import { Icon } from '../icons.jsx';
 import { ArrowLink, Section, SectionHeading } from './UI.jsx';
 import { useResponsive } from '../hooks/useResponsive.js';
 
-// ─── Come fare per + Servizi ───
+// ─── Come fare per ───
 
-const ServicesGrid = () => {
+const HowToGrid = () => {
   const { isMobile, isCompact } = useResponsive();
   const services = [
     {
@@ -78,7 +78,7 @@ const ServicesGrid = () => {
         eyebrow="Come fare per"
         title="Percorsi guidati, passo per passo."
         subtitle="Scopri come svolgere le pratiche più comuni con l'ASL."
-        action={<ArrowLink href="page-servizi.html">Vedi tutti i servizi</ArrowLink>}
+        action={<ArrowLink href="page-servizi.html">Vai a tutte le guide</ArrowLink>}
       />
 
       <div
@@ -176,4 +176,4 @@ const ServicesGrid = () => {
   );
 };
 
-export { ServicesGrid };
+export { HowToGrid };

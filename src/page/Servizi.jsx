@@ -3,7 +3,8 @@ import { Icon } from '../icons.jsx';
 import { ArrowLink, Section, SectionHeading, Breadcrumb } from '../component/UI.jsx';
 import { PageHero } from './Hero.jsx';
 import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
-import { CTABand, Footer } from '../component/Footer.jsx';
+import { Footer } from '../component/Footer.jsx';
+import { FSEBand } from '../component/FSEBand.jsx';
 import { FeedbackWidget } from '../component/Feedback.jsx';
 
 // ─── Pagina Servizi e prestazioni (PRD §5.2) ───
@@ -552,7 +553,7 @@ const PageServizi = () => (
     <ServicesHighlights />
     <CategoryGrid />
     <ServicesHowTo />
-    <CTABand />
+    <FSEBand />
     <TopicCloud />
     <FeedbackWidget />
     <Footer />

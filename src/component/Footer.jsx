@@ -1,67 +1,8 @@
-import React from 'react';
 import { Icon } from '../icons.jsx';
-import { Button, Eyebrow } from './UI.jsx';
 import { useResponsive } from '../hooks/useResponsive.js';
 import styles from './Footer.module.css';
 
 const cx = (...parts) => parts.filter(Boolean).join(' ');
-
-// ─── CTA band — Area personale / FSE ───
-const CTABand = () => (
-  <section className={styles.ctaBand}>
-    <div aria-hidden className={styles.ctaBand__overlay} />
-    <div aria-hidden className={styles.ctaBand__ringLg} />
-    <div aria-hidden className={styles.ctaBand__ringSm} />
-
-    <div className={cx('container', styles.ctaBand__grid)}>
-      <div>
-        <Eyebrow color="rgba(255,255,255,0.8)">Fascicolo Sanitario Elettronico</Eyebrow>
-        <h2 className={styles.ctaBand__title}>
-          La tua salute in un unico posto,
-          <br />
-          <em className={styles.ctaBand__titleEm}>accessibile con SPID o CIE.</em>
-        </h2>
-        <p className={styles.ctaBand__intro}>
-          Referti, prescrizioni, ricette dematerializzate, vaccinazioni, esenzioni. Consulta e
-          condividi la tua storia clinica in sicurezza.
-        </p>
-        <div className={styles.ctaBand__buttons}>
-          <Button variant="white" size="lg" icon="users">
-            Accedi con SPID
-          </Button>
-          <Button variant="outlineWhite" size="lg" icon="users">
-            Accedi con CIE
-          </Button>
-        </div>
-      </div>
-
-      {/* FSE mock card */}
-      <div className={styles.ctaCard}>
-        <div className={styles.ctaCard__head}>
-          <div>
-            <div className={styles.ctaCard__eyebrow}>Fascicolo di</div>
-            <div className={styles.ctaCard__name}>Giovanna Esposito</div>
-          </div>
-          <div className={styles.ctaCard__avatar}>GE</div>
-        </div>
-        {[
-          { label: 'Referti disponibili', val: '3 nuovi', icon: 'document', tone: '#9BD4DB' },
-          { label: 'Prescrizioni attive', val: '2', icon: 'pill', tone: '#FFD480' },
-          { label: 'Prossimi appuntamenti', val: '1 · 12 mag', icon: 'calendar', tone: '#9BD4DB' },
-          { label: 'Vaccinazioni 2025', val: '4 dosi', icon: 'shield', tone: '#C8E6C9' },
-        ].map((r, i) => (
-          <div key={i} className={styles.ctaCard__row}>
-            <span className={styles.ctaCard__icon} style={{ color: r.tone }}>
-              <Icon name={r.icon} size={18} />
-            </span>
-            <span className={styles.ctaCard__label}>{r.label}</span>
-            <span className={styles.ctaCard__val}>{r.val}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-);
 
 // ─── Footer ───
 const Footer = () => {
@@ -181,4 +122,4 @@ const Footer = () => {
   );
 };
 
-export { CTABand, Footer };
+export { Footer };

@@ -6,7 +6,8 @@ import { ServicesGrid } from './component/Services.jsx';
 import { WaitingLists } from './component/Waiting.jsx';
 import { Screening } from './component/Screening.jsx';
 import { News, Facilities } from './component/News.jsx';
-import { CTABand, Footer } from './component/Footer.jsx';
+import { Footer } from './component/Footer.jsx';
+import { FSEBand } from './component/FSEBand.jsx';
 
 function PrintApp() {
   return (
@@ -25,7 +26,7 @@ function PrintApp() {
         <Screening />
       </div>
       <div style={{ breakBefore: 'page', pageBreakBefore: 'always' }}>
-        <CTABand />
+        <FSEBand />
       </div>
       <div style={{ breakBefore: 'page', pageBreakBefore: 'always' }}>
         <News />
