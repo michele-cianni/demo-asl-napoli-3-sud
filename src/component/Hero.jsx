@@ -143,7 +143,7 @@ const HeroVisual = () => {
   );
 
   if (isMobile) {
-    return <div className={styles.visualMobile}>{placeholder}</div>;
+    return null;
   }
 
   return <div className={styles.visual}>{placeholder}</div>;

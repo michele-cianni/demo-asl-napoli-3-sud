@@ -16,35 +16,27 @@ const News = () => {
       title: 'Nuovo ambulatorio per la terapia del dolore a Castellammare',
       desc: 'Dal 5 maggio apre il nuovo centro di II livello al Presidio San Leonardo. Visite su prenotazione CUP.',
       readTime: '2 min',
-      feat: true,
+      imgLabel: 'Ambulatorio terapia del dolore · 800×480',
     },
     {
       badge: 'Bando',
       badgeTone: 'primary',
       date: '15 aprile 2026',
       title: 'Concorso pubblico per 24 posti di Infermiere',
-      desc: 'Scadenza presentazione domande: 30 maggio 2026.',
+      desc: 'Scadenza presentazione domande: 30 maggio 2026. Requisiti e modulistica disponibili sul portale aziendale.',
       readTime: '3 min',
+      imgLabel: 'Concorso infermieri · 800×480',
     },
     {
       badge: 'Salute',
       badgeTone: 'teal',
       date: '12 aprile 2026',
       title: 'Giornata mondiale della voce: visite gratuite il 16 aprile',
-      desc: "Otorinolaringoiatria aperta al pubblico presso 4 presidi dell'ASL.",
+      desc: "Otorinolaringoiatria aperta al pubblico presso 4 presidi dell'ASL. Accesso diretto senza prenotazione.",
       readTime: '1 min',
-    },
-    {
-      badge: 'Avviso',
-      badgeTone: 'warm',
-      date: '10 aprile 2026',
-      title: 'Modifiche orari Punti Prelievo Pasqua 2026',
-      desc: 'Variazioni dal 18 al 21 aprile. Consulta il calendario completo.',
-      readTime: '1 min',
+      imgLabel: 'Giornata mondiale della voce · 800×480',
     },
   ];
-
-  const [feat, ...rest] = items;
 
   return (
     <Section bg="var(--bi-bg-alt)" id="news">
@@ -56,47 +48,33 @@ const News = () => {
       />
 
       <div className={styles.news__grid}>
-        {/* Featured */}
-        <article className={styles.news__featCard}>
-          <div
-            className="placeholder-img"
-            style={{
-              aspectRatio: '16/9',
-              borderRadius: 0,
-              fontSize: 11,
-              color: 'var(--bi-primary-800)',
-            }}
-          >
-            PLACEHOLDER IMG · Ambulatorio terapia del dolore · 1600×900
-          </div>
-          <div className={styles.news__featBody}>
-            <div className={styles.news__featMeta}>
-              <Badge tone={feat.badgeTone}>{feat.badge}</Badge>
-              <span className={styles.news__featDate}>
-                {feat.date} · {feat.readTime} di lettura
-              </span>
+        {items.map((item, i) => (
+          <a key={i} href="#" className={styles.news__card}>
+            <div
+              className="placeholder-img"
+              style={{
+                aspectRatio: '5/3',
+                borderRadius: 0,
+                fontSize: 10,
+                color: 'var(--bi-primary-800)',
+              }}
+            >
+              PLACEHOLDER IMG · {item.imgLabel}
             </div>
-            <h3 className={styles.news__featTitle}>{feat.title}</h3>
-            <p className={styles.news__featDesc}>{feat.desc}</p>
-            <ArrowLink>Leggi l&apos;avviso</ArrowLink>
-          </div>
-        </article>
-
-        {/* List */}
-        <div className={styles.news__list}>
-          {rest.map((item, i) => (
-            <a key={i} href="#" className={styles.news__listItem}>
-              <div className={styles.news__listMeta}>
-                <Badge tone={item.badgeTone}>{item.badge}</Badge>
-                <span className={styles.news__listDate}>
-                  {item.date} · {item.readTime}
-                </span>
+            <div className={styles.news__cardBody}>
+              <div className={styles.news__cardContent}>
+                <div className={styles.news__cardMeta}>
+                  <Badge tone={item.badgeTone}>{item.badge}</Badge>
+                  <span className={styles.news__cardDate}>
+                    {item.date} · {item.readTime} di lettura
+                  </span>
+                </div>
+                <h3 className={styles.news__cardTitle}>{item.title}</h3>
+                <p className={styles.news__cardDesc}>{item.desc}</p>
               </div>
-              <h4 className={styles.news__listTitle}>{item.title}</h4>
-              <p className={styles.news__listDesc}>{item.desc}</p>
-            </a>
-          ))}
-        </div>
+            </div>
+          </a>
+        ))}
       </div>
     </Section>
   );
