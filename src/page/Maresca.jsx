@@ -1,0 +1,948 @@
+import React from 'react';
+import { Icon } from '../icons.jsx';
+import {
+  Button,
+  Badge,
+  ArrowLink,
+  Section,
+  SectionHeading,
+  Breadcrumb,
+  Eyebrow,
+} from '../component/UI.jsx';
+import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
+import { Footer } from '../component/Footer.jsx';
+import { FeedbackWidget } from '../component/Feedback.jsx';
+
+// ─── Pagina foglia — Ospedale Maresca di Torre del Greco (PRD §5.6) ───
+// Conforme al Modello AGID Tipologia Struttura (§5.6.2)
+// URL: /strutture/ospedali/maresca-torre-del-greco/
+// Breadcrumb: Home → Strutture → Ospedali → Ospedale Maresca
+
+// ── Dati statici ──
+
+const GALLERIA = [
+  { label: 'Ingresso principale', span: 2 },
+  { label: 'Reparto Cardiologia', span: 1 },
+  { label: 'Sala operatoria', span: 1 },
+  { label: 'Pronto Soccorso', span: 1 },
+  { label: 'Laboratorio Analisi', span: 1 },
+];
+
+const SERVIZI = [
+  {
+    cat: 'Emergenza',
+    items: [
+      {
+        nome: 'Pronto Soccorso',
+        desc: 'Assistenza di emergenza-urgenza 24 ore su 24, con area pediatrica dedicata.',
+        href: '#',
+        ps: true,
+      },
+    ],
+  },
+  {
+    cat: 'Visite specialistiche',
+    items: [
+      {
+        nome: 'Cardiologia',
+        desc: 'UTIC, emodinamica, cardiologia interventistica e ambulatorio.',
+        href: '#',
+      },
+      {
+        nome: 'Neurologia',
+        desc: 'Stroke unit e ambulatorio neurologico.',
+        href: '#',
+      },
+      {
+        nome: 'Pneumologia',
+        desc: 'Diagnosi e trattamento delle patologie respiratorie.',
+        href: '#',
+      },
+      {
+        nome: 'Chirurgia Generale',
+        desc: "Chirurgia laparoscopica, day surgery, chirurgia d'urgenza.",
+        href: '#',
+      },
+      {
+        nome: 'Ortopedia e Traumatologia',
+        desc: 'Protesica, artroscopia, traumatologia.',
+        href: '#',
+      },
+      {
+        nome: 'Urologia',
+        desc: 'Endourologia, chirurgia robotica mini-invasiva.',
+        href: '#',
+      },
+      {
+        nome: 'Ostetricia e Ginecologia',
+        desc: 'Punto nascita di I livello, consultorio aziendale.',
+        href: '#',
+      },
+      {
+        nome: 'Pediatria',
+        desc: 'Degenza pediatrica e ambulatorio neonatale.',
+        href: '#',
+      },
+      {
+        nome: 'Medicina Interna',
+        desc: 'Degenza e ambulatorio per patologie internistiche.',
+        href: '#',
+      },
+    ],
+  },
+  {
+    cat: 'Esami e analisi',
+    items: [
+      {
+        nome: 'Radiologia',
+        desc: 'TC multistrato, RMN 1.5T, Rx digitale, ecografia.',
+        href: '#',
+      },
+      {
+        nome: 'Laboratorio Analisi',
+        desc: 'Analisi di routine, urgenza 24h, biologia molecolare.',
+        href: '#',
+      },
+    ],
+  },
+];
+
+// ── 4. A chi è rivolto/a (campo AGID necessario) ──
+const ACHIBlock = () => (
+  <Section bg="var(--bi-bg-alt)" id="a-chi-e-rivolto">
+    <div style={{ maxWidth: 720 }}>
+      <SectionHeading eyebrow="Struttura" title="A chi è rivolto" />
+      <p
+        style={{
+          fontSize: 16,
+          color: 'var(--bi-ink-700)',
+          lineHeight: 1.7,
+          margin: '0 0 20px',
+        }}
+      >
+        L'Ospedale Maresca è aperto a tutti i cittadini del territorio ASL Napoli 3 Sud e della
+        Regione Campania per prestazioni di ricovero, emergenza, specialistica ambulatoriale e
+        diagnostica per immagini.
+      </p>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+        {['Tutti i cittadini', 'Anziani', 'Donne', 'Bambini', 'Persone con disabilità'].map(
+          (chip) => (
+            <span
+              key={chip}
+              style={{
+                padding: '6px 14px',
+                borderRadius: 99,
+                background: 'var(--bi-primary-050)',
+                color: 'var(--bi-primary-800)',
+                fontSize: 13,
+                fontWeight: 600,
+                border: '1px solid var(--bi-primary-100)',
+              }}
+            >
+              {chip}
+            </span>
+          )
+        )}
+      </div>
+    </div>
+  </Section>
+);
+
+// ── 5. Dove (campo AGID necessario) ──
+const DoveBlock = () => (
+  <Section bg="var(--bi-surface)" id="dove">
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: 40,
+        alignItems: 'start',
+      }}
+    >
+      <div>
+        <SectionHeading eyebrow="Struttura" title="Dove" />
+        <div
+          style={{
+            display: 'flex',
+            gap: 14,
+            alignItems: 'flex-start',
+            marginBottom: 24,
+          }}
+        >
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 8,
+              background: 'var(--bi-primary-050)',
+              color: 'var(--bi-primary)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}
+          >
+            <Icon name="hospital" size={20} />
+          </div>
+          <div>
+            <div
+              style={{
+                fontWeight: 700,
+                fontSize: 15,
+                color: 'var(--bi-ink-900)',
+                lineHeight: 1.4,
+              }}
+            >
+              Via Montedoro
+              <br />
+              80059 Torre del Greco (NA)
+            </div>
+            <div style={{ fontSize: 13, color: 'var(--bi-ink-500)', marginTop: 6 }}>
+              Distretto Sanitario 58 — Torre del Greco
+            </div>
+          </div>
+        </div>
+        <a
+          href="https://maps.google.com/?q=Via+Montedoro+Torre+del+Greco+NA"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '10px 18px',
+            background: 'var(--bi-primary)',
+            color: '#fff',
+            borderRadius: 8,
+            fontWeight: 700,
+            fontSize: 14,
+            textDecoration: 'none',
+          }}
+        >
+          <Icon name="hospital" size={15} />
+          Apri in mappa
+          <Icon name="external" size={13} />
+        </a>
+      </div>
+
+      {/* Mappa placeholder */}
+      <div
+        className="placeholder-img"
+        style={{
+          aspectRatio: '4/3',
+          borderRadius: 12,
+          fontSize: 12,
+          color: 'var(--bi-primary-800)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 8,
+        }}
+      >
+        <Icon name="hospital" size={36} />
+        <div style={{ fontWeight: 700 }}>Mappa — Via Montedoro, Torre del Greco</div>
+        <div style={{ opacity: 0.7, fontSize: 11 }}>OpenStreetMap / Leaflet.js — da integrare</div>
+      </div>
+    </div>
+  </Section>
+);
+
+// ── 6. Come accedere (campo AGID necessario — assorbe auto/treno/accessibilità/parcheggi) ──
+const ComeAccedereBlock = () => (
+  <Section bg="var(--bi-bg-alt)" id="come-accedere">
+    <SectionHeading eyebrow="Struttura" title="Come accedere" />
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+        gap: 28,
+        marginBottom: 24,
+      }}
+    >
+      {[
+        {
+          icon: 'car',
+          title: 'In auto',
+          items: [
+            'Autostrada A3 Napoli–Salerno, uscita Torre del Greco',
+            "Via Montedoro: 500 m dall'uscita autostradale",
+            'Parcheggio convenzionato in Via Circumvallazione (gratuito 2h)',
+          ],
+        },
+        {
+          icon: 'train',
+          title: 'Treno e mezzi pubblici',
+          items: [
+            'Circumvesuviana: fermata Torre del Greco (10 min a piedi)',
+            'Bus ANM linea 170 — fermata Ospedale Maresca',
+            'Bus SITA linea CS — fermata Via Montedoro',
+          ],
+        },
+        {
+          icon: 'accessibility',
+          title: 'Accessibilità',
+          items: [
+            "4 posti disabili riservati all'ingresso principale",
+            'Rampe e ascensori in tutti i padiglioni',
+            'Sportello URP con induttore magnetico',
+          ],
+        },
+      ].map((s, i) => (
+        <div key={i}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              marginBottom: 12,
+            }}
+          >
+            <div
+              style={{
+                width: 36,
+                height: 36,
+                borderRadius: 8,
+                background: 'var(--bi-primary-050)',
+                color: 'var(--bi-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Icon name={s.icon} size={18} />
+            </div>
+            <h4
+              style={{
+                margin: 0,
+                fontSize: 16,
+                fontWeight: 700,
+                color: 'var(--bi-ink-900)',
+              }}
+            >
+              {s.title}
+            </h4>
+          </div>
+          <ul
+            style={{
+              margin: 0,
+              paddingLeft: 20,
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 6,
+            }}
+          >
+            {s.items.map((item, j) => (
+              <li
+                key={j}
+                style={{
+                  fontSize: 14,
+                  color: 'var(--bi-ink-700)',
+                  lineHeight: 1.5,
+                }}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div
+      style={{
+        padding: '14px 18px',
+        background: 'var(--bi-primary-050)',
+        borderRadius: 8,
+        fontSize: 13,
+        color: 'var(--bi-primary-800)',
+      }}
+    >
+      Per prenotare una visita specialistica consulta la pagina{' '}
+      <a href="page-come-fare-per.html" style={{ color: 'var(--bi-primary)', fontWeight: 700 }}>
+        Come fare per prenotare una visita
+      </a>
+      .
+    </div>
+  </Section>
+);
+
+// ── 7. Orari di apertura (campo AGID necessario) ──
+const OrariAperturaBlock = () => (
+  <Section bg="var(--bi-surface)" id="orari">
+    <div style={{ maxWidth: 680 }}>
+      <SectionHeading eyebrow="Struttura" title="Orari di apertura" />
+      <div
+        style={{
+          background: 'var(--bi-bg-alt)',
+          border: '1px solid var(--bi-border)',
+          borderRadius: 12,
+          overflow: 'hidden',
+        }}
+      >
+        {[
+          {
+            servizio: 'Centralino / Accettazione',
+            orari: '24 ore su 24, 7 giorni su 7',
+          },
+          { servizio: 'Pronto Soccorso', orari: '24 ore su 24, 7 giorni su 7' },
+          {
+            servizio: 'Ambulatori specialistici',
+            orari: 'Lunedì–Venerdì 8:00–18:00 · Sabato 8:00–13:00',
+          },
+          {
+            servizio: 'Diagnostica per immagini (urgenza)',
+            orari: '24 ore su 24, 7 giorni su 7',
+          },
+          {
+            servizio: 'Laboratorio Analisi (prelievi)',
+            orari: 'Lunedì–Sabato 7:00–12:30',
+          },
+          { servizio: 'URP ospedaliero', orari: 'Lunedì–Venerdì 9:00–13:00' },
+          {
+            servizio: 'Orari di visita ai degenti',
+            orari: '11:00–12:30 e 15:30–17:30 (feriali) · 10:00–12:00 e 15:00–17:00 (festivi)',
+          },
+        ].map((row, i, arr) => (
+          <div
+            key={i}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1.4fr 1.6fr',
+              padding: '14px 24px',
+              borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
+              background: i % 2 === 0 ? 'transparent' : 'var(--bi-surface)',
+            }}
+          >
+            <span
+              style={{
+                fontWeight: 600,
+                fontSize: 14,
+                color: 'var(--bi-ink-900)',
+              }}
+            >
+              {row.servizio}
+            </span>
+            <span style={{ fontSize: 14, color: 'var(--bi-ink-700)' }}>{row.orari}</span>
+          </div>
+        ))}
+      </div>
+      <div
+        style={{
+          marginTop: 12,
+          padding: '12px 16px',
+          background: 'var(--bi-primary-050)',
+          borderRadius: 8,
+          fontSize: 13,
+          color: 'var(--bi-primary-800)',
+          display: 'flex',
+          gap: 8,
+          alignItems: 'flex-start',
+        }}
+      >
+        <Icon name="alert" size={15} style={{ flexShrink: 0, marginTop: 1 }} />
+        Terapia Intensiva e Neonatologia seguono orari speciali — contattare il reparto
+        direttamente.
+      </div>
+    </div>
+  </Section>
+);
+
+// ── 8. Contatti (campo AGID necessario, max 255 car. per item) ──
+const ContattiBlock = () => (
+  <Section bg="var(--bi-bg-alt)" id="contatti">
+    <SectionHeading eyebrow="Struttura" title="Contatti" />
+    <div
+      style={{
+        background: 'var(--bi-surface)',
+        border: '1px solid var(--bi-border)',
+        borderRadius: 12,
+        overflow: 'hidden',
+        maxWidth: 640,
+      }}
+    >
+      {[
+        { label: 'Centralino', tel: '081 849 2111', orari: '24h/24' },
+        {
+          label: 'URP ospedaliero',
+          tel: '081 849 2150',
+          orari: 'Lun–Ven 9:00–13:00',
+        },
+        {
+          label: 'Email istituzionale',
+          email: 'ospedale.maresca@aslnapoli3sud.it',
+        },
+        { label: 'PEC', pec: 'maresca.aslna3sud@pec.it' },
+      ].map((n, i, arr) => (
+        <div
+          key={i}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '16px 24px',
+            borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
+            gap: 24,
+          }}
+        >
+          <div>
+            <div
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: 'var(--bi-ink-900)',
+              }}
+            >
+              {n.label}
+            </div>
+            {n.orari && (
+              <div
+                style={{
+                  fontSize: 12,
+                  color: 'var(--bi-ink-500)',
+                  marginTop: 2,
+                }}
+              >
+                {n.orari}
+              </div>
+            )}
+          </div>
+          {n.tel ? (
+            <a
+              href={`tel:${n.tel.replace(/\s/g, '')}`}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                fontSize: 17,
+                fontWeight: 700,
+                color: 'var(--bi-primary)',
+                textDecoration: 'none',
+                flexShrink: 0,
+              }}
+            >
+              <Icon name="phone" size={15} />
+              {n.tel}
+            </a>
+          ) : n.email ? (
+            <a
+              href={`mailto:${n.email}`}
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: 'var(--bi-primary)',
+                textDecoration: 'none',
+              }}
+            >
+              {n.email}
+            </a>
+          ) : (
+            <span style={{ fontSize: 14, color: 'var(--bi-ink-700)' }}>{n.pec}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </Section>
+);
+
+// ── 9. Servizi e prestazioni (campo AGID necessario — Card Services) ──
+const ServiziBlock = () => (
+  <Section bg="var(--bi-surface)" id="servizi">
+    <SectionHeading
+      eyebrow="Struttura"
+      title="Servizi e prestazioni"
+      subtitle="Servizi erogati dall'Ospedale Maresca."
+    />
+    {SERVIZI.map((cat) => (
+      <div key={cat.cat} style={{ marginBottom: 36 }}>
+        <h3
+          style={{
+            fontFamily: 'var(--ff-sans)',
+            fontSize: 13,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: 1,
+            color: 'var(--bi-primary)',
+            borderBottom: '2px solid var(--bi-primary-100)',
+            paddingBottom: 8,
+            marginBottom: 16,
+          }}
+        >
+          {cat.cat}
+        </h3>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gap: 12,
+          }}
+        >
+          {cat.items.map((s) => (
+            <a
+              key={s.nome}
+              href={s.href}
+              style={{
+                display: 'flex',
+                gap: 16,
+                alignItems: 'flex-start',
+                padding: '16px 20px',
+                background: 'var(--bi-bg-alt)',
+                border: s.ps ? '2px solid #C62828' : '1px solid var(--bi-border)',
+                borderRadius: 10,
+                textDecoration: 'none',
+              }}
+            >
+              <div
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 8,
+                  flexShrink: 0,
+                  background: s.ps ? '#FFEBEE' : 'var(--bi-primary-050)',
+                  color: s.ps ? '#C62828' : 'var(--bi-primary)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <Icon name={s.ps ? 'alert' : 'stethoscope'} size={20} />
+              </div>
+              <div style={{ flex: 1 }}>
+                <div
+                  style={{
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: s.ps ? '#C62828' : 'var(--bi-ink-900)',
+                    lineHeight: 1.3,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {s.nome}
+                  {s.ps && (
+                    <span
+                      style={{
+                        padding: '2px 7px',
+                        background: '#C62828',
+                        color: '#fff',
+                        borderRadius: 4,
+                        fontSize: 10,
+                        fontWeight: 700,
+                      }}
+                    >
+                      24/7
+                    </span>
+                  )}
+                </div>
+                <div
+                  style={{
+                    fontSize: 13,
+                    color: 'var(--bi-ink-500)',
+                    marginTop: 4,
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {s.desc}
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+  </Section>
+);
+
+// ── 10. Responsabile della struttura (campo AGID necessario — Card People) ──
+const ResponsabileBlock = () => (
+  <Section bg="var(--bi-bg-alt)" id="responsabile">
+    <SectionHeading eyebrow="Struttura" title="Responsabile della struttura" />
+    <div
+      style={{
+        display: 'flex',
+        gap: 20,
+        alignItems: 'center',
+        padding: '24px',
+        background: 'var(--bi-surface)',
+        border: '1px solid var(--bi-border)',
+        borderRadius: 12,
+        maxWidth: 480,
+      }}
+    >
+      <div
+        style={{
+          width: 64,
+          height: 64,
+          borderRadius: '50%',
+          flexShrink: 0,
+          background: 'var(--bi-primary-100)',
+          color: 'var(--bi-primary-800)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 22,
+          fontWeight: 700,
+          fontFamily: 'var(--ff-sans)',
+        }}
+      >
+        MB
+      </div>
+      <div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--bi-ink-900)' }}>
+          Dott. Mario Borrelli
+        </div>
+        <div style={{ fontSize: 14, color: 'var(--bi-ink-500)', marginTop: 4 }}>
+          Direttore Sanitario — Ospedale Maresca
+        </div>
+        <a
+          href="#"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            marginTop: 10,
+            fontSize: 13,
+            fontWeight: 600,
+            color: 'var(--bi-primary)',
+            textDecoration: 'none',
+          }}
+        >
+          Scheda persona <Icon name="external" size={12} />
+        </a>
+      </div>
+    </div>
+  </Section>
+);
+
+// ── 11. Galleria (campo AGID opzionale, incluso — griglia 3 colonne desktop) ──
+const GalleriaBlock = () => (
+  <Section bg="var(--bi-surface)" id="galleria">
+    <SectionHeading eyebrow="Struttura" title="Galleria" />
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: 12,
+      }}
+    >
+      {GALLERIA.map((g, i) => (
+        <div
+          key={i}
+          className="placeholder-img"
+          style={{
+            gridColumn: `span ${Math.min(g.span, 3)}`,
+            aspectRatio: g.span === 2 ? '16/7' : '16/9',
+            borderRadius: 10,
+            fontSize: 11,
+            color: 'var(--bi-primary-800)',
+          }}
+        >
+          FOTO REALE · {g.label}
+        </div>
+      ))}
+    </div>
+  </Section>
+);
+
+// ── Pagina principale ──
+const PageMaresca = () => (
+  <div
+    data-screen-label="06 Ospedale Maresca — pagina foglia"
+    style={{ background: 'var(--bi-bg)' }}
+  >
+    <TopBar />
+    <BrandRow />
+    <StickyHeader activeItem="strutture" />
+
+    {/* ── Breadcrumb ── */}
+    <Breadcrumb
+      items={[
+        { label: 'Home', href: 'index.html' },
+        { label: 'Strutture', href: '#' },
+        { label: 'Ospedali', href: 'page-ospedali.html' },
+        { label: 'Ospedale Maresca' },
+      ]}
+    />
+
+    {/* ── 3. Hero — Nome (H1), Descrizione breve, Immagine, Dove, badge PS, CTA anchor ── */}
+    <div
+      style={{
+        position: 'relative',
+        background: 'linear-gradient(160deg, #001a24 0%, var(--bi-primary) 100%)',
+        color: '#fff',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Campo: Immagine (opzionale, di sfondo) */}
+      <div
+        className="placeholder-img"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          borderRadius: 0,
+          opacity: 0.25,
+          fontSize: 12,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        FOTO REALE OSPEDALE MARESCA · full-bleed · 1920×600
+      </div>
+
+      <div className="container" style={{ position: 'relative', padding: '64px 0 56px' }}>
+        <div style={{ maxWidth: 640 }}>
+          <Eyebrow color="rgba(255,255,255,0.75)">
+            Presidio ospedaliero · Distretto 58 · Torre del Greco
+          </Eyebrow>
+
+          {/* Campo: Nome della struttura (H1) */}
+          <h1
+            style={{
+              fontFamily: 'var(--ff-serif)',
+              fontSize: 'clamp(32px, 4vw, 56px)',
+              fontWeight: 500,
+              lineHeight: 1.1,
+              margin: '10px 0 8px',
+              color: '#fff',
+            }}
+          >
+            Ospedale Maresca
+          </h1>
+
+          {/* Campo: Descrizione breve (max 160 caratteri) */}
+          <p
+            style={{
+              fontSize: 16,
+              color: 'rgba(255,255,255,0.85)',
+              margin: '0 0 12px',
+              lineHeight: 1.5,
+              maxWidth: 520,
+            }}
+          >
+            Presidio ospedaliero di I livello con Pronto Soccorso attivo 24/7, 12 reparti clinici e
+            diagnostica avanzata al servizio del territorio vesuviano.
+          </p>
+
+          {/* Campo: Dove — indirizzo breve */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              fontSize: 14,
+              color: 'rgba(255,255,255,0.72)',
+              marginBottom: 24,
+            }}
+          >
+            <Icon name="hospital" size={14} />
+            Via Montedoro, 80059 Torre del Greco (NA)
+          </div>
+
+          {/* Badge PS cliccabile verso Card Service Pronto Soccorso + CTA scroll-to-anchor */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              flexWrap: 'wrap',
+            }}
+          >
+            <a
+              href="#servizi"
+              style={{
+                padding: '6px 14px',
+                borderRadius: 99,
+                background: '#C62828',
+                color: '#fff',
+                fontWeight: 700,
+                fontSize: 12,
+                letterSpacing: 0.5,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+              }}
+            >
+              PS attivo 24/7 — vedi stato in tempo reale →
+            </a>
+            <a
+              href="#dove"
+              style={{
+                padding: '10px 18px',
+                border: '1.5px solid rgba(255,255,255,0.6)',
+                borderRadius: 6,
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: 13,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+              }}
+            >
+              <Icon name="hospital" size={14} /> Dove
+            </a>
+            <a
+              href="#contatti"
+              style={{
+                padding: '10px 18px',
+                border: '1.5px solid rgba(255,255,255,0.6)',
+                borderRadius: 6,
+                color: '#fff',
+                fontWeight: 600,
+                fontSize: 13,
+                textDecoration: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 6,
+              }}
+            >
+              <Icon name="phone" size={14} /> Contatti
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* ── 4. A chi è rivolto/a ── */}
+    <ACHIBlock />
+
+    {/* ── 5. Dove ── */}
+    <DoveBlock />
+
+    {/* ── 6. Come accedere ── */}
+    <ComeAccedereBlock />
+
+    {/* ── 7. Orari di apertura ── */}
+    <OrariAperturaBlock />
+
+    {/* ── 8. Contatti ── */}
+    <ContattiBlock />
+
+    {/* ── 9. Servizi e prestazioni ── */}
+    <ServiziBlock />
+
+    {/* ── 10. Responsabile della struttura ── */}
+    <ResponsabileBlock />
+
+    {/* ── 11. Galleria ── */}
+    <GalleriaBlock />
+
+    {/* ── 12. Ultimo aggiornamento (campo AGID necessario) ── */}
+    <div className="container" style={{ padding: '20px 0 8px' }}>
+      <p style={{ fontSize: 13, color: 'var(--bi-ink-500)', margin: 0 }}>
+        Ultimo aggiornamento: 22 aprile 2026
+      </p>
+    </div>
+
+    {/* ── 13. [F3] Valutazione chiarezza informativa ── */}
+    <FeedbackWidget />
+
+    {/* ── 14. Footer ── */}
+    <Footer />
+  </div>
+);
+
+export { PageMaresca };

@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { TopBar, BrandRow, MainNav } from './header.jsx';
-import { Hero } from './hero.jsx';
-import { ServicesGrid } from './services.jsx';
-import { WaitingLists } from './waiting.jsx';
-import { Screening } from './screening.jsx';
-import { News, Facilities } from './news.jsx';
-import { CTABand, Footer } from './footer.jsx';
-import { MobilePreview } from './mobile.jsx';
+import { TopBar, BrandRow, MainNav } from './component/Header.jsx';
+import { Hero } from './component/Hero.jsx';
+import { ServicesGrid } from './component/Services.jsx';
+import { WaitingLists } from './component/Waiting.jsx';
+import { Screening } from './component/Screening.jsx';
+import { News, Facilities } from './component/News.jsx';
+import { CTABand, Footer } from './component/Footer.jsx';
 
 function PrintApp() {
   return (
@@ -33,9 +32,6 @@ function PrintApp() {
       </div>
       <div style={{ breakBefore: 'page', pageBreakBefore: 'always' }}>
         <Facilities />
-      </div>
-      <div style={{ breakBefore: 'page', pageBreakBefore: 'always' }}>
-        <MobilePreview />
       </div>
       <Footer />
     </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Simple line icons in Bootstrap Italia spirit (Bootstrap Icons-like)
-const Icon = ({ name, size = 20, color = 'currentColor', stroke = 1.8 }) => {
+const Icon = ({ name, size = 20, color = 'currentColor', stroke = 1.8, className, style }) => {
   const p = {
     width: size,
     height: size,
@@ -11,6 +11,8 @@ const Icon = ({ name, size = 20, color = 'currentColor', stroke = 1.8 }) => {
     strokeWidth: stroke,
     strokeLinecap: 'round',
     strokeLinejoin: 'round',
+    ...(className && { className }),
+    ...(style && { style }),
   };
   switch (name) {
     case 'search':
