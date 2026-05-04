@@ -1,4 +1,3 @@
-import React from 'react';
 import { Icon } from '../icons.jsx';
 import { ArrowLink, Section, SectionHeading, Breadcrumb } from '../component/UI.jsx';
 import { PageHero } from './Hero.jsx';
@@ -6,112 +5,15 @@ import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
 import { Footer } from '../component/Footer.jsx';
 import { FSEBand } from '../component/FSEBand.jsx';
 import { FeedbackWidget } from '../component/Feedback.jsx';
+import { useResponsive } from '../hooks/useResponsive.js';
 
 // ─── Pagina Servizi e prestazioni (PRD §5.2) ───
 
 // (Breadcrumb è definito in ui.jsx)
 
-// ── Barra di ricerca interna ──
-const ServiceSearch = () => {
-  const [query, setQuery] = React.useState('');
-  const chips = [
-    'Visite specialistiche',
-    'Esami e analisi',
-    'Prevenzione',
-    'Pronto soccorso',
-    'Chirurgia',
-  ];
-
-  return (
-    <div
-      style={{
-        background: 'var(--bi-primary-050)',
-        padding: '32px 0',
-        borderBottom: '1px solid var(--bi-border)',
-      }}
-    >
-      <div className="container">
-        <div style={{ maxWidth: 640 }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              background: 'var(--bi-surface)',
-              border: '2px solid var(--bi-primary)',
-              borderRadius: 8,
-              overflow: 'hidden',
-            }}
-          >
-            <span
-              style={{
-                padding: '0 16px',
-                color: 'var(--bi-primary)',
-                flexShrink: 0,
-              }}
-            >
-              <Icon name="search" size={20} />
-            </span>
-            <input
-              type="text"
-              placeholder="Cerca un servizio o una prestazione…"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              style={{
-                flex: 1,
-                border: 'none',
-                outline: 'none',
-                padding: '14px 0',
-                fontSize: 16,
-                background: 'transparent',
-                color: 'var(--bi-ink-900)',
-                fontFamily: 'var(--ff-sans)',
-              }}
-            />
-            <button
-              style={{
-                padding: '10px 20px',
-                background: 'var(--bi-primary)',
-                color: '#fff',
-                fontWeight: 700,
-                fontSize: 14,
-                border: 'none',
-                cursor: 'pointer',
-                flexShrink: 0,
-                margin: 4,
-                borderRadius: 5,
-              }}
-            >
-              Cerca
-            </button>
-          </div>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginTop: 12 }}>
-            {chips.map((c) => (
-              <button
-                key={c}
-                onClick={() => setQuery(c)}
-                style={{
-                  padding: '5px 14px',
-                  borderRadius: 99,
-                  border: '1.5px solid var(--bi-primary-100)',
-                  background: 'var(--bi-surface)',
-                  color: 'var(--bi-primary-800)',
-                  fontSize: 13,
-                  fontWeight: 600,
-                  cursor: 'pointer',
-                }}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 // ── Servizi in evidenza ──
 const ServicesHighlights = () => {
+  const { isMobile, isCompact } = useResponsive();
   const items = [
     {
       badge: 'Campagna vaccinale',
@@ -152,8 +54,8 @@ const ServicesHighlights = () => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3,1fr)',
-          gap: 24,
+          gridTemplateColumns: isMobile ? '1fr' : isCompact ? 'repeat(2,1fr)' : 'repeat(3,1fr)',
+          gap: isMobile ? 16 : 24,
         }}
       >
         {items.map((item, i) => {
@@ -295,12 +197,7 @@ const CategoryGrid = () => {
       icon: 'ambulance',
       title: 'Pronto Soccorso',
       desc: 'Presidi di Pronto Soccorso presenti nel territorio ASL Napoli 3 Sud.',
-    },
-    {
-      icon: 'document',
-      title: 'Fascicolo Sanitario Elettronico',
-      desc: 'Referti, prescrizioni e storia clinica su FSE Campania.',
-    },
+    }
   ];
 
   return (
@@ -546,10 +443,9 @@ const PageServizi = () => (
 
     <PageHero
       title="Servizi e prestazioni"
-      lead="Scopri tutte le prestazioni sanitarie erogate dall'ASL Napoli 3 Sud: visite specialistiche, esami diagnostici, screening, chirurgia e molto altro. Cerca per nome o esplora per categoria."
+      lead="Scopri tutte le prestazioni sanitarie erogate dall'ASL Napoli 3 Sud: visite specialistiche, esami diagnostici, screening, chirurgia e molto altro."
     />
 
-    <ServiceSearch />
     <ServicesHighlights />
     <CategoryGrid />
     <ServicesHowTo />

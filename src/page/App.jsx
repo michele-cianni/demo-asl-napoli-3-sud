@@ -2,7 +2,7 @@ import React from 'react';
 import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
 import { Hero } from '../component/Hero.jsx';
 import { HowToGrid } from '../component/HowTo.jsx';
-import { News, Facilities } from '../component/News.jsx';
+import { News } from '../component/News.jsx';
 import { AudienceGrid } from '../component/Audience.jsx';
 import { Tenders } from '../component/Tenders.jsx';
 import { Footer } from '../component/Footer.jsx';
@@ -19,10 +19,9 @@ function App() {
       <Hero />
       <HowToGrid />
       <FSEBand />
-      <News />
       <AudienceGrid />
+      <News />
       <Tenders />
-      <Facilities />
       <FeedbackWidget />
       <Footer />
       <Chatbot />
