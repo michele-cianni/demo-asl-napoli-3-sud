@@ -1,11 +1,7 @@
 import React from 'react';
 import { Icon } from '../icons.jsx';
 import {
-  Button,
-  Badge,
-  ArrowLink,
   Section,
-  SectionHeading,
   Breadcrumb,
   Eyebrow,
 } from '../component/UI.jsx';

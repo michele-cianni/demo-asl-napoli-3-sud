@@ -76,8 +76,8 @@ const ServicesGrid = () => {
     <Section bg="var(--bi-surface)" id="servizi">
       <SectionHeading
         eyebrow="Come fare per"
-        title="Le azioni più richieste dai cittadini"
-        subtitle="Percorsi guidati, passo per passo. Scopri come svolgere le pratiche più comuni con l'ASL."
+        title="Percorsi guidati, passo per passo."
+        subtitle="Scopri come svolgere le pratiche più comuni con l'ASL."
         action={<ArrowLink href="page-servizi.html">Vedi tutti i servizi</ArrowLink>}
       />
 

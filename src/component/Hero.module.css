@@ -64,6 +64,11 @@
   align-items: center;
 }
 
+/* Prevent grid items from expanding beyond their cell (chip row with nowrap causes this) */
+.grid > * {
+  min-width: 0;
+}
+
 @media (max-width: 1023.98px) {
   .grid {
     grid-template-columns: 1fr;
@@ -121,7 +126,9 @@
 }
 
 .searchBox--focused {
-  box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.15), var(--shadow-lg);
+  box-shadow:
+    0 0 0 4px rgba(0, 102, 204, 0.15),
+    var(--shadow-lg);
 }
 
 .searchRow {
@@ -235,9 +242,16 @@
 
 .chips {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 8px;
   margin-top: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
 }
 
 .chips__label {
@@ -245,12 +259,8 @@
   color: var(--bi-ink-500);
   align-self: center;
   margin-right: 4px;
-}
-
-@media (max-width: 767.98px) {
-  .chips__label {
-    width: 100%;
-  }
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .chip {
@@ -261,6 +271,8 @@
   background: #fff;
   border: 1px solid var(--bi-border);
   color: var(--bi-ink-700);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* ─── Hero visual — desktop ──────────────────────────────── */
@@ -296,172 +308,4 @@
 .placeholder--mobile {
   position: relative;
   aspect-ratio: 16 / 11;
-}
-
-/* ─── Appointment card ───────────────────────────────────── */
-
-.apptCard {
-  position: absolute;
-  top: 40px;
-  left: -40px;
-  width: 300px;
-  padding: 20px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--bi-border);
-}
-
-@media (max-width: 1023.98px) {
-  .apptCard {
-    top: 24px;
-    left: 16px;
-    width: 280px;
-  }
-}
-
-.apptCard--mobile {
-  position: relative;
-  top: auto;
-  left: auto;
-  width: 100%;
-  padding: 18px;
-}
-
-.apptCard__head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.apptCard__iconWrap {
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--bi-primary-100);
-  color: var(--bi-primary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.apptCard__label {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: var(--bi-ink-500);
-}
-
-.apptCard__title {
-  font-family: var(--ff-serif);
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--bi-ink-900);
-  margin-bottom: 6px;
-}
-
-.apptCard__loc {
-  font-size: 14px;
-  color: var(--bi-ink-500);
-  margin-bottom: 12px;
-}
-
-.apptCard__date {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: var(--bi-primary-050);
-}
-
-.apptCard__day {
-  font-size: 22px;
-  font-weight: 700;
-  color: var(--bi-primary);
-}
-
-.apptCard__month {
-  font-size: 11px;
-  color: var(--bi-ink-500);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.apptCard__time {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-/* ─── Waiting list card ──────────────────────────────────── */
-
-.waitCard {
-  position: absolute;
-  bottom: 30px;
-  right: -30px;
-  width: 280px;
-  padding: 20px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--bi-border);
-}
-
-@media (max-width: 1023.98px) {
-  .waitCard {
-    bottom: 24px;
-    right: 16px;
-    width: 260px;
-  }
-}
-
-.waitCard--mobile {
-  position: relative;
-  bottom: auto;
-  right: auto;
-  width: 100%;
-  padding: 18px;
-}
-
-.waitCard__head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.waitCard__dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--bi-success);
-  box-shadow: 0 0 0 3px rgba(0, 128, 85, 0.2);
-  animation: pulse 2s ease infinite;
-}
-
-.waitCard__label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--bi-ink-700);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.waitCard__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 0;
-}
-
-.waitCard__row + .waitCard__row {
-  border-top: 1px solid var(--bi-border);
-}
-
-.waitCard__rowLabel {
-  font-size: 13px;
-  color: var(--bi-ink-900);
 }

@@ -6,6 +6,14 @@ import styles from './Header.module.css';
 
 const cx = (...parts) => parts.filter(Boolean).join(' ');
 
+const SOCIAL_LINKS = [
+  { name: 'facebook', label: 'Facebook' },
+  { name: 'instagram', label: 'Instagram' },
+  { name: 'x', label: 'X (Twitter)' },
+  { name: 'youtube', label: 'YouTube' },
+  { name: 'linkedin', label: 'LinkedIn' },
+];
+
 // ─── TopBar ───
 const TopBar = () => {
   const { isCompact, isMobile } = useResponsive();
@@ -34,13 +42,7 @@ const TopBar = () => {
 
     return (
       <div className={styles.topbar}>
-        <div
-          className={cx(
-            'container',
-            styles.topbar__row,
-            styles['topbar__row--compact']
-          )}
-        >
+        <div className={cx('container', styles.topbar__row, styles['topbar__row--compact'])}>
           <a href="#" className={styles.topbar__link}>
             <Icon name="globe" size={14} />
             Portale Regione Campania
@@ -98,6 +100,35 @@ const TopBar = () => {
 const BrandRow = () => {
   const { isCompact, isMobile } = useResponsive();
 
+  if (isMobile) {
+    return (
+      <div className={styles.brandRow}>
+        <div className={cx('container', styles.brandRow__mobileWrap)}>
+          <div className={styles.brandRow__mobileTop}>
+            <a href="index.html" className={cx(styles.brand, styles['brand--mobile'])}>
+              <img
+                src="https://www.aslnapoli3sud.it/o/na3theme-theme/images/logo_primario.png"
+                alt="ASL Napoli 3 Sud"
+                className={cx(styles.brand__logo, styles['brand__logo--mobile'])}
+              />
+            </a>
+            <div className={cx(styles.social, styles['social--mobile'])}>
+              {SOCIAL_LINKS.map((s) => (
+                <a key={s.name} href="#" aria-label={s.label} className={styles.social__link}>
+                  <Icon name={s.name} size={22} />
+                </a>
+              ))}
+            </div>
+          </div>
+          <button className={cx(styles.searchBtn, styles['searchBtn--mobile'])}>
+            <Icon name="search" size={16} />
+            Cerca nel sito
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.brandRow}>
       <div
@@ -107,57 +138,28 @@ const BrandRow = () => {
           isCompact && styles['brandRow__inner--compact']
         )}
       >
-        <a href="index.html" className={cx(styles.brand, isMobile && styles['brand--mobile'])}>
+        <a href="index.html" className={cx(styles.brand, isCompact && styles['brand--compact'])}>
           <img
             src="https://www.aslnapoli3sud.it/o/na3theme-theme/images/logo_primario.png"
             alt="ASL Napoli 3 Sud"
             className={cx(
               styles.brand__logo,
-              isCompact && !isMobile && styles['brand__logo--compact'],
-              isMobile && styles['brand__logo--mobile']
+              isCompact && styles['brand__logo--compact']
             )}
           />
-          <div className={styles.brand__text}>
-            <div
-              className={cx(
-                styles.brand__title,
-                isCompact && !isMobile && styles['brand__title--compact'],
-                isMobile && styles['brand__title--mobile']
-              )}
-            >
-              ASL Napoli 3 Sud
-            </div>
-            <div
-              className={cx(styles.brand__subtitle, isMobile && styles['brand__subtitle--mobile'])}
-            >
-              Azienda Sanitaria Locale
-            </div>
-          </div>
         </a>
 
-        <div
-          className={cx(
-            styles.brand__actions,
-            isCompact && styles['brand__actions--compact'],
-            isMobile && styles['brand__actions--mobile']
-          )}
-        >
+        <div className={cx(styles.brand__actions, isCompact && styles['brand__actions--compact'])}>
           <div className={styles.social}>
-            {!isMobile && <span className={styles.social__label}>Seguici su</span>}
-            {[
-              { name: 'facebook', label: 'Facebook' },
-              { name: 'instagram', label: 'Instagram' },
-              { name: 'x', label: 'X (Twitter)' },
-              { name: 'youtube', label: 'YouTube' },
-              { name: 'linkedin', label: 'LinkedIn' },
-            ].map((s) => (
+            <span className={styles.social__label}>Seguici su</span>
+            {SOCIAL_LINKS.map((s) => (
               <a key={s.name} href="#" aria-label={s.label} className={styles.social__link}>
-                <Icon name={s.name} size={isMobile ? 20 : 22} />
+                <Icon name={s.name} size={22} />
               </a>
             ))}
           </div>
-          {!isMobile && <span className={styles.divider} />}
-          <button className={cx(styles.searchBtn, isMobile && styles['searchBtn--mobile'])}>
+          <span className={styles.divider} />
+          <button className={styles.searchBtn}>
             <Icon name="search" size={16} />
             Cerca nel sito
           </button>
@@ -267,26 +269,16 @@ const MobileMainNav = ({ items, activeItem }) => {
             style={{ top: panelTop }}
           >
             {items.map((item, i) => renderNavLink(item, i === 0 ? firstItemRef : undefined))}
-            <div className={styles.mobileCupUrp}>
-              <a href="#" className={styles.mobileCupUrpItem} onClick={() => setMenu(false)}>
-                <span className={styles.mobileCupUrpItem__icon}>
-                  <Icon name="calendar" size={16} />
-                </span>
-                <span className={styles.mobileCupUrpItem__body}>
-                  <span className={styles.mobileCupUrpItem__tag}>CUP — Prenota una visita</span>
-                  <span className={styles.mobileCupUrpItem__phone}>06 01020304</span>
-                </span>
-                <Icon name="phone" size={15} />
+            <div className={styles.mobilePanel__ctas}>
+              <a href="#" className={cx(styles.quickCta, styles['quickCta--navPrimary'], styles['quickCta--full'])}>
+                <Icon name="calendar" size={16} />
+                <span>Prenota una visita</span>
+                <span className={styles.quickCta__tag}>CUP</span>
               </a>
-              <a href="#" className={styles.mobileCupUrpItem} onClick={() => setMenu(false)}>
-                <span className={styles.mobileCupUrpItem__icon}>
-                  <Icon name="mail" size={16} />
-                </span>
-                <span className={styles.mobileCupUrpItem__body}>
-                  <span className={styles.mobileCupUrpItem__tag}>URP — Informazioni e segnalazioni</span>
-                  <span className={styles.mobileCupUrpItem__phone}>06 01020304</span>
-                </span>
-                <Icon name="phone" size={15} />
+              <a href="#" className={cx(styles.quickCta, styles['quickCta--navOutline'], styles['quickCta--full'])}>
+                <Icon name="mail" size={16} />
+                <span>Informazioni e segnalazioni</span>
+                <span className={styles.quickCta__tag}>URP</span>
               </a>
             </div>
           </nav>,
@@ -302,6 +294,7 @@ const MainNav = ({ activeItem, active }) => {
   activeItem = activeItem || active || '';
 
   const items = [
+    { id: 'home', label: 'Home', href: 'index.html' },
     { id: 'servizi', label: 'Servizi e prestazioni', href: 'page-servizi.html' },
     { id: 'come-fare-per', label: 'Come fare per', href: 'page-come-fare-per.html' },
     { id: 'strutture', label: 'Strutture', href: 'page-ospedali.html' },
@@ -339,16 +332,30 @@ const MainNav = ({ activeItem, active }) => {
         {isMobile ? (
           <MobileMainNav items={items} activeItem={activeItem} />
         ) : (
-          <nav
-            aria-label="Menu principale"
-            className={cx(
-              styles.nav__list,
-              isCompact && styles['nav__list--compact'],
-              isCompact && 'h-scroll'
-            )}
-          >
-            {items.map((item) => renderNavLink(item))}
-          </nav>
+          <>
+            <nav
+              aria-label="Menu principale"
+              className={cx(
+                styles.nav__list,
+                isCompact && styles['nav__list--compact'],
+                isCompact && 'h-scroll'
+              )}
+            >
+              {items.map((item) => renderNavLink(item))}
+            </nav>
+            <div className={cx(styles.nav__ctaGroup, isCompact && styles['nav__ctaGroup--compact'])}>
+              <a href="#" className={cx(styles.quickCta, styles['quickCta--navPrimary'])}>
+                <Icon name="calendar" size={15} />
+                <span>Prenota una visita</span>
+                <span className={styles.quickCta__tag}>CUP</span>
+              </a>
+              <a href="#" className={cx(styles.quickCta, styles['quickCta--navOutline'])}>
+                <Icon name="mail" size={15} />
+                <span>Informazioni e segnalazioni</span>
+                <span className={styles.quickCta__tag}>URP</span>
+              </a>
+            </div>
+          </>
         )}
       </div>
     </div>
@@ -359,74 +366,50 @@ const MainNav = ({ activeItem, active }) => {
 const QuickActions = () => {
   const { isCompact, isMobile } = useResponsive();
 
-  if (isMobile) {
-    return (
-      <div className={styles.quick}>
-        <div className={cx('container', styles.quick__grid)}>
-          <a href="#" className={styles.quickItemMobile}>
-            <div className={styles.quickItemMobile__head}>
-              <Icon
-                name="calendar"
-                size={14}
-                className={cx(styles.txtPrimary, styles.flexShrink0)}
-              />
-              <span className={cx(styles.quickItemMobile__tag, styles.txtPrimary)}>CUP</span>
-              <Icon name="phone" size={12} className={cx(styles.txtPrimary, styles.mlAuto)} />
-            </div>
-            <span className={cx(styles.quickItemMobile__phone, styles.txtPrimary)}>
-              06 01020304
-            </span>
-            <span className={styles.quickItemMobile__hint}>Prenota servizi e prestazioni</span>
-          </a>
-          <a href="#" className={styles.quickItemMobile}>
-            <div className={styles.quickItemMobile__head}>
-              <Icon name="mail" size={14} className={cx(styles.txtInk500, styles.flexShrink0)} />
-              <span className={cx(styles.quickItemMobile__tag, styles.txtInk700)}>URP</span>
-              <Icon name="phone" size={12} className={cx(styles.txtInk500, styles.mlAuto)} />
-            </div>
-            <span className={cx(styles.quickItemMobile__phone, styles.txtInk700)}>06 01020304</span>
-            <span className={styles.quickItemMobile__hint}>
-              Richiedi informazioni o segnalazione
-            </span>
-          </a>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className={styles.quick}>
       <div
-        className={cx('container', styles.quick__row, isCompact && styles['quick__row--compact'])}
+        className={cx(
+          'container',
+          styles.quick__row,
+          isCompact && styles['quick__row--compact'],
+          isMobile && styles['quick__row--mobile']
+        )}
       >
-        <a href="#" className={cx(styles.quickItem, isCompact && styles['quickItem--compact'])}>
-          <Icon name="calendar" size={16} className={cx(styles.txtPrimary, styles.flexShrink0)} />
-          <span>Prenota servizi e prestazioni</span>
-          <span className={cx(styles.quickItem__tag, styles.txtPrimary)}>CUP</span>
-          <span className={cx(styles.quickItem__phone, styles.txtPrimary)}>06 01020304</span>
-          <Icon name="phone" size={14} className={styles.txtPrimary} />
+        <a
+          href="#"
+          className={cx(
+            styles.quickCta,
+            styles['quickCta--primary'],
+            isMobile && styles['quickCta--full']
+          )}
+        >
+          <Icon name="calendar" size={16} />
+          <span>Prenota una visita</span>
+          <span className={styles.quickCta__tag}>CUP</span>
         </a>
-        {!isCompact && <span className={cx(styles.divider, styles['divider--sm'])} />}
-        <a href="#" className={cx(styles.quickItem, isCompact && styles['quickItem--compact'])}>
-          <Icon name="mail" size={16} className={cx(styles.txtInk500, styles.flexShrink0)} />
-          <span>Richiedi informazioni o fai una segnalazione</span>
-          <span className={cx(styles.quickItem__tag, styles.txtInk700)}>URP</span>
-          <span className={cx(styles.quickItem__phone, styles.txtInk700)}>06 01020304</span>
-          <Icon name="phone" size={14} className={styles.txtInk500} />
+        <a
+          href="#"
+          className={cx(
+            styles.quickCta,
+            styles['quickCta--outline'],
+            isMobile && styles['quickCta--full']
+          )}
+        >
+          <Icon name="mail" size={16} />
+          <span>Informazioni e segnalazioni</span>
+          <span className={styles.quickCta__tag}>URP</span>
         </a>
       </div>
     </div>
   );
 };
 
-// ─── Sticky wrapper: nav + banda CUP/URP ───
+// ─── Sticky wrapper: nav (con CTA integrati) ───
 const StickyHeader = ({ activeItem, active }) => {
-  const { isMobile } = useResponsive();
-
   return (
     <div className={styles.sticky}>
       <MainNav activeItem={activeItem} active={active} />
-      {!isMobile && <QuickActions />}
     </div>
   );
 };
