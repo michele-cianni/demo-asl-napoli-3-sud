@@ -132,7 +132,7 @@ const HeroVisual = () => {
 
   const placeholder = (
     <img
-      src={`${import.meta.env.BASE_URL}images/placeholder_1200x900 vers1.png`}
+      src={`${import.meta.env.BASE_URL}images/placeholder_1200x900 vers2.png`}
       alt="Medico con paziente"
       className={cx(
         styles.placeholder,

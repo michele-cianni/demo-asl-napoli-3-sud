@@ -15,6 +15,7 @@ export default defineConfig({
         'come-fare-per': resolve(__dirname, 'page-come-fare-per.html'),
         ospedali: resolve(__dirname, 'page-ospedali.html'),
         maresca: resolve(__dirname, 'page-maresca.html'),
+        'redazione-web': resolve(__dirname, 'page-redazione-web.html'),
       },
     },
   },
