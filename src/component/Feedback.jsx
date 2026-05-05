@@ -83,9 +83,20 @@ const FeedbackWidget = () => {
                 dell&apos;ASL Napoli 3 Sud.
               </div>
             </div>
-            <button onClick={handleReset} className={styles.thanks__resetBtn}>
-              Invia un altro feedback
-            </button>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8, flexShrink: 0, marginLeft: 'auto' }}>
+              <button onClick={handleReset} className={styles.thanks__resetBtn}>
+                Invia un altro feedback
+              </button>
+              <a
+                href="page-redazione-web.html"
+                style={{ fontSize: 13, color: 'var(--bi-ink-500)', textDecoration: 'none' }}
+              >
+                Hai trovato un errore?{' '}
+                <span style={{ color: 'var(--bi-primary)', fontWeight: 600 }}>
+                  Scrivi alla redazione →
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
