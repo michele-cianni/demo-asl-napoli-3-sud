@@ -14,6 +14,7 @@ import { PageHero } from './Hero.jsx';
 import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
 import { Footer } from '../component/Footer.jsx';
 import { FeedbackWidget } from '../component/Feedback.jsx';
+import { MapView } from '../component/MapView.jsx';
 
 // ─── Pagina lista Ospedali (PRD §5.5) ───
 // URL: /strutture/ospedali/
@@ -26,6 +27,7 @@ const OSPEDALI = [
     comune: 'Torre del Greco',
     indirizzo: 'Via Montedoro, Torre del Greco (NA)',
     telefono: '081 849 2111',
+    coords: [40.7847, 14.3703],
     ps: true,
     psCodice: 'PS attivo 24/7',
     specialita: [
@@ -45,6 +47,7 @@ const OSPEDALI = [
     comune: 'Boscoreale',
     indirizzo: 'Via Passanti 147, Boscoreale (NA)',
     telefono: '081 857 5111',
+    coords: [40.7742, 14.4853],
     ps: true,
     psCodice: 'PS attivo 24/7',
     specialita: ['Medicina Interna', 'Geriatria', 'Oncologia', 'Pronto Soccorso', 'Neurologia'],
@@ -58,6 +61,7 @@ const OSPEDALI = [
     comune: 'Castellammare di Stabia',
     indirizzo: 'Via Cosenza, Castellammare di Stabia (NA)',
     telefono: '081 872 7111',
+    coords: [40.6943, 14.4807],
     ps: true,
     psCodice: 'PS attivo 24/7',
     specialita: [
@@ -77,6 +81,7 @@ const OSPEDALI = [
     comune: 'Torre Annunziata',
     indirizzo: 'Via Palazziello, Torre Annunziata (NA)',
     telefono: '081 861 2111',
+    coords: [40.7536, 14.4505],
     ps: false,
     specialita: ['Riabilitazione', 'Lungodegenza', 'Pneumologia', 'Urologia'],
     badge: 'Riabilitazione',
@@ -89,6 +94,7 @@ const OSPEDALI = [
     comune: 'Gragnano',
     indirizzo: 'Via Vittorio Veneto, Gragnano (NA)',
     telefono: '081 801 2111',
+    coords: [40.6896, 14.5192],
     ps: false,
     specialita: ['Chirurgia Generale', 'Ortopedia', 'Oculistica', 'Otorinolaringoiatria'],
     badge: 'Day Surgery',
@@ -101,6 +107,7 @@ const OSPEDALI = [
     comune: 'Sorrento',
     indirizzo: 'Corso Italia 1, Sorrento (NA)',
     telefono: '081 533 2111',
+    coords: [40.6263, 14.3757],
     ps: true,
     psCodice: 'PS stagionale',
     specialita: ['Medicina Interna', 'Chirurgia Generale', 'Pronto Soccorso', 'Cardiologia'],
@@ -657,140 +664,11 @@ const PageOspedali = () => {
         </div>
       )}
 
-      {/* ── Vista mappa (placeholder) ── */}
+      {/* ── Vista mappa ── */}
       {view === 'mappa' && (
         <div style={{ padding: isMobile ? '24px 0 48px' : '48px 0 80px' }}>
           <div className="container">
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: isMobile ? '1fr' : '1fr 340px',
-                gap: 24,
-                alignItems: 'start',
-              }}
-            >
-              {/* Mappa placeholder */}
-              <div
-                className="placeholder-img"
-                style={{
-                  aspectRatio: '4/3',
-                  borderRadius: 12,
-                  fontSize: 13,
-                  color: 'var(--bi-primary-800)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: 12,
-                }}
-              >
-                <Icon name="hospital" size={48} />
-                <div style={{ fontWeight: 700 }}>Mappa interattiva</div>
-                <div style={{ opacity: 0.7, fontSize: 12 }}>
-                  OpenStreetMap / Leaflet.js — da integrare in sviluppo
-                </div>
-                <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-                  {OSPEDALI.map((o) => (
-                    <div
-                      key={o.id}
-                      style={{
-                        width: 28,
-                        height: 28,
-                        borderRadius: '50%',
-                        background: o.ps ? 'var(--bi-warm)' : 'var(--bi-primary)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        cursor: 'pointer',
-                      }}
-                      title={o.nome}
-                    >
-                      <Icon name="hospital" size={14} style={{ color: '#fff' }} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Lista laterale */}
-              <div
-                style={{
-                  background: 'var(--bi-surface)',
-                  border: '1px solid var(--bi-border)',
-                  borderRadius: 12,
-                  overflow: 'hidden',
-                }}
-              >
-                <div
-                  style={{
-                    padding: '16px 20px',
-                    borderBottom: '1px solid var(--bi-border)',
-                    fontWeight: 700,
-                    fontSize: 14,
-                    color: 'var(--bi-ink-900)',
-                  }}
-                >
-                  {filtered.length} osped{filtered.length !== 1 ? 'ali' : 'ale'} nel territorio
-                </div>
-                {filtered.map((osp, i) => (
-                  <a
-                    key={osp.id}
-                    href={osp.href}
-                    style={{
-                      display: 'flex',
-                      gap: 12,
-                      padding: '14px 20px',
-                      borderBottom: i < filtered.length - 1 ? '1px solid var(--bi-border)' : 'none',
-                      textDecoration: 'none',
-                      color: 'inherit',
-                      transition: 'background 0.12s',
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'var(--bi-primary-050)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = 'transparent';
-                    }}
-                  >
-                    <div
-                      style={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: 8,
-                        flexShrink: 0,
-                        background: osp.ps ? 'var(--bi-warm-100)' : 'var(--bi-primary-050)',
-                        color: osp.ps ? 'var(--bi-warm)' : 'var(--bi-primary)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      <Icon name="hospital" size={18} />
-                    </div>
-                    <div>
-                      <div
-                        style={{
-                          fontSize: 14,
-                          fontWeight: 600,
-                          color: 'var(--bi-ink-900)',
-                          lineHeight: 1.3,
-                        }}
-                      >
-                        {osp.nome}
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 12,
-                          color: 'var(--bi-ink-500)',
-                          marginTop: 2,
-                        }}
-                      >
-                        {osp.comune}
-                      </div>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
+            <MapView ospedali={filtered} />
           </div>
         </div>
       )}

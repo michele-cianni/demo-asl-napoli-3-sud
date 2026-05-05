@@ -59,10 +59,10 @@ const HowToGrid = () => {
     },
     {
       icon: 'phone',
-      title: 'Segnalare un disservizio',
-      desc: 'URP — Ufficio Relazioni con il Pubblico',
+      title: 'Segnalare un problema del sito',
+      desc: 'Redazione web: errori, link rotti, contenuti non aggiornati',
       tone: 'primary',
-      href: '#',
+      href: 'page-redazione-web.html',
     },
   ];
 

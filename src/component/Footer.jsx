@@ -83,9 +83,19 @@ const Footer = () => {
               <br />
               +39 081 8727111
             </p>
-            <a href="#" className={styles.footer__contactLink}>
-              Invia una segnalazione
+            <a href="page-redazione-web.html" className={styles.footer__contactLink}>
+              Segnala un problema del sito
             </a>
+            <p
+              style={{
+                margin: '12px 0 0',
+                fontSize: 13,
+                lineHeight: 1.6,
+                color: 'rgba(255,255,255,0.78)',
+              }}
+            >
+              Per reclami, orientamento ai servizi e richieste generali resta attivo l&apos;URP.
+            </p>
           </div>
           <div>
             <div className={styles.footer__colTitle}>Seguici su</div>

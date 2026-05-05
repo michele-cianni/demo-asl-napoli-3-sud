@@ -113,6 +113,8 @@ const ContactForm = () => {
             <option value="">— Seleziona —</option>
             <option value="errore">Errore nel contenuto</option>
             <option value="aggiornamento">Aggiornamento informazioni</option>
+            <option value="link">Link o documento non funzionante</option>
+            <option value="navigazione">Problema di navigazione</option>
             <option value="proposta">Proposta di contenuto</option>
             <option value="altro">Altro</option>
           </select>
@@ -136,9 +138,8 @@ const ContactForm = () => {
 
         <p className={styles.privacy}>
           I dati inseriti saranno trattati esclusivamente per rispondere alla tua richiesta, nel
-          rispetto del{' '}
-          <a href="#">Regolamento UE 2016/679 (GDPR)</a> e della normativa vigente in materia di
-          protezione dei dati personali.
+          rispetto del <a href="#">Regolamento UE 2016/679 (GDPR)</a> e della normativa vigente in
+          materia di protezione dei dati personali.
         </p>
 
         <Button variant="primary" size="lg" block>
@@ -167,10 +168,88 @@ const InfoColumn = ({ isMobile }) => (
       Scrivi alla redazione
     </h1>
     <p className={styles.info__desc}>
-      La redazione web dell&apos;ASL Napoli 3 Sud cura i contenuti del sito istituzionale. Puoi
-      contattarci per segnalare errori o imprecisioni, richiedere l&apos;aggiornamento di
-      informazioni, proporre nuovi contenuti o servizi da pubblicare.
+      La redazione web dell&apos;ASL Napoli 3 Sud cura i contenuti del sito istituzionale. Usa
+      questa sezione per segnalare errori del sito, informazioni non aggiornate, link non
+      funzionanti o difficolta di navigazione. Per reclami, orientamento ai servizi e richieste
+      amministrative resta invece il canale URP.
     </p>
+    <div
+      style={{
+        marginBottom: 20,
+        padding: isMobile ? '16px 18px' : '18px 20px',
+        borderRadius: 16,
+        background: 'var(--bi-primary-050)',
+        border: '1px solid var(--bi-primary-100)',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          fontSize: 14,
+          fontWeight: 700,
+          color: 'var(--bi-ink-900)',
+          marginBottom: 10,
+        }}
+      >
+        <Icon name="check" size={16} color="var(--bi-primary)" />
+        Quando usare questa sezione
+      </div>
+      <ul
+        style={{
+          margin: 0,
+          paddingLeft: 18,
+          color: 'var(--bi-ink-600)',
+          fontSize: 14,
+          lineHeight: 1.7,
+        }}
+      >
+        {[
+          'Errore in una pagina o in un contenuto pubblicato',
+          'Link non funzionante o documento non raggiungibile',
+          'Informazioni da aggiornare o correggere',
+          'Problemi di navigazione o modulo poco chiaro',
+        ].map((item) => (
+          <li key={item}>{item}</li>
+        ))}
+      </ul>
+    </div>
+    <div
+      style={{
+        marginBottom: 24,
+        padding: '16px 18px',
+        borderRadius: 16,
+        background: 'var(--bi-surface)',
+        border: '1px solid var(--bi-border)',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          fontSize: 14,
+          fontWeight: 700,
+          color: 'var(--bi-ink-900)',
+          marginBottom: 6,
+        }}
+      >
+        <Icon name="info" size={16} color="var(--bi-primary)" />
+        Redazione web o URP?
+      </div>
+      <p
+        style={{
+          margin: 0,
+          fontSize: 14,
+          lineHeight: 1.65,
+          color: 'var(--bi-ink-600)',
+        }}
+      >
+        Scrivi alla redazione web se il problema riguarda il portale o i suoi contenuti. Contatta
+        URP se ti serve assistenza generale, orientamento ai servizi o vuoi presentare un reclamo.
+      </p>
+    </div>
     <ul className={styles.info__metaList} style={{ listStyle: 'none', padding: 0, margin: 0 }}>
       <li className={styles.info__metaItem}>
         <span className={styles.info__metaIcon}>
@@ -208,9 +287,7 @@ const PageRedazioneWeb = () => {
       <TopBar />
       <BrandRow />
       <StickyHeader active="" />
-      <Breadcrumb
-        items={[{ label: 'Home', href: 'index.html' }, { label: 'Redazione web' }]}
-      />
+      <Breadcrumb items={[{ label: 'Home', href: 'index.html' }, { label: 'Redazione web' }]} />
 
       <Section pad={isMobile ? '40px 0 64px' : '56px 0 80px'}>
         <div className={styles.grid}>

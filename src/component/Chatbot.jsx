@@ -17,6 +17,7 @@ const TREE = {
       { label: 'Pagare il ticket', next: 'ticket' },
       { label: 'Trovare un presidio', next: 'presidio' },
       { label: 'Contatti e orari', next: 'contatti' },
+      { label: 'Segnalare un problema del sito', next: 'sito_web' },
       { label: 'Altro', next: 'altro' },
     ],
   },
@@ -157,8 +158,11 @@ const TREE = {
     ],
   },
   contatti: {
-    msg: 'Centralino ASL: 081 8722111\nURP (relazioni pubblico): 081 8722111 — Lun–Ven 9:00–13:00, Mar–Gio 15:00–17:00\nEmail URP: urp@aslnapoli3sud.it\nCUP telefonico: 800 019 774 (gratuito)',
-    options: [{ label: "Torna all'inizio", next: 'root' }],
+    msg: 'Centralino ASL: 081 8722111\nURP (relazioni pubblico): 081 8722111 — Lun–Ven 9:00–13:00, Mar–Gio 15:00–17:00\nEmail URP: urp@aslnapoli3sud.it\nRedazione web: redazione@aslnapoli3sud.it\nCUP telefonico: 800 019 774 (gratuito)',
+    options: [
+      { label: 'Problema del sito o contenuto errato', next: 'sito_web' },
+      { label: "Torna all'inizio", next: 'root' },
+    ],
   },
   medico_base: {
     msg: 'Per trovare o cambiare il tuo medico di medicina generale, accedi alla sezione scelta/revoca sul portale FSE Campania o recati al distretto sanitario di competenza.',
@@ -183,9 +187,22 @@ const TREE = {
     ],
   },
   altro: {
-    msg: 'Per richieste non in elenco, il modo più efficace è contattare direttamente il nostro Ufficio Relazioni con il Pubblico.',
+    msg: 'Per richieste non in elenco, il modo piu efficace e contattare direttamente il nostro Ufficio Relazioni con il Pubblico. Se invece devi segnalare un errore del sito o un contenuto non aggiornato, usa la redazione web.',
     options: [
       { label: 'Parla con un operatore', next: 'operatore' },
+      { label: 'Problemi del sito o contenuti online', next: 'sito_web' },
+      { label: "Torna all'inizio", next: 'root' },
+    ],
+  },
+  sito_web: {
+    msg: 'Per errori del sito, pagine non aggiornate, link non funzionanti o difficolta di navigazione, il canale corretto e la redazione web. URP resta dedicato a informazioni generali, reclami e orientamento ai servizi.',
+    options: [
+      {
+        label: 'Apri la redazione web',
+        next: 'link_redazione',
+        internal: 'page-redazione-web.html',
+      },
+      { label: 'Devo contattare URP', next: 'operatore' },
       { label: "Torna all'inizio", next: 'root' },
     ],
   },
@@ -200,6 +217,7 @@ const TREE = {
   link_pagopa: null,
   link_fse: null,
   link_spid: null,
+  link_redazione: null,
 };
 
 // ── Chatbot component ──

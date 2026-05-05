@@ -83,18 +83,29 @@ const FeedbackWidget = () => {
                 dell&apos;ASL Napoli 3 Sud.
               </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8, flexShrink: 0, marginLeft: 'auto' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-end',
+                gap: 8,
+                flexShrink: 0,
+                marginLeft: 'auto',
+              }}
+            >
               <button onClick={handleReset} className={styles.thanks__resetBtn}>
                 Invia un altro feedback
               </button>
               <a
                 href="page-redazione-web.html"
-                style={{ fontSize: 13, color: 'var(--bi-ink-500)', textDecoration: 'none' }}
+                style={{
+                  fontSize: 13,
+                  color: 'var(--bi-primary)',
+                  textDecoration: 'none',
+                  fontWeight: 700,
+                }}
               >
-                Hai trovato un errore?{' '}
-                <span style={{ color: 'var(--bi-primary)', fontWeight: 600 }}>
-                  Scrivi alla redazione →
-                </span>
+                Hai trovato un errore del sito? Scrivi alla redazione web →
               </a>
             </div>
           </div>
@@ -157,6 +168,70 @@ const FeedbackWidget = () => {
                   </button>
                 ))}
               </div>
+              {isLow && (
+                <div
+                  style={{
+                    marginTop: 16,
+                    padding: '14px 16px',
+                    borderRadius: 12,
+                    border: '1px solid var(--bi-primary-100)',
+                    background: 'var(--bi-primary-050)',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 12,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 32,
+                      height: 32,
+                      borderRadius: 999,
+                      background: '#fff',
+                      color: 'var(--bi-primary)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      flexShrink: 0,
+                    }}
+                  >
+                    <Icon name="mail" size={16} />
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        fontSize: 14,
+                        fontWeight: 700,
+                        color: 'var(--bi-ink-900)',
+                        marginBottom: 4,
+                      }}
+                    >
+                      Vuoi segnalare un errore del sito?
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 13,
+                        lineHeight: 1.6,
+                        color: 'var(--bi-ink-600)',
+                        marginBottom: 6,
+                      }}
+                    >
+                      Per link non funzionanti, contenuti da aggiornare o problemi di navigazione
+                      puoi scrivere direttamente alla redazione web.
+                    </div>
+                    <a
+                      href="page-redazione-web.html"
+                      style={{
+                        color: 'var(--bi-primary)',
+                        fontSize: 13,
+                        fontWeight: 700,
+                        textDecoration: 'none',
+                      }}
+                    >
+                      Apri la redazione web →
+                    </a>
+                  </div>
+                </div>
+              )}
               <div className={styles.actions}>
                 <button onClick={() => setStep('comment')} className={styles.primaryBtn}>
                   Avanti
@@ -175,6 +250,29 @@ const FeedbackWidget = () => {
               <div className={cx(styles.title, styles['title--tight'])}>
                 Vuoi aggiungere altri dettagli?
               </div>
+              {isLow && (
+                <div
+                  style={{
+                    marginBottom: 16,
+                    fontSize: 13,
+                    lineHeight: 1.6,
+                    color: 'var(--bi-ink-600)',
+                  }}
+                >
+                  Se stai segnalando un errore del sito o un contenuto non aggiornato, puoi anche{' '}
+                  <a
+                    href="page-redazione-web.html"
+                    style={{
+                      color: 'var(--bi-primary)',
+                      fontWeight: 700,
+                      textDecoration: 'none',
+                    }}
+                  >
+                    contattare direttamente la redazione web
+                  </a>
+                  .
+                </div>
+              )}
               <div className={styles.field}>
                 <label className={styles.label}>
                   Commento libero (opzionale)

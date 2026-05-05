@@ -518,8 +518,12 @@ const PageReferti = () => {
               </li>
               <li>Se il portale FSE è irraggiungibile, attendi qualche minuto e riprova.</li>
               <li>
-                Contatta l'URP al numero <strong>081 8722111</strong> o scrivi a{' '}
-                <strong>urp@aslnapoli3sud.it</strong>.
+                Se hai trovato un errore in questa pagina o un&apos;informazione da aggiornare,
+                scrivi alla{' '}
+                <a href="page-redazione-web.html" style={{ color: 'var(--bi-primary)' }}>
+                  redazione web
+                </a>{' '}
+                oppure a <strong>redazione@aslnapoli3sud.it</strong>.
               </li>
               <li>
                 Per problemi tecnici al portale regionale: numero verde <strong>800 012 333</strong>{' '}
@@ -729,7 +733,7 @@ const PageReferti = () => {
                   marginBottom: 6,
                 }}
               >
-                Contatti per assistenza
+                Contatti per assistenza al servizio e al sito
               </div>
               <div
                 style={{
@@ -743,7 +747,17 @@ const PageReferti = () => {
                   15:00–17:00
                 </div>
                 <div>
-                  <strong>Email:</strong> urp@aslnapoli3sud.it
+                  <strong>Email URP:</strong> urp@aslnapoli3sud.it
+                </div>
+                <div>
+                  <strong>Redazione web:</strong>{' '}
+                  <a
+                    href="page-redazione-web.html"
+                    style={{ color: 'var(--bi-primary)', fontWeight: 600 }}
+                  >
+                    segnala errori del sito
+                  </a>{' '}
+                  — redazione@aslnapoli3sud.it
                 </div>
                 <div>
                   <strong>Supporto portale regionale:</strong> 800 012 333 (gratuito)

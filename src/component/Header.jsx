@@ -142,10 +142,7 @@ const BrandRow = () => {
           <img
             src="https://www.aslnapoli3sud.it/o/na3theme-theme/images/logo_primario.png"
             alt="ASL Napoli 3 Sud"
-            className={cx(
-              styles.brand__logo,
-              isCompact && styles['brand__logo--compact']
-            )}
+            className={cx(styles.brand__logo, isCompact && styles['brand__logo--compact'])}
           />
         </a>
 
@@ -219,12 +216,12 @@ const MobileMainNav = ({ items, activeItem }) => {
     setMenu((open) => !open);
   };
 
-  const renderNavLink = (item, ref) => {
+  const renderNavLink = (item, isFirstItem = false) => {
     const isActive = activeItem === item.id;
     return (
       <a
         key={item.id}
-        ref={ref}
+        ref={isFirstItem ? firstItemRef : undefined}
         href={item.href}
         aria-current={isActive ? 'page' : undefined}
         className={cx(styles.mobileNavLink, isActive && styles['mobileNavLink--active'])}
@@ -268,17 +265,31 @@ const MobileMainNav = ({ items, activeItem }) => {
             className={styles.mobilePanel}
             style={{ top: panelTop }}
           >
-            {items.map((item, i) => renderNavLink(item, i === 0 ? firstItemRef : undefined))}
+            {items.map((item, i) => renderNavLink(item, i === 0))}
             <div className={styles.mobilePanel__ctas}>
-              <a href="#" className={cx(styles.quickCta, styles['quickCta--navPrimary'], styles['quickCta--full'])}>
+              <a
+                href="#"
+                className={cx(
+                  styles.quickCta,
+                  styles['quickCta--navPrimary'],
+                  styles['quickCta--full']
+                )}
+              >
                 <Icon name="calendar" size={16} />
                 <span>Prenota una visita</span>
                 <span className={styles.quickCta__tag}>CUP</span>
               </a>
-              <a href="#" className={cx(styles.quickCta, styles['quickCta--navOutline'], styles['quickCta--full'])}>
+              <a
+                href="page-redazione-web.html"
+                className={cx(
+                  styles.quickCta,
+                  styles['quickCta--navOutline'],
+                  styles['quickCta--full']
+                )}
+              >
                 <Icon name="mail" size={16} />
-                <span>Informazioni e segnalazioni</span>
-                <span className={styles.quickCta__tag}>URP</span>
+                <span>Problemi del sito?</span>
+                <span className={styles.quickCta__tag}>WEB</span>
               </a>
             </div>
           </nav>,
@@ -343,16 +354,21 @@ const MainNav = ({ activeItem, active }) => {
             >
               {items.map((item) => renderNavLink(item))}
             </nav>
-            <div className={cx(styles.nav__ctaGroup, isCompact && styles['nav__ctaGroup--compact'])}>
+            <div
+              className={cx(styles.nav__ctaGroup, isCompact && styles['nav__ctaGroup--compact'])}
+            >
               <a href="#" className={cx(styles.quickCta, styles['quickCta--navPrimary'])}>
                 <Icon name="calendar" size={15} />
                 <span>Prenota una visita</span>
                 <span className={styles.quickCta__tag}>CUP</span>
               </a>
-              <a href="#" className={cx(styles.quickCta, styles['quickCta--navOutline'])}>
+              <a
+                href="page-redazione-web.html"
+                className={cx(styles.quickCta, styles['quickCta--navOutline'])}
+              >
                 <Icon name="mail" size={15} />
-                <span>Informazioni e segnalazioni</span>
-                <span className={styles.quickCta__tag}>URP</span>
+                <span>Problemi del sito?</span>
+                <span className={styles.quickCta__tag}>WEB</span>
               </a>
             </div>
           </>
@@ -389,7 +405,7 @@ const QuickActions = () => {
           <span className={styles.quickCta__tag}>CUP</span>
         </a>
         <a
-          href="#"
+          href="page-redazione-web.html"
           className={cx(
             styles.quickCta,
             styles['quickCta--outline'],
@@ -397,8 +413,8 @@ const QuickActions = () => {
           )}
         >
           <Icon name="mail" size={16} />
-          <span>Informazioni e segnalazioni</span>
-          <span className={styles.quickCta__tag}>URP</span>
+          <span>Problemi del sito?</span>
+          <span className={styles.quickCta__tag}>WEB</span>
         </a>
       </div>
     </div>

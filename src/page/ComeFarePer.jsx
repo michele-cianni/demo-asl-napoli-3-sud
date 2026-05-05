@@ -1,9 +1,6 @@
 import React from 'react';
 import { Icon } from '../icons.jsx';
-import {
-  Breadcrumb,
-  Eyebrow,
-} from '../component/UI.jsx';
+import { Breadcrumb, Eyebrow } from '../component/UI.jsx';
 import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
 import { Footer } from '../component/Footer.jsx';
 import { FeedbackWidget } from '../component/Feedback.jsx';
@@ -309,11 +306,7 @@ const Indice = ({ items }) => {
         }}
       >
         Indice
-        <Icon
-          name={open ? 'chevron-down' : 'chevron-right'}
-          size={18}
-          color="var(--bi-primary)"
-        />
+        <Icon name={open ? 'chevron-down' : 'chevron-right'} size={18} color="var(--bi-primary)" />
       </button>
       {open && (
         <nav style={{ padding: '8px 0' }}>
@@ -395,8 +388,7 @@ const PageComeFarePer = () => {
   const [openSteps, setOpenSteps] = React.useState(steps.map(() => false));
   const allOpen = openSteps.every(Boolean);
   const toggleAll = () => setOpenSteps(steps.map(() => !allOpen));
-  const toggleStep = (i) =>
-    setOpenSteps((s) => s.map((v, idx) => (idx === i ? !v : v)));
+  const toggleStep = (i) => setOpenSteps((s) => s.map((v, idx) => (idx === i ? !v : v)));
 
   const faq = [
     {
@@ -433,7 +425,7 @@ const PageComeFarePer = () => {
       size: 'PDF — 89 KB',
     },
     {
-      title: 'Guida all\'uso del portale CUP',
+      title: "Guida all'uso del portale CUP",
       desc: 'Istruzioni passo per passo per prenotare una visita specialistica tramite il portale CUP Campania.',
       size: 'PDF — 210 KB',
     },
@@ -525,7 +517,6 @@ const PageComeFarePer = () => {
 
             {/* ── Main content ── */}
             <main style={{ flex: 1, minWidth: 0 }}>
-
               {/* ── Panoramica (video) ── */}
               <section id="panoramica" style={{ marginBottom: 48, scrollMarginTop: 96 }}>
                 <VideoPlayer />
@@ -998,9 +989,7 @@ const PageComeFarePer = () => {
                 <div
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: isMobile
-                      ? '1fr'
-                      : 'repeat(auto-fill, minmax(200px, 1fr))',
+                    gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fill, minmax(200px, 1fr))',
                     gap: 14,
                   }}
                 >
@@ -1120,6 +1109,60 @@ const PageComeFarePer = () => {
                       </div>
                       <div>
                         <strong>Sede:</strong> Via Acquaviva 109, Castellammare di Stabia (NA)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    marginTop: 16,
+                    padding: '20px 24px',
+                    background: 'var(--bi-surface)',
+                    borderRadius: 8,
+                    border: '1px solid var(--bi-border)',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 20,
+                  }}
+                >
+                  <Icon
+                    name="mail"
+                    size={24}
+                    color="var(--bi-primary)"
+                    style={{ flexShrink: 0, marginTop: 2 }}
+                  />
+                  <div>
+                    <div
+                      style={{
+                        fontWeight: 700,
+                        fontSize: 16,
+                        color: 'var(--bi-ink-900)',
+                        marginBottom: 6,
+                      }}
+                    >
+                      Redazione web
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 14,
+                        color: 'var(--bi-ink-600)',
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      <div>
+                        Per errori del sito, link non funzionanti o informazioni da aggiornare usa
+                        la redazione web invece dell&apos;URP.
+                      </div>
+                      <div>
+                        <strong>Email:</strong> redazione@aslnapoli3sud.it
+                      </div>
+                      <div>
+                        <a
+                          href="page-redazione-web.html"
+                          style={{ color: 'var(--bi-primary)', fontWeight: 700 }}
+                        >
+                          Apri la sezione redazione web
+                        </a>
                       </div>
                     </div>
                   </div>
