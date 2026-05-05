@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { TopBar, BrandRow, MainNav } from './component/Header.jsx';
 import { Hero } from './component/Hero.jsx';
-import { ServicesGrid } from './component/Services.jsx';
+import { HowToGrid } from './component/HowTo.jsx';
 import { WaitingLists } from './component/Waiting.jsx';
 import { Screening } from './component/Screening.jsx';
 import { News, Facilities } from './component/News.jsx';
@@ -17,7 +17,7 @@ function PrintApp() {
       <MainNav />
       <Hero />
       <div style={{ breakBefore: 'page', pageBreakBefore: 'always' }}>
-        <ServicesGrid />
+        <HowToGrid />
       </div>
       <div style={{ breakBefore: 'page', pageBreakBefore: 'always' }}>
         <WaitingLists />

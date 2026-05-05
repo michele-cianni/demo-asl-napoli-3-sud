@@ -131,15 +131,15 @@ const HeroVisual = () => {
   const { isMobile } = useResponsive();
 
   const placeholder = (
-    <div
+    <img
+      src={`${import.meta.env.BASE_URL}images/placeholder_1200x900 vers1.png`}
+      alt="Medico con paziente"
       className={cx(
-        'placeholder-img',
         styles.placeholder,
         styles[isMobile ? 'placeholder--mobile' : 'placeholder--desktop']
       )}
-    >
-      PLACEHOLDER IMG · Medico con paziente · 1200×900
-    </div>
+      style={{ objectFit: 'cover', width: '100%', height: '100%', display: 'block' }}
+    />
   );
 
   if (isMobile) {

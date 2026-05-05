@@ -21,6 +21,7 @@ const ServicesHighlights = () => {
       title: 'Vaccino antinfluenzale 2026–2027',
       desc: "Prenotazioni aperte per over 60 e categorie a rischio presso tutti i distretti dell'ASL.",
       icon: 'shield',
+      img: `${import.meta.env.BASE_URL}images/servizi_vaccino.png`,
     },
     {
       badge: 'Prevenzione',
@@ -28,6 +29,7 @@ const ServicesHighlights = () => {
       title: 'Screening mammografico — inviti in corso',
       desc: 'Se hai ricevuto una lettera di invito, prenota la mammografia gratuita.',
       icon: 'heart',
+      img: `${import.meta.env.BASE_URL}images/servizi_screening_mammografico.png`,
     },
     {
       badge: 'Novità',
@@ -35,6 +37,7 @@ const ServicesHighlights = () => {
       title: 'Nuovo ambulatorio terapia del dolore',
       desc: 'Dal 5 maggio attivo al Presidio San Leonardo di Castellammare di Stabia.',
       icon: 'stethoscope',
+      img: `${import.meta.env.BASE_URL}images/servizi_terapia_dolore.png`,
     },
   ];
 
@@ -79,19 +82,16 @@ const ServicesHighlights = () => {
               }
               onMouseLeave={(e) => (e.currentTarget.style.boxShadow = 'none')}
             >
-              {/* Placeholder immagine */}
-              <div
+              <img
+                src={item.img}
+                alt={item.title}
                 style={{
+                  width: '100%',
                   height: 160,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background:
-                    'linear-gradient(135deg, var(--bi-primary-050), var(--bi-primary-100))',
+                  objectFit: 'cover',
+                  display: 'block',
                 }}
-              >
-                <Icon name={item.icon} size={56} color="var(--bi-primary)" stroke={1.2} />
-              </div>
+              />
               <div
                 style={{
                   padding: '20px',

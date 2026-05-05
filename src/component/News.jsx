@@ -17,6 +17,7 @@ const News = () => {
       desc: 'Dal 5 maggio apre il nuovo centro di II livello al Presidio San Leonardo. Visite su prenotazione CUP.',
       readTime: '2 min',
       imgLabel: 'Ambulatorio terapia del dolore · 800×480',
+      img: `${import.meta.env.BASE_URL}images/terapia_dolore_castellammare.png`,
     },
     {
       badge: 'Bando',
@@ -26,6 +27,7 @@ const News = () => {
       desc: 'Scadenza presentazione domande: 30 maggio 2026. Requisiti e modulistica disponibili sul portale aziendale.',
       readTime: '3 min',
       imgLabel: 'Concorso infermieri · 800×480',
+      img: `${import.meta.env.BASE_URL}images/concorso_pubblico.png`,
     },
     {
       badge: 'Salute',
@@ -35,6 +37,7 @@ const News = () => {
       desc: "Otorinolaringoiatria aperta al pubblico presso 4 presidi dell'ASL. Accesso diretto senza prenotazione.",
       readTime: '1 min',
       imgLabel: 'Giornata mondiale della voce · 800×480',
+      img: `${import.meta.env.BASE_URL}images/giornata_voce.png`,
     },
   ];
 
@@ -50,17 +53,16 @@ const News = () => {
       <div className={styles.news__grid}>
         {items.map((item, i) => (
           <a key={i} href="#" className={styles.news__card}>
-            <div
-              className="placeholder-img"
+            <img
+              src={item.img}
+              alt={item.imgLabel}
               style={{
+                width: '100%',
                 aspectRatio: '5/3',
-                borderRadius: 0,
-                fontSize: 10,
-                color: 'var(--bi-primary-800)',
+                objectFit: 'cover',
+                display: 'block',
               }}
-            >
-              PLACEHOLDER IMG · {item.imgLabel}
-            </div>
+            />
             <div className={styles.news__cardBody}>
               <div className={styles.news__cardContent}>
                 <div className={styles.news__cardMeta}>

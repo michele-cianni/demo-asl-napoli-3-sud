@@ -35,13 +35,26 @@ const VideoPlayer = () => {
           position: 'relative',
           width: '100%',
           paddingBottom: '56.25%',
-          background: 'linear-gradient(135deg, #001f3f, var(--bi-primary))',
+          background: '#001a2e',
           borderRadius: 10,
           overflow: 'hidden',
           cursor: 'pointer',
           boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
         }}
       >
+        <img
+          src={`${import.meta.env.BASE_URL}images/screen_come_fare_per.png`}
+          alt="Come fare per prenotare una visita"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: playing ? 0.25 : 0.55,
+            transition: 'opacity 0.3s',
+          }}
+        />
         <div
           style={{
             position: 'absolute',
