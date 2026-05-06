@@ -447,7 +447,9 @@ const PageComeFarePer = () => {
   return (
     <div
       data-screen-label="03 Come fare per — Prenotare una visita"
-      style={{ background: 'var(--bi-bg)' }}
+      style={{
+        backgroundColor: 'var(--bi-bg)',
+      }}
     >
       <TopBar />
       <BrandRow />
@@ -461,7 +463,7 @@ const PageComeFarePer = () => {
       />
 
       {/* ── Hero title ── */}
-      <div style={{ background: 'var(--bi-surface)', padding: '40px 0 0' }}>
+      <div style={{ background: 'var(--bi-surface)', padding: '40px 0 32px' }}>
         <div className="container">
           <Eyebrow>Come fare per</Eyebrow>
           <h1
@@ -482,7 +484,7 @@ const PageComeFarePer = () => {
               color: 'var(--bi-ink-500)',
               maxWidth: 640,
               lineHeight: 1.6,
-              margin: '0 0 32px',
+              margin: 0,
             }}
           >
             Scopri come prenotare una visita con uno specialista ASL partendo dall'impegnativa del

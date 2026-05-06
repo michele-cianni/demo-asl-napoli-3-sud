@@ -42,7 +42,15 @@ const News = () => {
   ];
 
   return (
-    <Section bg="var(--bi-bg-alt)" id="news">
+    <Section
+      style={{
+        backgroundColor: 'var(--bi-bg-alt)',
+        backgroundImage: `url('${import.meta.env.BASE_URL}images/background/sotto%20in%20evidenza.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+      id="news"
+    >
       <SectionHeading
         eyebrow="ASL comunica"
         title="In evidenza"

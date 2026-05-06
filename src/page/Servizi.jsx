@@ -48,7 +48,15 @@ const ServicesHighlights = () => {
   };
 
   return (
-    <Section bg="var(--bi-surface)" id="servizi-evidenza">
+    <Section
+      style={{
+        backgroundColor: 'var(--bi-surface)',
+        backgroundImage: `url('${import.meta.env.BASE_URL}images/background/sotto%20servizi%20prioritari%20del%20momento.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+      id="servizi-evidenza"
+    >
       <SectionHeading
         eyebrow="In evidenza"
         title="Servizi prioritari del momento"
@@ -98,6 +106,7 @@ const ServicesHighlights = () => {
                   flex: 1,
                   display: 'flex',
                   flexDirection: 'column',
+                  background: 'var(--bi-surface)',
                 }}
               >
                 <span
@@ -201,7 +210,15 @@ const CategoryGrid = () => {
   ];
 
   return (
-    <Section bg="var(--bi-bg-alt)" id="categorie">
+    <Section
+      style={{
+        backgroundColor: 'var(--bi-bg-alt)',
+        backgroundImage: `linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)), url('${import.meta.env.BASE_URL}images/background/sez%20servizisotto%20tutti%20i%20servizi%20dell%20asl.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+      id="categorie"
+    >
       <SectionHeading
         eyebrow="Esplora per categoria"
         title="Tutti i servizi dell'ASL"

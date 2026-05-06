@@ -206,9 +206,9 @@
   padding: 0 18px;
   height: 40px;
   border-radius: 20px;
-  border: 1.5px solid var(--bi-primary);
-  background: transparent;
-  color: var(--bi-primary);
+  border: 1.5px solid #52b075;
+  background: #52b075;
+  color: #fff;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -222,7 +222,7 @@
 /* ─── MainNav ────────────────────────────────────────────────────────── */
 
 .nav {
-  background: var(--bi-primary);
+  background: #52b075;
   color: #fff;
   position: relative;
   z-index: 50;
@@ -357,7 +357,7 @@
   bottom: 0;
   overflow-y: auto;
   z-index: 35;
-  background: var(--bi-primary);
+  background: #52b075;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -509,7 +509,7 @@
 }
 
 .quickCta--navPrimary .quickCta__tag {
-  background: rgba(0, 121, 140, 0.12);
+  background: rgba(82, 176, 117, 0.15);
   color: var(--bi-primary);
 }
 

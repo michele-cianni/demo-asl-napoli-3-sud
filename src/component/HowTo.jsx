@@ -73,7 +73,15 @@ const HowToGrid = () => {
   };
 
   return (
-    <Section bg="var(--bi-surface)" id="servizi">
+    <Section
+      style={{
+        backgroundColor: 'var(--bi-surface)',
+        backgroundImage: `linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)), url('${import.meta.env.BASE_URL}images/background/sotto%20percorsi%20guidati.png')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+      id="servizi"
+    >
       <SectionHeading
         eyebrow="Come fare per"
         title="Percorsi guidati, passo per passo."

@@ -9,7 +9,7 @@ const INITIAL_CENTER = [40.74, 14.43];
 const INITIAL_ZOOM = 11;
 
 const createMarkerIcon = (isPS) => {
-  const bg = isPS ? '#d14900' : '#00798C';
+  const bg = isPS ? '#d14900' : '#52b075';
   return L.divIcon({
     html: `<div style="width:36px;height:36px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.35);border:2.5px solid rgba(255,255,255,.8)">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -30,12 +30,13 @@ const BADGE_TONES = {
   primary: { bg: '#e6f0f8', fg: '#004f9e' },
 };
 
-// Forza invalidateSize al montaggio per evitare il blank tile bug di Leaflet
+// Forza invalidateSize dopo il montaggio — due passaggi per coprire mobile lento
 const MapInitializer = () => {
   const map = useMap();
   useEffect(() => {
-    const t = setTimeout(() => map.invalidateSize(), 50);
-    return () => clearTimeout(t);
+    const t1 = setTimeout(() => map.invalidateSize(), 100);
+    const t2 = setTimeout(() => map.invalidateSize(), 400);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, [map]);
   return null;
 };
@@ -93,7 +94,8 @@ const MapView = ({ ospedali }) => {
         alignItems: 'start',
       }}
     >
-      {/* Mappa */}
+      {/* Mappa — isolation:isolate crea uno stacking context isolato
+          così i z-index interni di Leaflet (400+) non sfondano lo sticky header */}
       <div
         ref={mapWrapRef}
         style={{
@@ -101,6 +103,8 @@ const MapView = ({ ospedali }) => {
           overflow: 'hidden',
           border: '1px solid var(--bi-border)',
           minHeight: isMobile ? 300 : 450,
+          position: 'relative',
+          isolation: 'isolate',
         }}
       >
         <MapContainer
@@ -164,7 +168,7 @@ const MapView = ({ ospedali }) => {
                     href={`tel:${osp.telefono.replace(/\s/g, '')}`}
                     style={{
                       fontSize: 12,
-                      color: '#00798C',
+                      color: '#52b075',
                       fontWeight: 600,
                       display: 'block',
                       marginBottom: 10,
@@ -179,7 +183,7 @@ const MapView = ({ ospedali }) => {
                       style={{
                         display: 'inline-block',
                         padding: '5px 12px',
-                        background: '#00798C',
+                        background: '#52b075',
                         color: '#fff',
                         borderRadius: 6,
                         fontSize: 12,

@@ -2,7 +2,7 @@
 
 .wrap {
   background: var(--bi-surface);
-  padding: 32px 0 0;
+  padding: 40px 0 48px;
 }
 
 .title {

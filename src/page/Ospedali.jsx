@@ -424,7 +424,10 @@ const PageOspedali = () => {
       {/* ── Barra di ricerca ── */}
       <div
         style={{
-          background: 'var(--bi-surface)',
+          backgroundColor: 'var(--bi-surface)',
+          backgroundImage: `url('${import.meta.env.BASE_URL}images/background/sotto%20ospedali%20barra%20di%20ricerca.png')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           borderBottom: '1px solid var(--bi-border)',
           padding: '24px 0',
         }}
@@ -492,8 +495,8 @@ const PageOspedali = () => {
               )}
             </div>
 
-            {/* Toggle lista / mappa */}
-            <div
+            {/* Toggle lista / mappa — nascosto su mobile */}
+            {!isMobile && <div
               style={{
                 display: 'flex',
                 border: '1.5px solid var(--bi-border)',
@@ -527,7 +530,7 @@ const PageOspedali = () => {
                   {v.label}
                 </button>
               ))}
-            </div>
+            </div>}
           </div>
 
           {/* Filtri a chip */}
@@ -640,7 +643,7 @@ const PageOspedali = () => {
       </div>
 
       {/* ── Vista lista ── */}
-      {view === 'lista' && (
+      {(view === 'lista' || isMobile) && (
         <div style={{ padding: isMobile ? '24px 0 48px' : '48px 0 80px' }}>
           <div className="container">
             {filtered.length === 0 ? (
@@ -664,8 +667,8 @@ const PageOspedali = () => {
         </div>
       )}
 
-      {/* ── Vista mappa ── */}
-      {view === 'mappa' && (
+      {/* ── Vista mappa — solo desktop ── */}
+      {view === 'mappa' && !isMobile && (
         <div style={{ padding: isMobile ? '24px 0 48px' : '48px 0 80px' }}>
           <div className="container">
             <MapView ospedali={filtered} />
