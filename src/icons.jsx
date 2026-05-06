@@ -263,35 +263,54 @@ const Icon = ({ name, size = 20, color = 'currentColor', stroke = 1.8, className
     case 'instagram':
       return (
         <svg {...p}>
-          <rect x="3" y="3" width="18" height="18" rx="5" />
-          <circle cx="12" cy="12" r="4" />
-          <circle cx="17.5" cy="6.5" r="1" fill={color} />
+          <path d="M4 8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-8a4 4 0 0 1-4-4l0-8" />
+          <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0-6 0" />
+          <path d="M16.5 7.5v.01" />
         </svg>
       );
     case 'facebook':
       return (
         <svg {...p}>
-          <path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v7h4v-7h3l1-4h-4V8a1 1 0 0 1 1-1z" />
+          <path d="M7 10v4h3v7h4v-7h3l1-4h-4v-2a1 1 0 0 1 1-1h3v-4h-3a5 5 0 0 0-5 5v2h-3" />
         </svg>
       );
     case 'x':
       return (
         <svg {...p}>
-          <path d="M4 4 20 20M20 4 4 20" />
+          <path d="M4 4l11.733 16h4.267l-11.733-16l-4.267 0" />
+          <path d="M4 20l6.768-6.768m2.46-2.46l6.772-6.772" />
         </svg>
       );
     case 'youtube':
       return (
         <svg {...p}>
-          <rect x="2" y="6" width="20" height="12" rx="3" />
-          <path d="m10 9 5 3-5 3z" />
+          <path d="M2 8a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-12a4 4 0 0 1-4-4v-8" />
+          <path d="M10 9l5 3-5 3l0-6" />
         </svg>
       );
     case 'linkedin':
       return (
         <svg {...p}>
-          <rect x="3" y="3" width="18" height="18" rx="3" />
-          <path d="M7 10v7M7 7v.01M11 17v-4a2 2 0 0 1 4 0v4M11 17v-7" />
+          <path d="M3 7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-10a4 4 0 0 1-4-4l0-10" />
+          <path d="M8 11v5" />
+          <path d="M8 8v.01" />
+          <path d="M12 16v-5" />
+          <path d="M16 16v-3a2 2 0 1 0-4 0" />
+        </svg>
+      );
+    case 'whatsapp':
+      return (
+        <svg {...p}>
+          <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+          <path d="M9 10a.5.5 0 0 0 1 0v-1a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+        </svg>
+      );
+    case 'rss':
+      return (
+        <svg {...p}>
+          <path d="M4 19a1 1 0 1 0 2 0a1 1 0 1 0-2 0" />
+          <path d="M4 4a16 16 0 0 1 16 16" />
+          <path d="M4 11a9 9 0 0 1 9 9" />
         </svg>
       );
     default:

@@ -12,6 +12,8 @@ const SOCIAL_LINKS = [
   { name: 'x', label: 'X (Twitter)' },
   { name: 'youtube', label: 'YouTube' },
   { name: 'linkedin', label: 'LinkedIn' },
+  { name: 'whatsapp', label: 'WhatsApp' },
+  { name: 'rss', label: 'RSS' },
 ];
 
 // ─── TopBar ───
@@ -288,8 +290,8 @@ const MobileMainNav = ({ items, activeItem }) => {
                 )}
               >
                 <Icon name="mail" size={16} />
-                <span>Problemi del sito?</span>
-                <span className={styles.quickCta__tag}>WEB</span>
+                <span>Segnala un problema del sito</span>
+                {/* <span className={styles.quickCta__tag}>WEB</span> */}
               </a>
             </div>
           </nav>,
@@ -367,8 +369,8 @@ const MainNav = ({ activeItem, active }) => {
                 className={cx(styles.quickCta, styles['quickCta--navOutline'])}
               >
                 <Icon name="mail" size={15} />
-                <span>Problemi del sito?</span>
-                <span className={styles.quickCta__tag}>WEB</span>
+                <span>Segnala un problema del sito</span>
+                {/* <span className={styles.quickCta__tag}>WEB</span> */}
               </a>
             </div>
           </>
@@ -413,8 +415,8 @@ const QuickActions = () => {
           )}
         >
           <Icon name="mail" size={16} />
-          <span>Problemi del sito?</span>
-          <span className={styles.quickCta__tag}>WEB</span>
+          <span>Segnala un problema del sito</span>
+          {/* <span className={styles.quickCta__tag}>WEB</span> */}
         </a>
       </div>
     </div>

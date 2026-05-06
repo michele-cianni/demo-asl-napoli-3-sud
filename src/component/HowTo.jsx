@@ -84,7 +84,7 @@ const HowToGrid = () => {
     >
       <SectionHeading
         eyebrow="Come fare per"
-        title="Percorsi guidati, passo per passo."
+        title="Percorsi guidati, passo dopo passo."
         subtitle="Scopri come svolgere le pratiche più comuni con l'ASL."
         action={<ArrowLink href="page-servizi.html">Vai a tutte le guide</ArrowLink>}
       />
