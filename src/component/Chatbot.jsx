@@ -187,7 +187,7 @@ const TREE = {
     ],
   },
   altro: {
-    msg: 'Per richieste non in elenco, il modo piu efficace e contattare direttamente il nostro Ufficio Relazioni con il Pubblico. Se invece devi segnalare un errore del sito o un contenuto non aggiornato, usa la redazione web.',
+    msg: 'Per richieste non in elenco, il modo piu efficace e contattare direttamente il nostro Ufficio Relazioni con il Pubblico. Se invece devi segnalare un errore del sito o un contenuto non aggiornato, contatta la redazione web.',
     options: [
       { label: 'Parla con un operatore', next: 'operatore' },
       { label: 'Problemi del sito o contenuti online', next: 'sito_web' },
@@ -270,7 +270,7 @@ const Chatbot = () => {
         {open ? (
           <Icon name="close" size={20} color="#fff" />
         ) : (
-          <Icon name="microphone" size={20} color="#fff" />
+          <Icon name="stethoscope" size={20} color="#fff" />
         )}
         {!open && !isMobile && 'Aiuto'}
       </button>

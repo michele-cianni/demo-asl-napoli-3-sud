@@ -467,7 +467,7 @@ const PageOspedali = () => {
               </span>
               <input
                 type="text"
-                placeholder="Cerca per nome ospedale o specialità…"
+                placeholder="Cerca per nome ospedale o area clinica…"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 style={{
@@ -585,7 +585,7 @@ const PageOspedali = () => {
                   marginBottom: 8,
                 }}
               >
-                Specialità
+                Aree cliniche ad alta specializzazione
               </div>
               <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                 <FilterChip

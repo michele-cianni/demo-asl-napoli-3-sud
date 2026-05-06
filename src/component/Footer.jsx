@@ -100,7 +100,7 @@ const Footer = () => {
           <div>
             <div className={styles.footer__colTitle}>Seguici su</div>
             <div className={styles.footer__social}>
-              {['facebook', 'instagram', 'x', 'youtube', 'linkedin'].map((n) => (
+              {['facebook', 'instagram', 'x', 'youtube', 'linkedin', 'whatsapp', 'rss'].map((n) => (
                 <a key={n} href="#" className={styles.footer__socialLink}>
                   <Icon name={n} size={18} />
                 </a>

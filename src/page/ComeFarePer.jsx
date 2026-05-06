@@ -426,7 +426,7 @@ const PageComeFarePer = () => {
     },
     {
       title: "Guida all'uso del portale CUP",
-      desc: 'Istruzioni passo per passo per prenotare una visita specialistica tramite il portale CUP Campania.',
+      desc: 'Istruzioni passo dopo passo per prenotare una visita specialistica tramite il portale CUP Campania.',
       size: 'PDF — 210 KB',
     },
   ];
@@ -487,8 +487,8 @@ const PageComeFarePer = () => {
               margin: 0,
             }}
           >
-            Scopri come prenotare una visita con uno specialista ASL partendo dall'impegnativa del
-            tuo medico di base, passo per passo. Il video in primo piano ti guida in 4 minuti.
+            Scopri come prenotare una visita con uno specialista ASL partendo dall&apos;impegnativa del
+            tuo medico di base, passo dopo passo. Il video in primo piano ti guida in 4 minuti.
           </p>
         </div>
       </div>
@@ -1071,54 +1071,6 @@ const PageComeFarePer = () => {
                 <div
                   style={{
                     padding: '20px 24px',
-                    background: 'var(--bi-primary-050)',
-                    borderRadius: 8,
-                    border: '1px solid var(--bi-primary-100)',
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    gap: 20,
-                  }}
-                >
-                  <Icon
-                    name="phone"
-                    size={24}
-                    color="var(--bi-primary)"
-                    style={{ flexShrink: 0, marginTop: 2 }}
-                  />
-                  <div>
-                    <div
-                      style={{
-                        fontWeight: 700,
-                        fontSize: 16,
-                        color: 'var(--bi-ink-900)',
-                        marginBottom: 6,
-                      }}
-                    >
-                      Ufficio Relazioni con il Pubblico (URP)
-                    </div>
-                    <div
-                      style={{
-                        fontSize: 14,
-                        color: 'var(--bi-ink-600)',
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      <div>
-                        <strong>Tel.</strong> 081 8722111 — Lun-Ven 9:00–13:00 | Mar-Gio 15:00–17:00
-                      </div>
-                      <div>
-                        <strong>Email:</strong> urp@aslnapoli3sud.it
-                      </div>
-                      <div>
-                        <strong>Sede:</strong> Via Acquaviva 109, Castellammare di Stabia (NA)
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  style={{
-                    marginTop: 16,
-                    padding: '20px 24px',
                     background: 'var(--bi-surface)',
                     borderRadius: 8,
                     border: '1px solid var(--bi-border)',
@@ -1152,8 +1104,8 @@ const PageComeFarePer = () => {
                       }}
                     >
                       <div>
-                        Per errori del sito, link non funzionanti o informazioni da aggiornare usa
-                        la redazione web invece dell&apos;URP.
+                        Per errori del sito, link non funzionanti o informazioni da aggiornare contatta
+                        la redazione web.
                       </div>
                       <div>
                         <strong>Email:</strong> redazione@aslnapoli3sud.it
@@ -1165,6 +1117,57 @@ const PageComeFarePer = () => {
                         >
                           Apri la sezione redazione web
                         </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    marginTop: 16,
+                    padding: '20px 24px',
+                    background: 'var(--bi-primary-050)',
+                    borderRadius: 8,
+                    border: '1px solid var(--bi-primary-100)',
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: 20,
+                  }}
+                >
+                  <Icon
+                    name="phone"
+                    size={24}
+                    color="var(--bi-primary)"
+                    style={{ flexShrink: 0, marginTop: 2 }}
+                  />
+                  <div>
+                    <div
+                      style={{
+                        fontWeight: 700,
+                        fontSize: 16,
+                        color: 'var(--bi-ink-900)',
+                        marginBottom: 6,
+                      }}
+                    >
+                      Ufficio Relazioni con il Pubblico (URP)
+                    </div>
+                    <div
+                      style={{
+                        fontSize: 14,
+                        color: 'var(--bi-ink-600)',
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      <div>
+                        Per segnalazioni encomi e reclami, e per informazioni sui servizi sanitari o pratiche personali contatta l&apos;Ufficio Relazioni con il Pubblico.
+                      </div>
+                      <div>
+                        <strong>Tel.</strong> 081 8722111 — Lun-Ven 9:00–13:00 | Mar-Gio 15:00–17:00
+                      </div>
+                      <div>
+                        <strong>Email:</strong> urp@aslnapoli3sud.it
+                      </div>
+                      <div>
+                        <strong>Sede:</strong> Via Acquaviva 109, Castellammare di Stabia (NA)
                       </div>
                     </div>
                   </div>
