@@ -31,10 +31,10 @@ const OSPEDALI = [
     ps: true,
     psCodice: 'PS attivo 24/7',
     specialita: [
-      'Cardiologia',
-      'Chirurgia Generale',
-      'Ortopedia',
-      'Medicina Interna',
+      'Chirurgia',
+      'Radiologia',
+      'Diagnostica',
+      'Breast Unit',
       'Pronto Soccorso',
     ],
     badge: 'PS 24/7',
@@ -50,7 +50,7 @@ const OSPEDALI = [
     coords: [40.7742, 14.4853],
     ps: true,
     psCodice: 'PS attivo 24/7',
-    specialita: ['Medicina Interna', 'Geriatria', 'Oncologia', 'Pronto Soccorso', 'Neurologia'],
+    specialita: ['Oncologia', 'Pneumologia', 'Radiologia', 'Pronto Soccorso'],
     badge: 'PS 24/7',
     badgeTone: 'warm',
     href: '#',
@@ -65,10 +65,10 @@ const OSPEDALI = [
     ps: true,
     psCodice: 'PS attivo 24/7',
     specialita: [
-      'Cardiologia',
-      'Chirurgia Vascolare',
-      'Ostetricia',
-      'Neonatologia',
+      'Chirurgia',
+      'Ginecologia',
+      'Radiologia',
+      'Diagnostica',
       'Pronto Soccorso',
     ],
     badge: 'PS 24/7',
@@ -83,7 +83,7 @@ const OSPEDALI = [
     telefono: '081 861 2111',
     coords: [40.7536, 14.4505],
     ps: false,
-    specialita: ['Riabilitazione', 'Lungodegenza', 'Pneumologia', 'Urologia'],
+    specialita: ['Pneumologia', 'Reti Ulcere', 'Ambulatorio Stomie'],
     badge: 'Riabilitazione',
     badgeTone: 'teal',
     href: '#',
@@ -96,7 +96,7 @@ const OSPEDALI = [
     telefono: '081 801 2111',
     coords: [40.6896, 14.5192],
     ps: false,
-    specialita: ['Chirurgia Generale', 'Ortopedia', 'Oculistica', 'Otorinolaringoiatria'],
+    specialita: ['Chirurgia', 'Radiologia'],
     badge: 'Day Surgery',
     badgeTone: 'primary',
     href: '#',
@@ -110,7 +110,7 @@ const OSPEDALI = [
     coords: [40.6263, 14.3757],
     ps: true,
     psCodice: 'PS stagionale',
-    specialita: ['Medicina Interna', 'Chirurgia Generale', 'Pronto Soccorso', 'Cardiologia'],
+    specialita: ['Chirurgia', 'Diagnostica', 'Ginecologia', 'Pronto Soccorso'],
     badge: 'PS stagionale',
     badgeTone: 'primary',
     href: '#',
@@ -119,6 +119,17 @@ const OSPEDALI = [
 
 const ALL_COMUNI = [...new Set(OSPEDALI.map((o) => o.comune))].sort();
 const ALL_SPECIALITA = [...new Set(OSPEDALI.flatMap((o) => o.specialita))].sort();
+const AREE_CLINICHE = [
+  'Breast Unit',
+  'Chirurgia',
+  'Reti Ulcere',
+  'Oncologia',
+  'Ambulatorio Stomie',
+  'Pneumologia',
+  'Ginecologia',
+  'Radiologia',
+  'Diagnostica',
+];
 
 // ── Chip filtro ──
 const FilterChip = ({ label, active, onClick }) => (
@@ -593,7 +604,7 @@ const PageOspedali = () => {
                   active={!specFilter}
                   onClick={() => setSpecFilter(null)}
                 />
-                {ALL_SPECIALITA.slice(0, 8).map((s) => (
+                {AREE_CLINICHE.map((s) => (
                   <FilterChip
                     key={s}
                     label={s}
