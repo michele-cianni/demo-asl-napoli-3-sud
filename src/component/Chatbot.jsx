@@ -121,7 +121,7 @@ const TREE = {
     ],
   },
   referti_sportello: {
-    msg: 'Puoi ritirare il referto cartaceo presso: Presidio di Boscoreale, Presidio San Leonardo (Castellammare), Presidio Maresca (Torre del Greco). Portare tessera sanitaria.',
+    msg: 'Puoi ritirare il referto cartaceo presso: P.O. S. Anna e SS. Madonna della Neve (Boscotrecase), P.O. San Leonardo (Castellammare), P.O. Maresca (Torre del Greco). Portare tessera sanitaria.',
     options: [
       {
         label: 'Vedi orari dettagliati',
@@ -144,7 +144,7 @@ const TREE = {
     ],
   },
   presidio: {
-    msg: "L'ASL Napoli 3 Sud copre 56 Comuni. I presidi principali sono: P.O. San Leonardo (Castellammare), P.O. Maresca (Torre del Greco), P.O. Boscoreale, Distretto 58 (Pompei).",
+    msg: "L'ASL Napoli 3 Sud copre 58 Comuni con 8 presidi ospedalieri: P.O. Maresca (Torre del Greco), P.O. S. Anna e SS. Madonna della Neve (Boscotrecase), P.O. San Leonardo (Castellammare), P.O. Santa Maria della Misericordia (Sorrento), P.O. De Luca e Rossano (Vico Equense), P.O. Santa Maria della Pietà (Nola), P.O. Apicella (Pollena Trocchia), P.O. Gragnano.",
     options: [
       { label: 'Vedi tutti i presidi', next: 'link_presidi' },
       { label: "Torna all'inizio", next: 'root' },
