@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import { useEffect, useRef, useState } from 'react';
 import { useResponsive } from '../hooks/useResponsive.js';
 import { Icon } from '../icons.jsx';
+import { BoundaryLayer } from './BoundaryLayer.jsx';
 
 const INITIAL_CENTER = [40.74, 14.43];
 const INITIAL_ZOOM = 11;
@@ -107,6 +108,43 @@ const MapView = ({ ospedali }) => {
           isolation: 'isolate',
         }}
       >
+        {/* Legenda sovrapposta in basso a sinistra */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 24,
+            left: 12,
+            zIndex: 500,
+            background: 'rgba(255,255,255,0.92)',
+            backdropFilter: 'blur(4px)',
+            borderRadius: 8,
+            padding: '8px 12px',
+            boxShadow: '0 1px 6px rgba(0,0,0,0.18)',
+            fontSize: 11,
+            lineHeight: 1.8,
+            color: '#1a1a2e',
+            pointerEvents: 'none',
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+            <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#d14900', flexShrink: 0, display: 'inline-block' }} />
+            Pronto Soccorso 24/7
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+            <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#52b075', flexShrink: 0, display: 'inline-block' }} />
+            Presidio Ospedaliero
+          </div>
+          <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', marginTop: 4, paddingTop: 4 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+              <span style={{ width: 14, height: 3, background: '#50639d', flexShrink: 0, display: 'inline-block', borderRadius: 1 }} />
+              ASL Napoli 3 Sud
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+              <span style={{ width: 14, height: 2, background: '#52b075', flexShrink: 0, display: 'inline-block', borderRadius: 1, opacity: 0.7 }} />
+              Regione Campania
+            </div>
+          </div>
+        </div>
         <MapContainer
           center={INITIAL_CENTER}
           zoom={INITIAL_ZOOM}
@@ -119,6 +157,7 @@ const MapView = ({ ospedali }) => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
+          <BoundaryLayer />
           <MapInitializer />
           <BoundsController ospedali={ospedali} />
           {ospedali.map((osp) => (
