@@ -5,12 +5,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useResponsive } from '../hooks/useResponsive.js';
 import { Icon } from '../icons.jsx';
 import { BoundaryLayer } from './BoundaryLayer.jsx';
+import { BRAND_SECONDARY } from '../theme.js';
 
 const INITIAL_CENTER = [40.74, 14.43];
 const INITIAL_ZOOM = 11;
 
 const createMarkerIcon = (isPS) => {
-  const bg = isPS ? '#d14900' : '#52b075';
+  const bg = isPS ? '#d14900' : BRAND_SECONDARY;
   return L.divIcon({
     html: `<div style="width:36px;height:36px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.35);border:2.5px solid rgba(255,255,255,.8)">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -131,16 +132,16 @@ const MapView = ({ ospedali }) => {
             Pronto Soccorso 24/7
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#52b075', flexShrink: 0, display: 'inline-block' }} />
+            <span style={{ width: 12, height: 12, borderRadius: '50%', background: 'var(--brand-secondary)', flexShrink: 0, display: 'inline-block' }} />
             Presidio Ospedaliero
           </div>
           <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', marginTop: 4, paddingTop: 4 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-              <span style={{ width: 14, height: 3, background: '#50639d', flexShrink: 0, display: 'inline-block', borderRadius: 1 }} />
+              <span style={{ width: 14, height: 3, background: 'var(--brand-primary)', flexShrink: 0, display: 'inline-block', borderRadius: 1 }} />
               ASL Napoli 3 Sud
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-              <span style={{ width: 14, height: 2, background: '#52b075', flexShrink: 0, display: 'inline-block', borderRadius: 1, opacity: 0.7 }} />
+              <span style={{ width: 14, height: 2, background: 'var(--brand-secondary)', flexShrink: 0, display: 'inline-block', borderRadius: 1, opacity: 0.7 }} />
               Regione Campania
             </div>
           </div>
@@ -207,7 +208,7 @@ const MapView = ({ ospedali }) => {
                     href={`tel:${osp.telefono.replace(/\s/g, '')}`}
                     style={{
                       fontSize: 12,
-                      color: '#52b075',
+                      color: 'var(--brand-secondary)',
                       fontWeight: 600,
                       display: 'block',
                       marginBottom: 10,
@@ -222,7 +223,7 @@ const MapView = ({ ospedali }) => {
                       style={{
                         display: 'inline-block',
                         padding: '5px 12px',
-                        background: '#52b075',
+                        background: 'var(--brand-secondary)',
                         color: '#fff',
                         borderRadius: 6,
                         fontSize: 12,
@@ -313,8 +314,8 @@ const MapView = ({ ospedali }) => {
                 height: 36,
                 borderRadius: 8,
                 flexShrink: 0,
-                background: osp.ps ? 'var(--bi-warm-100)' : 'var(--bi-primary-050)',
-                color: osp.ps ? 'var(--bi-warm)' : 'var(--bi-primary)',
+                background: osp.ps ? 'var(--bi-warm-100)' : 'var(--brand-secondary-050)',
+                color: osp.ps ? 'var(--bi-warm)' : 'var(--brand-secondary)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',

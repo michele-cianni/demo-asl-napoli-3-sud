@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react';
 import { GeoJSON } from 'react-leaflet';
+import { BRAND_PRIMARY, BRAND_SECONDARY } from '../theme.js';
 
 const BASE = import.meta.env.BASE_URL;
 
 const campaniaStyle = {
-  color: '#52b075',
+  color: BRAND_SECONDARY,
   weight: 1.5,
   dashArray: '4 4',
-  fillColor: '#52b075',
+  fillColor: BRAND_SECONDARY,
   fillOpacity: 0.10,
 };
 
 const aslStyle = {
-  color: '#50639d',
+  color: BRAND_PRIMARY,
   weight: 2,
-  fillColor: '#50639d',
+  fillColor: BRAND_PRIMARY,
   fillOpacity: 0.20,
 };
 

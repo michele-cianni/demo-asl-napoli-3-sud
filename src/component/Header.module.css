@@ -206,8 +206,8 @@
   padding: 0 18px;
   height: 40px;
   border-radius: 20px;
-  border: 1.5px solid #52b075;
-  background: #52b075;
+  border: 1.5px solid var(--brand-primary);
+  background: var(--brand-primary);
   color: #fff;
   font-size: 14px;
   font-weight: 600;
@@ -222,7 +222,7 @@
 /* ─── MainNav ────────────────────────────────────────────────────────── */
 
 .nav {
-  background: #52b075;
+  background: var(--brand-primary);
   color: #fff;
   position: relative;
   z-index: 50;
@@ -357,7 +357,7 @@
   bottom: 0;
   overflow-y: auto;
   z-index: 35;
-  background: #52b075;
+  background: var(--brand-primary);
   display: flex;
   flex-direction: column;
   gap: 10px;

@@ -4,15 +4,26 @@
 */
 
 :root {
-  /* Bootstrap Italia institutional palette */
-  --bi-primary: #0066cc; /* Blu Italia */
-  --bi-primary-800: #004080;
-  --bi-primary-100: #d2e6f9;
-  --bi-primary-050: #edf4fc;
+  /* ── Brand palette — unica fonte di verità ──────────────────────────── */
+  --brand-primary:       #50639d;
+  --brand-primary-800:   #3d4e7a;
+  --brand-primary-100:   #d0d7ea;
+  --brand-primary-050:   #eaecf5;
 
-  --bi-teal: #50639d;
-  --bi-teal-700: #3d4e7a;
-  --bi-teal-100: #d0d7ea;
+  --brand-secondary:       #52b075;
+  --brand-secondary-800:   #3a7d52;
+  --brand-secondary-100:   #c5e8d2;
+  --brand-secondary-050:   #e2f4e9;
+
+  /* Bootstrap Italia overrides — referenziano il brand palette */
+  --bi-primary:     var(--brand-primary);
+  --bi-primary-800: var(--brand-primary-800);
+  --bi-primary-100: var(--brand-primary-100);
+  --bi-primary-050: var(--brand-primary-050);
+
+  --bi-teal:     var(--brand-secondary);
+  --bi-teal-700: var(--brand-secondary-800);
+  --bi-teal-100: var(--brand-secondary-100);
 
   --bi-warm: #d14900; /* warm accent for priority CTAs */
   --bi-warm-100: #fbe8dc;

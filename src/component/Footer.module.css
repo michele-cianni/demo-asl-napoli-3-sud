@@ -4,7 +4,7 @@
 /* ─── Footer ─────────────────────────────────────────────────────────── */
 
 .footer {
-  background: #50639d;
+  background: var(--brand-primary);
   color: rgba(255, 255, 255, 0.95);
 }
 
