@@ -509,8 +509,8 @@
 }
 
 .quickCta--navPrimary .quickCta__tag {
-  background: rgba(82, 176, 117, 0.15);
-  color: var(--bi-primary);
+  background: var(--brand-primary-100);
+  color: var(--brand-primary);
 }
 
 .quickCta--navOutline {

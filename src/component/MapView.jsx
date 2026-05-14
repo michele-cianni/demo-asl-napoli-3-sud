@@ -10,19 +10,58 @@ import { BRAND_SECONDARY } from '../theme.js';
 const INITIAL_CENTER = [40.74, 14.43];
 const INITIAL_ZOOM = 11;
 
+if (typeof document !== 'undefined' && !document.getElementById('asl-marker-styles')) {
+  const s = document.createElement('style');
+  s.id = 'asl-marker-styles';
+  s.textContent = `
+    @keyframes asl-pulse {
+      0%   { transform: scale(1);   opacity: .55; }
+      100% { transform: scale(2.2); opacity: 0;   }
+    }
+    .asl-ps-ring::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #d14900;
+      animation: asl-pulse 1.8s ease-out infinite;
+      pointer-events: none;
+    }
+  `;
+  document.head.appendChild(s);
+}
+
 const createMarkerIcon = (isPS) => {
-  const bg = isPS ? '#d14900' : BRAND_SECONDARY;
+  if (isPS) {
+    return L.divIcon({
+      html: `
+        <div class="asl-ps-ring" style="position:relative;width:44px;height:44px;">
+          <div style="position:absolute;inset:0;border-radius:50%;background:#d14900;border:3px solid rgba(255,255,255,.92);box-shadow:0 3px 14px rgba(209,73,0,.45);display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="white">
+              <rect x="8" y="2" width="4" height="16" rx="1"/>
+              <rect x="2" y="8" width="16" height="4" rx="1"/>
+            </svg>
+          </div>
+        </div>`,
+      className: '',
+      iconSize: [44, 44],
+      iconAnchor: [22, 44],
+      popupAnchor: [0, -50],
+    });
+  }
   return L.divIcon({
-    html: `<div style="width:36px;height:36px;border-radius:50%;background:${bg};display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.35);border:2.5px solid rgba(255,255,255,.8)">
-      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
-    </div>`,
+    html: `
+      <div style="width:40px;height:40px;border-radius:50%;background:${BRAND_SECONDARY};border:3px solid rgba(255,255,255,.92);box-shadow:0 3px 12px rgba(82,176,117,.35);display:flex;align-items:center;justify-content:center;">
+        <svg width="19" height="19" viewBox="0 0 19 19" fill="white">
+          <rect x="2"  y="2"   width="4" height="15" rx="1"/>
+          <rect x="13" y="2"   width="4" height="15" rx="1"/>
+          <rect x="2"  y="7.5" width="15" height="4" rx="1"/>
+        </svg>
+      </div>`,
     className: '',
-    iconSize: [36, 36],
-    iconAnchor: [18, 36],
-    popupAnchor: [0, -40],
+    iconSize: [40, 40],
+    iconAnchor: [20, 40],
+    popupAnchor: [0, -46],
   });
 };
 
@@ -128,11 +167,15 @@ const MapView = ({ ospedali }) => {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <span style={{ width: 12, height: 12, borderRadius: '50%', background: '#d14900', flexShrink: 0, display: 'inline-block' }} />
+            <span style={{ width: 14, height: 14, borderRadius: '50%', background: '#d14900', border: '2px solid rgba(255,255,255,.9)', boxShadow: '0 0 0 2px #d14900', flexShrink: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="7" height="7" viewBox="0 0 20 20" fill="white"><rect x="8" y="2" width="4" height="16" rx="1"/><rect x="2" y="8" width="16" height="4" rx="1"/></svg>
+            </span>
             Pronto Soccorso 24/7
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <span style={{ width: 12, height: 12, borderRadius: '50%', background: 'var(--brand-secondary)', flexShrink: 0, display: 'inline-block' }} />
+            <span style={{ width: 14, height: 14, borderRadius: '50%', background: 'var(--brand-secondary)', border: '2px solid rgba(255,255,255,.9)', boxShadow: '0 0 0 2px var(--brand-secondary)', flexShrink: 0, display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
+              <svg width="7" height="7" viewBox="0 0 19 19" fill="white"><rect x="2" y="2" width="4" height="15" rx="1"/><rect x="13" y="2" width="4" height="15" rx="1"/><rect x="2" y="7.5" width="15" height="4" rx="1"/></svg>
+            </span>
             Presidio Ospedaliero
           </div>
           <div style={{ borderTop: '1px solid rgba(0,0,0,0.1)', marginTop: 4, paddingTop: 4 }}>
