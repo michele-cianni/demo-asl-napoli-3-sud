@@ -613,7 +613,7 @@ const PageReferti = () => {
             >
               {[
                 {
-                  sede: 'Presidio di Boscoreale',
+                  sede: 'S. Anna e SS. Madonna della Neve — Boscotrecase',
                   orari: 'Lun–Ven 8:00–13:00 | Mar–Gio 14:30–17:00',
                 },
                 {

@@ -15,121 +15,15 @@ import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
 import { Footer } from '../component/Footer.jsx';
 import { FeedbackWidget } from '../component/Feedback.jsx';
 import { MapView } from '../component/MapView.jsx';
+import {
+  OSPEDALI_ASL_NAPOLI_3_SUD as OSPEDALI,
+  ALL_COMUNI,
+  AREE_CLINICHE,
+} from '../data/ospedaliAslNapoli3Sud.js';
 
 // ─── Pagina lista Ospedali (PRD §5.5) ───
 // URL: /strutture/ospedali/
 // Breadcrumb: Home → Strutture → Ospedali
-
-const OSPEDALI = [
-  {
-    id: 'maresca',
-    nome: 'Ospedale Maresca',
-    comune: 'Torre del Greco',
-    indirizzo: 'Via Montedoro, Torre del Greco (NA)',
-    telefono: '081 849 2111',
-    coords: [40.7847, 14.3703],
-    ps: true,
-    psCodice: 'PS attivo 24/7',
-    specialita: [
-      'Chirurgia',
-      'Radiologia',
-      'Diagnostica',
-      'Breast Unit',
-      'Pronto Soccorso',
-    ],
-    badge: 'PS 24/7',
-    badgeTone: 'warm',
-    href: 'page-maresca.html',
-  },
-  {
-    id: 'boscoreale',
-    nome: 'Presidio Ospedaliero di Boscoreale',
-    comune: 'Boscoreale',
-    indirizzo: 'Via Passanti 147, Boscoreale (NA)',
-    telefono: '081 857 5111',
-    coords: [40.7742, 14.4853],
-    ps: true,
-    psCodice: 'PS attivo 24/7',
-    specialita: ['Oncologia', 'Pneumologia', 'Radiologia', 'Pronto Soccorso'],
-    badge: 'PS 24/7',
-    badgeTone: 'warm',
-    href: '#',
-  },
-  {
-    id: 'castellammare',
-    nome: 'Presidio Ospedaliero San Leonardo',
-    comune: 'Castellammare di Stabia',
-    indirizzo: 'Via Cosenza, Castellammare di Stabia (NA)',
-    telefono: '081 872 7111',
-    coords: [40.6943, 14.4807],
-    ps: true,
-    psCodice: 'PS attivo 24/7',
-    specialita: [
-      'Chirurgia',
-      'Ginecologia',
-      'Radiologia',
-      'Diagnostica',
-      'Pronto Soccorso',
-    ],
-    badge: 'PS 24/7',
-    badgeTone: 'warm',
-    href: '#',
-  },
-  {
-    id: 'torre-annunziata',
-    nome: 'Presidio Ospedaliero Mariano Lauro',
-    comune: 'Torre Annunziata',
-    indirizzo: 'Via Palazziello, Torre Annunziata (NA)',
-    telefono: '081 861 2111',
-    coords: [40.7536, 14.4505],
-    ps: false,
-    specialita: ['Pneumologia', 'Reti Ulcere', 'Ambulatorio Stomie'],
-    badge: 'Riabilitazione',
-    badgeTone: 'teal',
-    href: '#',
-  },
-  {
-    id: 'gragnano',
-    nome: 'Presidio Ospedaliero di Gragnano',
-    comune: 'Gragnano',
-    indirizzo: 'Via Vittorio Veneto, Gragnano (NA)',
-    telefono: '081 801 2111',
-    coords: [40.6896, 14.5192],
-    ps: false,
-    specialita: ['Chirurgia', 'Radiologia'],
-    badge: 'Day Surgery',
-    badgeTone: 'primary',
-    href: '#',
-  },
-  {
-    id: 'sorrento',
-    nome: 'Presidio Ospedaliero di Sorrento',
-    comune: 'Sorrento',
-    indirizzo: 'Corso Italia 1, Sorrento (NA)',
-    telefono: '081 533 2111',
-    coords: [40.6263, 14.3757],
-    ps: true,
-    psCodice: 'PS stagionale',
-    specialita: ['Chirurgia', 'Diagnostica', 'Ginecologia', 'Pronto Soccorso'],
-    badge: 'PS stagionale',
-    badgeTone: 'primary',
-    href: '#',
-  },
-];
-
-const ALL_COMUNI = [...new Set(OSPEDALI.map((o) => o.comune))].sort();
-const ALL_SPECIALITA = [...new Set(OSPEDALI.flatMap((o) => o.specialita))].sort();
-const AREE_CLINICHE = [
-  'Breast Unit',
-  'Chirurgia',
-  'Reti Ulcere',
-  'Oncologia',
-  'Ambulatorio Stomie',
-  'Pneumologia',
-  'Ginecologia',
-  'Radiologia',
-  'Diagnostica',
-];
 
 // ── Chip filtro ──
 const FilterChip = ({ label, active, onClick }) => (
@@ -160,10 +54,11 @@ const OspedaleCard = ({ osp }) => {
     primary: { bg: 'var(--bi-primary-100)', fg: 'var(--bi-primary-800)' },
   };
   const t = badgeTones[osp.badgeTone] || badgeTones.primary;
+  const cardHref = osp.href !== '#' ? osp.href : (osp.fonteUrl || '#');
 
   return (
     <a
-      href={osp.href}
+      href={cardHref}
       style={{
         display: 'flex',
         flexDirection: 'column',
@@ -272,7 +167,7 @@ const OspedaleCard = ({ osp }) => {
         >
           <Icon name="phone" size={14} style={{ color: 'var(--bi-primary)' }} />
           <a
-            href={`tel:${osp.telefono.replace(/\s/g, '')}`}
+            href={osp.telefonoHref}
             style={{
               color: 'var(--bi-primary)',
               fontWeight: 600,
