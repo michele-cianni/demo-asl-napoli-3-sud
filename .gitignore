@@ -1,6 +1,17 @@
 # Cartella temporanea task (non versionata)
 temp/
 
+# Build output
+dist/
+
+# Tool caches
+.vite/
+.cache/
+
+# Environment
+.env
+.env.*.local
+
 # OS
 .DS_Store
 Thumbs.db
