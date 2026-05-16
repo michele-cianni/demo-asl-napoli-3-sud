@@ -14,20 +14,21 @@ const Footer = () => {
         {/* Logo row */}
         <div className={styles.footer__logos}>
           <div className={styles.footer__brand}>
-            <div className={cx(styles.footer__badge, styles['footer__badge--primary'])}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                <path d="M12 3v18M3 12h18" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
-              </svg>
-            </div>
-            <div className={styles.footer__brandTitle}>ASL Napoli 3 Sud</div>
+            <img
+              src={`${import.meta.env.BASE_URL}images/logos/asl-napoli-3-sud-bianco.png`}
+              alt="ASL Napoli 3 Sud"
+              style={{ height: 48, width: 'auto', objectFit: 'contain' }}
+            />
           </div>
 
           {!isMobile && <div className={styles.footer__sep} />}
 
           <div className={styles.footer__brand}>
-            <div className={cx(styles.footer__badge, styles['footer__badge--soft'])}>
-              <Icon name="shield" size={22} color="rgba(255,255,255,0.85)" />
-            </div>
+            <img
+              src={`${import.meta.env.BASE_URL}images/logos/regione-campania.svg`}
+              alt="Regione Campania"
+              style={{ height: 48, width: 'auto', objectFit: 'contain', display: 'block' }}
+            />
             <div className={styles.footer__brandTitle}>Portale Regione Campania</div>
           </div>
         </div>
