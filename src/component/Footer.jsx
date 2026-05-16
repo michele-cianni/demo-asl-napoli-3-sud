@@ -44,6 +44,7 @@ const Footer = () => {
               title: 'Area Istituzionale',
               links: [
                 'Organizzazione',
+                { label: 'Distretti sanitari', href: 'page-distretti.html' },
                 'Documenti',
                 'Personale',
                 'Lavora con noi',
@@ -59,13 +60,17 @@ const Footer = () => {
             <div key={i}>
               <div className={styles.footer__colTitle}>{col.title}</div>
               <ul className={styles.footer__list}>
-                {col.links.map((l) => (
-                  <li key={l}>
-                    <a href="#" className={styles.footer__link}>
-                      {l}
-                    </a>
-                  </li>
-                ))}
+                {col.links.map((l) => {
+                  const label = typeof l === 'string' ? l : l.label;
+                  const href = typeof l === 'string' ? '#' : l.href;
+                  return (
+                    <li key={label}>
+                      <a href={href} className={styles.footer__link}>
+                        {label}
+                      </a>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

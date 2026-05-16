@@ -16,6 +16,7 @@ export default defineConfig({
         ospedali: resolve(__dirname, 'page-ospedali.html'),
         maresca: resolve(__dirname, 'page-maresca.html'),
         'redazione-web': resolve(__dirname, 'page-redazione-web.html'),
+        distretti: resolve(__dirname, 'page-distretti.html'),
       },
     },
   },
