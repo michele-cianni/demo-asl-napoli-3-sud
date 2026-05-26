@@ -101,7 +101,7 @@ const OspedaleCard = ({ osp }) => {
           gap: 12,
         }}
       >
-        {/* Badge + PS */}
+        {/* Badge + gruppo */}
         <div
           style={{
             display: 'flex',
@@ -124,7 +124,38 @@ const OspedaleCard = ({ osp }) => {
           >
             {osp.badge}
           </span>
+          {osp.gruppo && (
+            <span
+              style={{
+                padding: '3px 10px',
+                borderRadius: 99,
+                background: 'var(--bi-teal-100)',
+                color: 'var(--bi-teal-700)',
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: 0.3,
+              }}
+            >
+              {osp.gruppo}
+            </span>
+          )}
         </div>
+
+        {/* Afferenza */}
+        {osp.afferenteA && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 5,
+              fontSize: 11,
+              color: 'var(--bi-ink-500)',
+            }}
+          >
+            <Icon name="arrow-right" size={11} />
+            {osp.tipoAfferenza} del {osp.afferenteA}
+          </div>
+        )}
 
         {/* Nome */}
         <h3
