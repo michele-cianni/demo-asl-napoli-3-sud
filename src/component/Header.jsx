@@ -171,6 +171,7 @@ const BrandRow = () => {
 // ─── Mobile main nav ───
 const MobileMainNav = ({ items, activeItem }) => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [expandedItem, setExpandedItem] = React.useState(null);
   const [panelTop, setPanelTop] = React.useState(0);
   const mobileMenuId = React.useId();
   const menuBtnRef = React.useRef(null);
@@ -220,6 +221,45 @@ const MobileMainNav = ({ items, activeItem }) => {
 
   const renderNavLink = (item, isFirstItem = false) => {
     const isActive = activeItem === item.id;
+    const isExpanded = expandedItem === item.id;
+
+    if (item.children) {
+      return (
+        <div key={item.id}>
+          <button
+            ref={isFirstItem ? firstItemRef : undefined}
+            type="button"
+            aria-expanded={isExpanded}
+            aria-haspopup="true"
+            className={cx(styles.mobileNavLink, isActive && styles['mobileNavLink--active'])}
+            onClick={() => setExpandedItem(isExpanded ? null : item.id)}
+          >
+            <span>{item.label}</span>
+            <Icon
+              name="chevron-down"
+              size={16}
+              style={{ transition: 'transform 0.15s', transform: isExpanded ? 'rotate(180deg)' : 'none' }}
+            />
+          </button>
+          {isExpanded && (
+            <div className={styles.mobileSubList}>
+              {item.children.map((child) => (
+                <a
+                  key={child.id}
+                  href={child.href}
+                  className={styles.mobileSubLink}
+                  onClick={() => setMenu(false)}
+                >
+                  <Icon name="chevron-right" size={14} />
+                  <span>{child.label}</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
     return (
       <a
         key={item.id}
@@ -305,17 +345,68 @@ const MobileMainNav = ({ items, activeItem }) => {
 const MainNav = ({ activeItem, active }) => {
   const { isCompact, isMobile } = useResponsive();
   activeItem = activeItem || active || '';
+  const [openDropdown, setOpenDropdown] = React.useState(null);
 
   const items = [
     { id: 'home', label: 'Home', href: 'index.html' },
     { id: 'servizi', label: 'Servizi e prestazioni', href: 'page-servizi.html' },
     { id: 'come-fare-per', label: 'Come fare per', href: 'page-come-fare-per.html' },
     { id: 'strutture', label: 'Strutture', href: 'page-ospedali.html' },
-    { id: 'asl-comunica', label: 'ASL comunica', href: '#' },
+    {
+      id: 'asl-informa',
+      label: 'ASL Informa',
+      href: '#',
+      children: [
+        { id: 'avvisi', label: 'Avvisi', href: '#' },
+        { id: 'news', label: 'News', href: '#' },
+        { id: 'comunicati-stampa', label: 'Comunicati stampa', href: '#' },
+        { id: 'bandi-concorsi', label: 'Bandi e concorsi', href: '#' },
+      ],
+    },
   ];
 
   const renderNavLink = (item) => {
     const isActive = activeItem === item.id;
+    const isOpen = openDropdown === item.id;
+
+    if (item.children) {
+      return (
+        <div
+          key={item.id}
+          className={styles.navItem}
+          onMouseEnter={() => setOpenDropdown(item.id)}
+          onMouseLeave={() => setOpenDropdown(null)}
+        >
+          <button
+            type="button"
+            aria-haspopup="true"
+            aria-expanded={isOpen}
+            className={cx(
+              styles.navTrigger,
+              isCompact && styles['navLink--compact'],
+              isActive && styles['navLink--active']
+            )}
+          >
+            <span>{item.label}</span>
+            <Icon
+              name="chevron-down"
+              size={14}
+              style={{ transition: 'transform 0.15s', transform: isOpen ? 'rotate(180deg)' : 'none' }}
+            />
+          </button>
+          {isOpen && (
+            <div className={styles.navDropdown}>
+              {item.children.map((child) => (
+                <a key={child.id} href={child.href} className={styles.navDropdown__link}>
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    }
+
     return (
       <a
         key={item.id}
