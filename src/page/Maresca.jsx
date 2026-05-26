@@ -31,77 +31,92 @@ const GALLERIA = [
 
 const SERVIZI = [
   {
-    cat: 'Emergenza',
+    cat: 'Emergenza e Urgenza',
     items: [
       {
-        nome: 'Pronto Soccorso',
-        desc: 'Assistenza di emergenza-urgenza 24 ore su 24, con area pediatrica dedicata.',
+        nome: "U.O.S.D. Medicina d'Urgenza con Pronto Soccorso e OBI",
+        desc: 'Assistenza di emergenza-urgenza 24/7 con Osservazione Breve Intensiva.',
         href: '#',
         ps: true,
       },
-    ],
-  },
-  {
-    cat: 'Visite specialistiche',
-    items: [
       {
-        nome: 'Cardiologia',
-        desc: 'UTIC, emodinamica, cardiologia interventistica e ambulatorio.',
-        href: '#',
-      },
-      {
-        nome: 'Neurologia',
-        desc: 'Stroke unit e ambulatorio neurologico.',
-        href: '#',
-      },
-      {
-        nome: 'Pneumologia',
-        desc: 'Diagnosi e trattamento delle patologie respiratorie.',
-        href: '#',
-      },
-      {
-        nome: 'Chirurgia Generale',
-        desc: "Chirurgia laparoscopica, day surgery, chirurgia d'urgenza.",
-        href: '#',
-      },
-      {
-        nome: 'Ortopedia e Traumatologia',
-        desc: 'Protesica, artroscopia, traumatologia.',
-        href: '#',
-      },
-      {
-        nome: 'Urologia',
-        desc: 'Endourologia, chirurgia robotica mini-invasiva.',
-        href: '#',
-      },
-      {
-        nome: 'Ostetricia e Ginecologia',
-        desc: 'Punto nascita di I livello, consultorio aziendale.',
-        href: '#',
-      },
-      {
-        nome: 'Pediatria',
-        desc: 'Degenza pediatrica e ambulatorio neonatale.',
-        href: '#',
-      },
-      {
-        nome: 'Medicina Interna',
-        desc: 'Degenza e ambulatorio per patologie internistiche.',
+        nome: 'U.O.S. Patologia Clinica e Emergenza/Urgenza',
+        desc: 'Supporto diagnostico di laboratorio per le attività di emergenza.',
         href: '#',
       },
     ],
   },
   {
-    cat: 'Esami e analisi',
+    cat: 'Chirurgia e Specialistica',
     items: [
       {
-        nome: 'Radiologia',
-        desc: 'TC multistrato, RMN 1.5T, Rx digitale, ecografia.',
+        nome: 'U.O.C. Anestesia e Terapia Intensiva',
+        desc: 'Anestesia operatoria e gestione del paziente critico in terapia intensiva.',
         href: '#',
       },
       {
-        nome: 'Laboratorio Analisi',
-        desc: 'Analisi di routine, urgenza 24h, biologia molecolare.',
+        nome: 'U.O.S.D. Chirurgia generale',
+        desc: 'Interventi chirurgici in elezione e in urgenza.',
+        href: '#',
+      },
+      {
+        nome: 'U.O.C. Gastroenterologia ed Endoscopia Digestiva',
+        desc: 'Diagnosi e cura delle patologie gastroenterologiche con endoscopia.',
+        href: '#',
+      },
+      {
+        nome: 'U.O.S.D. Ortopedia',
+        desc: 'Trattamento chirurgico e conservativo delle patologie osteoarticolari.',
+        href: '#',
+      },
+      {
+        nome: 'U.O.C. Oculistica',
+        desc: "Diagnosi e trattamento delle malattie dell'occhio.",
+        href: '#',
+      },
+      {
+        nome: 'U.O.S.D. Otorinolaringoiatria',
+        desc: 'Patologie di orecchio, naso e gola in regime ambulatoriale e di degenza.',
+        href: '#',
+      },
+      {
+        nome: 'U.O.C. Piac Oncologico',
+        desc: 'Percorsi integrati per la diagnosi e la cura dei pazienti oncologici.',
+        href: '#',
+      },
+    ],
+  },
+  {
+    cat: 'Medicina',
+    items: [
+      {
+        nome: 'U.O.C. Attività Riabilitative',
+        desc: 'Riabilitazione motoria e funzionale in regime di degenza e ambulatoriale.',
+        href: '#',
+      },
+      {
+        nome: 'U.O.S.D. Medicina Generale e Reumatologia',
+        desc: 'Degenza internistica e gestione delle patologie reumatologiche.',
+        href: '#',
+      },
+    ],
+  },
+  {
+    cat: 'Servizi diagnostici e di supporto',
+    items: [
+      {
+        nome: 'U.O.S.D. Radiologia',
+        desc: 'Diagnostica per immagini: RX, TC, ecografia.',
+        href: '#',
+      },
+      {
+        nome: 'U.O.C. Medicina Trasfusionale',
+        desc: 'Raccolta, lavorazione e distribuzione degli emocomponenti.',
+        href: '#',
+      },
+      {
+        nome: 'U.O.C. Farmacia Ospedaliera Area Nord',
+        desc: 'Dispensazione e gestione del farmaco in ambito ospedaliero.',
         href: '#',
       },
     ],
