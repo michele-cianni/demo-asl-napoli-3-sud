@@ -744,6 +744,172 @@ const ResponsabileBlock = () => (
   </Section>
 );
 
+// ── 10b. URP ──
+const UrpBlock = () => (
+  <Section bg="var(--bi-surface)" id="urp">
+    <SectionHeading eyebrow="Struttura" title="Ufficio Relazioni con il Pubblico (URP)" />
+    <div
+      style={{
+        display: 'flex',
+        gap: 20,
+        alignItems: 'center',
+        padding: '24px',
+        background: 'var(--bi-bg-alt)',
+        border: '1px solid var(--bi-border)',
+        borderRadius: 12,
+        maxWidth: 480,
+      }}
+    >
+      <div
+        style={{
+          width: 64,
+          height: 64,
+          borderRadius: '50%',
+          flexShrink: 0,
+          background: 'var(--bi-primary-100)',
+          color: 'var(--bi-primary-800)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 22,
+          fontWeight: 700,
+          fontFamily: 'var(--ff-sans)',
+        }}
+      >
+        CA
+      </div>
+      <div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--bi-ink-900)' }}>
+          Dott.ssa Cira Ascione
+        </div>
+        <div style={{ fontSize: 14, color: 'var(--bi-ink-500)', marginTop: 4 }}>
+          Responsabile URP — Ospedale Maresca
+        </div>
+        <a
+          href="tel:08118434924"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            marginTop: 10,
+            fontSize: 13,
+            fontWeight: 600,
+            color: 'var(--bi-primary)',
+            textDecoration: 'none',
+          }}
+        >
+          <Icon name="phone" size={13} /> 081 184 34924
+        </a>
+        <div style={{ fontSize: 13, color: 'var(--bi-ink-500)', marginTop: 6 }}>
+          Lunedì–Venerdì 09:00–10:30
+        </div>
+      </div>
+    </div>
+  </Section>
+);
+
+// ── 10c. CUP ──
+const CupBlock = () => (
+  <Section bg="var(--bi-bg-alt)" id="cup">
+    <SectionHeading eyebrow="Struttura" title="Centro Unico di Prenotazione (CUP)" />
+    <div style={{ maxWidth: 540 }}>
+      {[
+        { label: 'Telefono', value: '08118434926', tel: true },
+        { label: 'Email', value: 'potdg.dirs@aslnapoli3sud.it', email: true },
+        { label: 'Lunedì–Venerdì', value: '08:30–15:00' },
+        { label: 'Sabato', value: '08:00–11:00' },
+      ].map((row, i, arr) => (
+        <div
+          key={i}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1.4fr 1.6fr',
+            gap: 12,
+            padding: '14px 0',
+            borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
+          }}
+        >
+          <span style={{ fontSize: 14, color: 'var(--bi-ink-500)', fontWeight: 500 }}>
+            {row.label}
+          </span>
+          {row.tel ? (
+            <a
+              href={`tel:${row.value}`}
+              style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-primary)', textDecoration: 'none' }}
+            >
+              {row.value}
+            </a>
+          ) : row.email ? (
+            <a
+              href={`mailto:${row.value}`}
+              style={{ fontSize: 14, color: 'var(--bi-primary)', textDecoration: 'none', wordBreak: 'break-all' }}
+            >
+              {row.value}
+            </a>
+          ) : (
+            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-ink-900)' }}>{row.value}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </Section>
+);
+
+// ── 10d. Cartella clinica ──
+const CartellaClinicaBlock = () => (
+  <Section bg="var(--bi-surface)" id="cartella-clinica">
+    <SectionHeading eyebrow="Struttura" title="Cartella clinica" />
+    <div style={{ maxWidth: 680, display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <div>
+        <p style={{ fontSize: 15, color: 'var(--bi-ink-700)', margin: '0 0 8px', lineHeight: 1.6 }}>
+          La richiesta può essere effettuata via mail allegando:
+        </p>
+        <ul style={{ margin: 0, paddingLeft: 20, fontSize: 15, color: 'var(--bi-ink-700)', lineHeight: 1.8 }}>
+          <li>modulo compilato</li>
+          <li>eventuale delega</li>
+          <li>copia del documento di riconoscimento del richiedente e/o delegato</li>
+        </ul>
+      </div>
+      <p style={{ fontSize: 15, color: 'var(--bi-ink-700)', margin: 0, lineHeight: 1.6 }}>
+        Per il ritiro è necessario esibire il documento originale valido. In caso di delega, occorre
+        presentare anche la documentazione del paziente e del delegato.
+      </p>
+      <div>
+        <div style={{ fontSize: 13, color: 'var(--bi-ink-500)', marginBottom: 6 }}>Email richiesta</div>
+        <a
+          href="mailto:potdg.arc@aslnapoli3sud.it"
+          style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-primary)', textDecoration: 'none' }}
+        >
+          potdg.arc@aslnapoli3sud.it
+        </a>
+      </div>
+      <div style={{ maxWidth: 540 }}>
+        <div style={{ fontSize: 14, fontWeight: 600, color: 'var(--bi-ink-700)', marginBottom: 8 }}>
+          Orari ritiro
+        </div>
+        {[
+          { sportello: 'Presso il C.U.P.', orari: 'Lunedì–Venerdì 09:00–13:00' },
+          { sportello: "Presso l'ufficio archivio", orari: 'Martedì e Giovedì 11:00–12:30' },
+        ].map((row, i, arr) => (
+          <div
+            key={i}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1.4fr 1.6fr',
+              gap: 12,
+              padding: '14px 0',
+              borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
+            }}
+          >
+            <span style={{ fontSize: 14, color: 'var(--bi-ink-500)', fontWeight: 500 }}>{row.sportello}</span>
+            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-ink-900)' }}>{row.orari}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+);
+
 // ── 11. Galleria (campo AGID opzionale, incluso — griglia 3 colonne desktop) ──
 const GalleriaBlock = () => {
   const { isMobile, isCompact } = useResponsive();
@@ -989,6 +1155,15 @@ const PageMaresca = () => (
 
     {/* ── 10. Responsabile della struttura ── */}
     <ResponsabileBlock />
+
+    {/* ── 10b. URP ── */}
+    <UrpBlock />
+
+    {/* ── 10c. CUP ── */}
+    <CupBlock />
+
+    {/* ── 10d. Cartella clinica ── */}
+    <CartellaClinicaBlock />
 
     {/* ── 11. Galleria ── */}
     <GalleriaBlock />
