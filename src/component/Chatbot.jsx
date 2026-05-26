@@ -272,7 +272,7 @@ const Chatbot = () => {
         ) : (
           <Icon name="stethoscope" size={20} color="#fff" />
         )}
-        {!open && !isMobile && 'Aiuto'}
+        {!open && !isMobile && 'Aiuto?'}
       </button>
 
       {open && (
