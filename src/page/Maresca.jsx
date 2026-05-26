@@ -910,6 +910,78 @@ const CartellaClinicaBlock = () => (
   </Section>
 );
 
+// ── 11a. Direzione Medica di Presidio ──
+const DirMedicaBlock = () => (
+  <Section bg="var(--bi-bg-alt)" id="direzione-medica">
+    <SectionHeading eyebrow="Struttura" title="U.O.C. Direzione Medica di Presidio" />
+    <div style={{ maxWidth: 680, display: 'flex', flexDirection: 'column', gap: 20 }}>
+      <p style={{ fontSize: 15, color: 'var(--bi-ink-700)', margin: 0, lineHeight: 1.6 }}>
+        La Direzione Medica di Presidio svolge funzioni igienico-sanitarie, organizzative e gestionali.
+        Coordina i servizi ospedalieri per garantire l'efficienza delle prestazioni e la tutela del paziente.
+      </p>
+      <div style={{ maxWidth: 540 }}>
+        {[
+          { servizio: 'Segreteria di Direzione', tel: '08118434902' },
+          { servizio: 'Sala Morgue',             tel: '08118434983' },
+        ].map((row, i, arr) => (
+          <div
+            key={i}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: '1.4fr 1.6fr',
+              gap: 12,
+              padding: '14px 0',
+              borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
+            }}
+          >
+            <span style={{ fontSize: 14, color: 'var(--bi-ink-500)', fontWeight: 500 }}>{row.servizio}</span>
+            <a
+              href={`tel:${row.tel}`}
+              style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-primary)', textDecoration: 'none' }}
+            >
+              {row.tel}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Section>
+);
+
+// ── 11b. SAO ──
+const SaoBlock = () => (
+  <Section bg="var(--bi-surface)" id="sao">
+    <SectionHeading eyebrow="Struttura" title="U.O.C. Servizi Amministrativi Ospedalieri Area Nord – SAO" />
+    <div style={{ maxWidth: 740 }}>
+      {[
+        { servizio: 'Segreteria di Direzione',                                                                                                        tel: '08118437075' },
+        { servizio: 'Gestione richieste dagli Affari Legali per contenzioso lavoro',                                                                  tel: '08118437075' },
+        { servizio: 'Gestione specialisti ambulatoriali',                                                                                             tel: '08118437094' },
+        { servizio: 'Gestione rimborso ticket, Gestione cassa, Recupero codici bianchi, Gestione NSIS, Gestione liquidazione, Gestione SAP',          tel: '08118437124' },
+      ].map((row, i, arr) => (
+        <div
+          key={i}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '2fr 1fr',
+            gap: 12,
+            padding: '14px 0',
+            borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
+          }}
+        >
+          <span style={{ fontSize: 14, color: 'var(--bi-ink-700)', lineHeight: 1.5 }}>{row.servizio}</span>
+          <a
+            href={`tel:${row.tel}`}
+            style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-primary)', textDecoration: 'none' }}
+          >
+            {row.tel}
+          </a>
+        </div>
+      ))}
+    </div>
+  </Section>
+);
+
 // ── 11. Galleria (campo AGID opzionale, incluso — griglia 3 colonne desktop) ──
 const GalleriaBlock = () => {
   const { isMobile, isCompact } = useResponsive();
@@ -1164,6 +1236,12 @@ const PageMaresca = () => (
 
     {/* ── 10d. Cartella clinica ── */}
     <CartellaClinicaBlock />
+
+    {/* ── 11a. Direzione Medica di Presidio ── */}
+    <DirMedicaBlock />
+
+    {/* ── 11b. SAO ── */}
+    <SaoBlock />
 
     {/* ── 11. Galleria ── */}
     <GalleriaBlock />
