@@ -351,7 +351,16 @@ const MainNav = ({ activeItem, active }) => {
     { id: 'home', label: 'Home', href: 'index.html' },
     { id: 'servizi', label: 'Servizi e prestazioni', href: 'page-servizi.html' },
     { id: 'come-fare-per', label: 'Come fare per', href: 'page-come-fare-per.html' },
-    { id: 'strutture', label: 'Strutture', href: 'page-ospedali.html' },
+    {
+      id: 'strutture',
+      label: 'Strutture',
+      href: '#',
+      children: [
+        { id: 'distretti',           label: 'Distretti',           href: 'page-distretti.html' },
+        { id: 'dipartimenti',        label: 'Dipartimenti',        href: '#' },
+        { id: 'presidi-ospedalieri', label: 'Presidi ospedalieri', href: 'page-ospedali.html' },
+      ],
+    },
     {
       id: 'asl-informa',
       label: 'ASL Informa',
