@@ -1,14 +1,6 @@
 import React from 'react';
 import { Icon } from '../icons.jsx';
-import {
-  Button,
-  Badge,
-  ArrowLink,
-  Section,
-  SectionHeading,
-  Breadcrumb,
-  Eyebrow,
-} from '../component/UI.jsx';
+import { Section, SectionHeading, Breadcrumb } from '../component/UI.jsx';
 import { TopBar, BrandRow, StickyHeader } from '../component/Header.jsx';
 import { Footer } from '../component/Footer.jsx';
 import { FeedbackWidget } from '../component/Feedback.jsx';
@@ -127,37 +119,41 @@ const SERVIZI = [
 const ACHIBlock = () => (
   <Section bg="var(--bi-bg-alt)" id="a-chi-e-rivolto">
     <div style={{ maxWidth: 720 }}>
-      <SectionHeading eyebrow="Struttura" title="A chi è rivolto" />
+      <SectionHeading title="A chi è rivolto" />
       <p style={{ fontSize: 16, color: 'var(--bi-ink-700)', lineHeight: 1.7, margin: '0 0 16px' }}>
-        Il Presidio Ospedaliero di Torre del Greco garantisce assistenza sanitaria di qualità a cittadini
-        italiani e stranieri, residenti e non, rispettando sempre la dignità della persona.
+        Il Presidio Ospedaliero di Torre del Greco garantisce assistenza sanitaria di qualità a
+        cittadini italiani e stranieri, residenti e non, rispettando sempre la dignità della
+        persona.
       </p>
       <p style={{ fontSize: 16, color: 'var(--bi-ink-700)', lineHeight: 1.7, margin: '0 0 16px' }}>
-        Grazie alle Unità Operative di Degenza e ai Servizi Diagnostici moderni, l'ospedale offre cure
-        mediche, diagnosi accurate e percorsi terapeutici integrati per pazienti di tutte le età.
+        Grazie alle Unità Operative di Degenza e ai Servizi Diagnostici moderni, l'ospedale offre
+        cure mediche, diagnosi accurate e percorsi terapeutici integrati per pazienti di tutte le
+        età.
       </p>
       <p style={{ fontSize: 16, color: 'var(--bi-ink-700)', lineHeight: 1.7, margin: '0 0 20px' }}>
-        I presidi ospedalieri rappresentano un punto di riferimento per la salute del territorio, con
-        personale qualificato, tecnologie avanzate e servizi organizzati per garantire cure sicure,
-        tempestive e accessibili.
+        I presidi ospedalieri rappresentano un punto di riferimento per la salute del territorio,
+        con personale qualificato, tecnologie avanzate e servizi organizzati per garantire cure
+        sicure, tempestive e accessibili.
       </p>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-        {['Tutti i cittadini', 'Anziani', 'Donne', 'Bambini', 'Persone con disabilità'].map((chip) => (
-          <span
-            key={chip}
-            style={{
-              padding: '6px 14px',
-              borderRadius: 99,
-              background: 'var(--bi-primary-050)',
-              color: 'var(--bi-primary-800)',
-              fontSize: 13,
-              fontWeight: 600,
-              border: '1px solid var(--bi-primary-100)',
-            }}
-          >
-            {chip}
-          </span>
-        ))}
+        {['Tutti i cittadini', 'Anziani', 'Donne', 'Bambini', 'Persone con disabilità'].map(
+          (chip) => (
+            <span
+              key={chip}
+              style={{
+                padding: '6px 14px',
+                borderRadius: 99,
+                background: 'var(--bi-primary-050)',
+                color: 'var(--bi-primary-800)',
+                fontSize: 13,
+                fontWeight: 600,
+                border: '1px solid var(--bi-primary-100)',
+              }}
+            >
+              {chip}
+            </span>
+          )
+        )}
       </div>
     </div>
   </Section>
@@ -167,111 +163,113 @@ const ACHIBlock = () => (
 const DoveBlock = () => {
   const { isMobile } = useResponsive();
   return (
-  <Section bg="var(--bi-surface)" id="dove">
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-        gap: 40,
-        alignItems: 'start',
-      }}
-    >
-      <div>
-        <SectionHeading eyebrow="Struttura" title="Dove" />
-        <div
-          style={{
-            display: 'flex',
-            gap: 14,
-            alignItems: 'flex-start',
-            marginBottom: 24,
-          }}
-        >
+    <Section bg="var(--bi-surface)" id="dove">
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
+          gap: 40,
+          alignItems: 'start',
+        }}
+      >
+        <div>
+          <SectionHeading title="Dove" />
           <div
             style={{
-              width: 40,
-              height: 40,
-              borderRadius: 8,
-              background: 'var(--bi-primary-050)',
-              color: 'var(--bi-primary)',
               display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexShrink: 0,
+              gap: 14,
+              alignItems: 'flex-start',
+              marginBottom: 24,
             }}
           >
-            <Icon name="hospital" size={20} />
-          </div>
-          <div>
             <div
               style={{
-                fontWeight: 700,
-                fontSize: 15,
-                color: 'var(--bi-ink-900)',
-                lineHeight: 1.4,
+                width: 40,
+                height: 40,
+                borderRadius: 8,
+                background: 'var(--bi-primary-050)',
+                color: 'var(--bi-primary)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
               }}
             >
-              Via Montedoro 53
-              <br />
-              80059 Torre del Greco (NA)
+              <Icon name="hospital" size={20} />
             </div>
-            <div style={{ fontSize: 13, color: 'var(--bi-ink-500)', marginTop: 6 }}>
-              Distretto Sanitario 58 — Torre del Greco
+            <div>
+              <div
+                style={{
+                  fontWeight: 700,
+                  fontSize: 15,
+                  color: 'var(--bi-ink-900)',
+                  lineHeight: 1.4,
+                }}
+              >
+                Via Montedoro 53
+                <br />
+                80059 Torre del Greco (NA)
+              </div>
+              <div style={{ fontSize: 13, color: 'var(--bi-ink-500)', marginTop: 6 }}>
+                Distretto Sanitario 58 — Torre del Greco
+              </div>
             </div>
           </div>
+          <a
+            href="https://maps.google.com/?q=Via+Montedoro+Torre+del+Greco+NA"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '10px 18px',
+              background: 'var(--bi-primary)',
+              color: '#fff',
+              borderRadius: 8,
+              fontWeight: 700,
+              fontSize: 14,
+              textDecoration: 'none',
+            }}
+          >
+            <Icon name="hospital" size={15} />
+            Apri in mappa
+            <Icon name="external" size={13} />
+          </a>
         </div>
-        <a
-          href="https://maps.google.com/?q=Via+Montedoro+Torre+del+Greco+NA"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
-            padding: '10px 18px',
-            background: 'var(--bi-primary)',
-            color: '#fff',
-            borderRadius: 8,
-            fontWeight: 700,
-            fontSize: 14,
-            textDecoration: 'none',
-          }}
-        >
-          <Icon name="hospital" size={15} />
-          Apri in mappa
-          <Icon name="external" size={13} />
-        </a>
-      </div>
 
-      {/* Mappa placeholder */}
-      {!isMobile && (
-        <div
-          className="placeholder-img"
-          style={{
-            aspectRatio: '4/3',
-            borderRadius: 12,
-            fontSize: 12,
-            color: 'var(--bi-primary-800)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 8,
-          }}
-        >
-          <Icon name="hospital" size={36} />
-          <div style={{ fontWeight: 700 }}>Mappa — Via Montedoro, Torre del Greco</div>
-          <div style={{ opacity: 0.7, fontSize: 11 }}>OpenStreetMap / Leaflet.js — da integrare</div>
-        </div>
-      )}
-    </div>
-  </Section>
+        {/* Mappa placeholder */}
+        {!isMobile && (
+          <div
+            className="placeholder-img"
+            style={{
+              aspectRatio: '4/3',
+              borderRadius: 12,
+              fontSize: 12,
+              color: 'var(--bi-primary-800)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+            }}
+          >
+            <Icon name="hospital" size={36} />
+            <div style={{ fontWeight: 700 }}>Mappa — Via Montedoro, Torre del Greco</div>
+            <div style={{ opacity: 0.7, fontSize: 11 }}>
+              OpenStreetMap / Leaflet.js — da integrare
+            </div>
+          </div>
+        )}
+      </div>
+    </Section>
   );
 };
 
 // ── 6. Come accedere (campo AGID necessario — assorbe auto/treno/accessibilità/parcheggi) ──
 const ComeAccedereBlock = () => (
   <Section bg="var(--bi-bg-alt)" id="come-accedere">
-    <SectionHeading eyebrow="Struttura" title="Come accedere" />
+    <SectionHeading title="Come accedere" />
     <div
       style={{
         display: 'grid',
@@ -390,85 +388,92 @@ const ComeAccedereBlock = () => (
 const OrariAperturaBlock = () => {
   const { isMobile } = useResponsive();
   return (
-  <Section bg="var(--bi-surface)" id="orari">
-    <div style={{ maxWidth: 680 }}>
-      <SectionHeading eyebrow="Struttura" title="Orari di apertura" />
-      <div
-        style={{
-          background: 'var(--bi-bg-alt)',
-          border: '1px solid var(--bi-border)',
-          borderRadius: 12,
-          overflow: 'hidden',
-        }}
-      >
-        {[
-          {
-            servizio: 'Centralino / Accettazione',
-            orari: '24 ore su 24, 7 giorni su 7',
-          },
-          { servizio: 'Pronto Soccorso', orari: '24 ore su 24, 7 giorni su 7' },
-          {
-            servizio: 'Ambulatori specialistici',
-            orari: 'Lunedì–Venerdì 8:00–18:00 · Sabato 8:00–13:00',
-          },
-          {
-            servizio: 'Diagnostica per immagini (urgenza)',
-            orari: '24 ore su 24, 7 giorni su 7',
-          },
-          {
-            servizio: 'Laboratorio Analisi (prelievi)',
-            orari: 'Lunedì–Sabato 7:00–12:30',
-          },
-          { servizio: 'URP ospedaliero', orari: 'Lunedì–Venerdì 9:00–13:00' },
-          {
-            servizio: 'Orari di visita ai degenti',
-            orari: '11:00–12:30 e 15:30–17:30 (feriali) · 10:00–12:00 e 15:00–17:00 (festivi)',
-          },
-        ].map((row, i, arr) => (
-          <div
-            key={i}
-            style={{
-              display: isMobile ? 'flex' : 'grid',
-              flexDirection: 'column',
-              gridTemplateColumns: '1.4fr 1.6fr',
-              gap: isMobile ? 2 : undefined,
-              padding: '14px 24px',
-              borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
-              background: i % 2 === 0 ? 'transparent' : 'var(--bi-surface)',
-            }}
-          >
-            <span
+    <Section bg="var(--bi-surface)" id="orari">
+      <div style={{ maxWidth: 680 }}>
+        <SectionHeading title="Orari di apertura" />
+        <div
+          style={{
+            background: 'var(--bi-bg-alt)',
+            border: '1px solid var(--bi-border)',
+            borderRadius: 12,
+            overflow: 'hidden',
+          }}
+        >
+          {[
+            {
+              servizio: 'Centralino / Accettazione',
+              orari: '24 ore su 24, 7 giorni su 7',
+            },
+            { servizio: 'Pronto Soccorso', orari: '24 ore su 24, 7 giorni su 7' },
+            {
+              servizio: 'Ambulatori specialistici',
+              orari: 'Lunedì–Venerdì 8:00–18:00 · Sabato 8:00–13:00',
+            },
+            {
+              servizio: 'Diagnostica per immagini (urgenza)',
+              orari: '24 ore su 24, 7 giorni su 7',
+            },
+            {
+              servizio: 'Laboratorio Analisi (prelievi)',
+              orari: 'Lunedì–Sabato 7:00–12:30',
+            },
+            { servizio: 'URP ospedaliero', orari: 'Lunedì–Venerdì 9:00–13:00' },
+            {
+              servizio: 'Orari di visita ai degenti',
+              orari: '11:00–12:30 e 15:30–17:30 (feriali) · 10:00–12:00 e 15:00–17:00 (festivi)',
+            },
+          ].map((row, i, arr) => (
+            <div
+              key={i}
               style={{
-                fontWeight: 600,
-                fontSize: 14,
-                color: 'var(--bi-ink-900)',
+                display: isMobile ? 'flex' : 'grid',
+                flexDirection: 'column',
+                gridTemplateColumns: '1.4fr 1.6fr',
+                gap: isMobile ? 2 : undefined,
+                padding: '14px 24px',
+                borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
+                background: i % 2 === 0 ? 'transparent' : 'var(--bi-surface)',
               }}
             >
-              {row.servizio}
-            </span>
-            <span style={{ fontSize: 14, color: isMobile ? 'var(--bi-ink-500)' : 'var(--bi-ink-700)' }}>{row.orari}</span>
-          </div>
-        ))}
+              <span
+                style={{
+                  fontWeight: 600,
+                  fontSize: 14,
+                  color: 'var(--bi-ink-900)',
+                }}
+              >
+                {row.servizio}
+              </span>
+              <span
+                style={{
+                  fontSize: 14,
+                  color: isMobile ? 'var(--bi-ink-500)' : 'var(--bi-ink-700)',
+                }}
+              >
+                {row.orari}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div
+          style={{
+            marginTop: 12,
+            padding: '12px 16px',
+            background: 'var(--bi-primary-050)',
+            borderRadius: 8,
+            fontSize: 13,
+            color: 'var(--bi-primary-800)',
+            display: 'flex',
+            gap: 8,
+            alignItems: 'flex-start',
+          }}
+        >
+          <Icon name="alert" size={15} style={{ flexShrink: 0, marginTop: 1 }} />
+          Terapia Intensiva e Neonatologia seguono orari speciali — contattare il reparto
+          direttamente.
+        </div>
       </div>
-      <div
-        style={{
-          marginTop: 12,
-          padding: '12px 16px',
-          background: 'var(--bi-primary-050)',
-          borderRadius: 8,
-          fontSize: 13,
-          color: 'var(--bi-primary-800)',
-          display: 'flex',
-          gap: 8,
-          alignItems: 'flex-start',
-        }}
-      >
-        <Icon name="alert" size={15} style={{ flexShrink: 0, marginTop: 1 }} />
-        Terapia Intensiva e Neonatologia seguono orari speciali — contattare il reparto
-        direttamente.
-      </div>
-    </div>
-  </Section>
+    </Section>
   );
 };
 
@@ -476,100 +481,100 @@ const OrariAperturaBlock = () => {
 const ContattiBlock = () => {
   const { isMobile } = useResponsive();
   return (
-  <Section bg="var(--bi-bg-alt)" id="contatti">
-    <SectionHeading eyebrow="Struttura" title="Contatti" />
-    <div
-      style={{
-        background: 'var(--bi-surface)',
-        border: '1px solid var(--bi-border)',
-        borderRadius: 12,
-        overflow: 'hidden',
-        maxWidth: 640,
-      }}
-    >
-      {[
-        { label: 'Centralino', tel: '081 849 2111', orari: '24h/24' },
-        {
-          label: 'URP ospedaliero',
-          tel: '081 849 2150',
-          orari: 'Lun–Ven 9:00–13:00',
-        },
-        {
-          label: 'Email istituzionale',
-          email: 'ospedale.maresca@aslnapoli3sud.it',
-        },
-        { label: 'PEC', pec: 'maresca.aslna3sud@pec.it' },
-      ].map((n, i, arr) => (
-        <div
-          key={i}
-          style={{
-            display: 'flex',
-            flexDirection: isMobile ? 'column' : 'row',
-            alignItems: isMobile ? 'flex-start' : 'center',
-            justifyContent: 'space-between',
-            padding: '16px 24px',
-            borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
-            gap: isMobile ? 8 : 24,
-          }}
-        >
-          <div>
-            <div
-              style={{
-                fontSize: 14,
-                fontWeight: 600,
-                color: 'var(--bi-ink-900)',
-              }}
-            >
-              {n.label}
-            </div>
-            {n.orari && (
+    <Section bg="var(--bi-bg-alt)" id="contatti">
+      <SectionHeading title="Contatti" />
+      <div
+        style={{
+          background: 'var(--bi-surface)',
+          border: '1px solid var(--bi-border)',
+          borderRadius: 12,
+          overflow: 'hidden',
+          maxWidth: 640,
+        }}
+      >
+        {[
+          { label: 'Centralino', tel: '081 849 2111', orari: '24h/24' },
+          {
+            label: 'URP ospedaliero',
+            tel: '081 849 2150',
+            orari: 'Lun–Ven 9:00–13:00',
+          },
+          {
+            label: 'Email istituzionale',
+            email: 'ospedale.maresca@aslnapoli3sud.it',
+          },
+          { label: 'PEC', pec: 'maresca.aslna3sud@pec.it' },
+        ].map((n, i, arr) => (
+          <div
+            key={i}
+            style={{
+              display: 'flex',
+              flexDirection: isMobile ? 'column' : 'row',
+              alignItems: isMobile ? 'flex-start' : 'center',
+              justifyContent: 'space-between',
+              padding: '16px 24px',
+              borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
+              gap: isMobile ? 8 : 24,
+            }}
+          >
+            <div>
               <div
                 style={{
-                  fontSize: 12,
-                  color: 'var(--bi-ink-500)',
-                  marginTop: 2,
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: 'var(--bi-ink-900)',
                 }}
               >
-                {n.orari}
+                {n.label}
               </div>
+              {n.orari && (
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: 'var(--bi-ink-500)',
+                    marginTop: 2,
+                  }}
+                >
+                  {n.orari}
+                </div>
+              )}
+            </div>
+            {n.tel ? (
+              <a
+                href={`tel:${n.tel.replace(/\s/g, '')}`}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  fontSize: 17,
+                  fontWeight: 700,
+                  color: 'var(--bi-primary)',
+                  textDecoration: 'none',
+                  flexShrink: 0,
+                }}
+              >
+                <Icon name="phone" size={15} />
+                {n.tel}
+              </a>
+            ) : n.email ? (
+              <a
+                href={`mailto:${n.email}`}
+                style={{
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: 'var(--bi-primary)',
+                  textDecoration: 'none',
+                }}
+              >
+                {n.email}
+              </a>
+            ) : (
+              <span style={{ fontSize: 14, color: 'var(--bi-ink-700)' }}>{n.pec}</span>
             )}
           </div>
-          {n.tel ? (
-            <a
-              href={`tel:${n.tel.replace(/\s/g, '')}`}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 8,
-                fontSize: 17,
-                fontWeight: 700,
-                color: 'var(--bi-primary)',
-                textDecoration: 'none',
-                flexShrink: 0,
-              }}
-            >
-              <Icon name="phone" size={15} />
-              {n.tel}
-            </a>
-          ) : n.email ? (
-            <a
-              href={`mailto:${n.email}`}
-              style={{
-                fontSize: 14,
-                fontWeight: 600,
-                color: 'var(--bi-primary)',
-                textDecoration: 'none',
-              }}
-            >
-              {n.email}
-            </a>
-          ) : (
-            <span style={{ fontSize: 14, color: 'var(--bi-ink-700)' }}>{n.pec}</span>
-          )}
-        </div>
-      ))}
-    </div>
-  </Section>
+        ))}
+      </div>
+    </Section>
   );
 };
 
@@ -577,7 +582,6 @@ const ContattiBlock = () => {
 const ServiziBlock = () => (
   <Section bg="var(--bi-surface)" id="servizi">
     <SectionHeading
-      eyebrow="Struttura"
       title="Servizi e prestazioni"
       subtitle="Servizi erogati dall'Ospedale Maresca."
     />
@@ -686,7 +690,7 @@ const ServiziBlock = () => (
 // ── 10. Responsabile della struttura (campo AGID necessario — Card People) ──
 const ResponsabileBlock = () => (
   <Section bg="var(--bi-bg-alt)" id="responsabile">
-    <SectionHeading eyebrow="Struttura" title="Responsabile della struttura" />
+    <SectionHeading title="Responsabile della struttura" />
     <div
       style={{
         display: 'flex',
@@ -747,7 +751,7 @@ const ResponsabileBlock = () => (
 // ── 10b. URP ──
 const UrpBlock = () => (
   <Section bg="var(--bi-surface)" id="urp">
-    <SectionHeading eyebrow="Struttura" title="Ufficio Relazioni con il Pubblico (URP)" />
+    <SectionHeading title="Ufficio Relazioni con il Pubblico (URP)" />
     <div
       style={{
         display: 'flex',
@@ -811,7 +815,7 @@ const UrpBlock = () => (
 // ── 10c. CUP ──
 const CupBlock = () => (
   <Section bg="var(--bi-bg-alt)" id="cup">
-    <SectionHeading eyebrow="Struttura" title="Centro Unico di Prenotazione (CUP)" />
+    <SectionHeading title="Centro Unico di Prenotazione (CUP)" />
     <div style={{ maxWidth: 540 }}>
       {[
         { label: 'Telefono', value: '08118434926', tel: true },
@@ -835,19 +839,31 @@ const CupBlock = () => (
           {row.tel ? (
             <a
               href={`tel:${row.value}`}
-              style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-primary)', textDecoration: 'none' }}
+              style={{
+                fontSize: 15,
+                fontWeight: 600,
+                color: 'var(--bi-primary)',
+                textDecoration: 'none',
+              }}
             >
               {row.value}
             </a>
           ) : row.email ? (
             <a
               href={`mailto:${row.value}`}
-              style={{ fontSize: 14, color: 'var(--bi-primary)', textDecoration: 'none', wordBreak: 'break-all' }}
+              style={{
+                fontSize: 14,
+                color: 'var(--bi-primary)',
+                textDecoration: 'none',
+                wordBreak: 'break-all',
+              }}
             >
               {row.value}
             </a>
           ) : (
-            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-ink-900)' }}>{row.value}</span>
+            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-ink-900)' }}>
+              {row.value}
+            </span>
           )}
         </div>
       ))}
@@ -858,13 +874,21 @@ const CupBlock = () => (
 // ── 10d. Cartella clinica ──
 const CartellaClinicaBlock = () => (
   <Section bg="var(--bi-surface)" id="cartella-clinica">
-    <SectionHeading eyebrow="Struttura" title="Cartella clinica" />
+    <SectionHeading title="Cartella clinica" />
     <div style={{ maxWidth: 680, display: 'flex', flexDirection: 'column', gap: 20 }}>
       <div>
         <p style={{ fontSize: 15, color: 'var(--bi-ink-700)', margin: '0 0 8px', lineHeight: 1.6 }}>
           La richiesta può essere effettuata via mail allegando:
         </p>
-        <ul style={{ margin: 0, paddingLeft: 20, fontSize: 15, color: 'var(--bi-ink-700)', lineHeight: 1.8 }}>
+        <ul
+          style={{
+            margin: 0,
+            paddingLeft: 20,
+            fontSize: 15,
+            color: 'var(--bi-ink-700)',
+            lineHeight: 1.8,
+          }}
+        >
           <li>modulo compilato</li>
           <li>eventuale delega</li>
           <li>copia del documento di riconoscimento del richiedente e/o delegato</li>
@@ -875,10 +899,17 @@ const CartellaClinicaBlock = () => (
         presentare anche la documentazione del paziente e del delegato.
       </p>
       <div>
-        <div style={{ fontSize: 13, color: 'var(--bi-ink-500)', marginBottom: 6 }}>Email richiesta</div>
+        <div style={{ fontSize: 13, color: 'var(--bi-ink-500)', marginBottom: 6 }}>
+          Email richiesta
+        </div>
         <a
           href="mailto:potdg.arc@aslnapoli3sud.it"
-          style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-primary)', textDecoration: 'none' }}
+          style={{
+            fontSize: 15,
+            fontWeight: 600,
+            color: 'var(--bi-primary)',
+            textDecoration: 'none',
+          }}
         >
           potdg.arc@aslnapoli3sud.it
         </a>
@@ -901,8 +932,12 @@ const CartellaClinicaBlock = () => (
               borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
             }}
           >
-            <span style={{ fontSize: 14, color: 'var(--bi-ink-500)', fontWeight: 500 }}>{row.sportello}</span>
-            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-ink-900)' }}>{row.orari}</span>
+            <span style={{ fontSize: 14, color: 'var(--bi-ink-500)', fontWeight: 500 }}>
+              {row.sportello}
+            </span>
+            <span style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-ink-900)' }}>
+              {row.orari}
+            </span>
           </div>
         ))}
       </div>
@@ -913,16 +948,17 @@ const CartellaClinicaBlock = () => (
 // ── 11a. Direzione Medica di Presidio ──
 const DirMedicaBlock = () => (
   <Section bg="var(--bi-bg-alt)" id="direzione-medica">
-    <SectionHeading eyebrow="Struttura" title="U.O.C. Direzione Medica di Presidio" />
+    <SectionHeading title="U.O.C. Direzione Medica di Presidio" />
     <div style={{ maxWidth: 680, display: 'flex', flexDirection: 'column', gap: 20 }}>
       <p style={{ fontSize: 15, color: 'var(--bi-ink-700)', margin: 0, lineHeight: 1.6 }}>
-        La Direzione Medica di Presidio svolge funzioni igienico-sanitarie, organizzative e gestionali.
-        Coordina i servizi ospedalieri per garantire l'efficienza delle prestazioni e la tutela del paziente.
+        La Direzione Medica di Presidio svolge funzioni igienico-sanitarie, organizzative e
+        gestionali. Coordina i servizi ospedalieri per garantire l'efficienza delle prestazioni e la
+        tutela del paziente.
       </p>
       <div style={{ maxWidth: 540 }}>
         {[
           { servizio: 'Segreteria di Direzione', tel: '08118434902' },
-          { servizio: 'Sala Morgue',             tel: '08118434983' },
+          { servizio: 'Sala Morgue', tel: '08118434983' },
         ].map((row, i, arr) => (
           <div
             key={i}
@@ -934,10 +970,17 @@ const DirMedicaBlock = () => (
               borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
             }}
           >
-            <span style={{ fontSize: 14, color: 'var(--bi-ink-500)', fontWeight: 500 }}>{row.servizio}</span>
+            <span style={{ fontSize: 14, color: 'var(--bi-ink-500)', fontWeight: 500 }}>
+              {row.servizio}
+            </span>
             <a
               href={`tel:${row.tel}`}
-              style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-primary)', textDecoration: 'none' }}
+              style={{
+                fontSize: 15,
+                fontWeight: 600,
+                color: 'var(--bi-primary)',
+                textDecoration: 'none',
+              }}
             >
               {row.tel}
             </a>
@@ -951,13 +994,20 @@ const DirMedicaBlock = () => (
 // ── 11b. SAO ──
 const SaoBlock = () => (
   <Section bg="var(--bi-surface)" id="sao">
-    <SectionHeading eyebrow="Struttura" title="U.O.C. Servizi Amministrativi Ospedalieri Area Nord – SAO" />
+    <SectionHeading title="U.O.C. Servizi Amministrativi Ospedalieri Area Nord – SAO" />
     <div style={{ maxWidth: 740 }}>
       {[
-        { servizio: 'Segreteria di Direzione',                                                                                                        tel: '08118437075' },
-        { servizio: 'Gestione richieste dagli Affari Legali per contenzioso lavoro',                                                                  tel: '08118437075' },
-        { servizio: 'Gestione specialisti ambulatoriali',                                                                                             tel: '08118437094' },
-        { servizio: 'Gestione rimborso ticket, Gestione cassa, Recupero codici bianchi, Gestione NSIS, Gestione liquidazione, Gestione SAP',          tel: '08118437124' },
+        { servizio: 'Segreteria di Direzione', tel: '08118437075' },
+        {
+          servizio: 'Gestione richieste dagli Affari Legali per contenzioso lavoro',
+          tel: '08118437075',
+        },
+        { servizio: 'Gestione specialisti ambulatoriali', tel: '08118437094' },
+        {
+          servizio:
+            'Gestione rimborso ticket, Gestione cassa, Recupero codici bianchi, Gestione NSIS, Gestione liquidazione, Gestione SAP',
+          tel: '08118437124',
+        },
       ].map((row, i, arr) => (
         <div
           key={i}
@@ -969,10 +1019,17 @@ const SaoBlock = () => (
             borderBottom: i < arr.length - 1 ? '1px solid var(--bi-border)' : 'none',
           }}
         >
-          <span style={{ fontSize: 14, color: 'var(--bi-ink-700)', lineHeight: 1.5 }}>{row.servizio}</span>
+          <span style={{ fontSize: 14, color: 'var(--bi-ink-700)', lineHeight: 1.5 }}>
+            {row.servizio}
+          </span>
           <a
             href={`tel:${row.tel}`}
-            style={{ fontSize: 15, fontWeight: 600, color: 'var(--bi-primary)', textDecoration: 'none' }}
+            style={{
+              fontSize: 15,
+              fontWeight: 600,
+              color: 'var(--bi-primary)',
+              textDecoration: 'none',
+            }}
           >
             {row.tel}
           </a>
@@ -986,32 +1043,32 @@ const SaoBlock = () => (
 const GalleriaBlock = () => {
   const { isMobile, isCompact } = useResponsive();
   return (
-  <Section bg="var(--bi-surface)" id="galleria">
-    <SectionHeading eyebrow="Struttura" title="Galleria" />
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : isCompact ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
-        gap: 12,
-      }}
-    >
-      {GALLERIA.map((g, i) => (
-        <div
-          key={i}
-          className="placeholder-img"
-          style={{
-            gridColumn: isMobile ? 'span 1' : `span ${Math.min(g.span, 3)}`,
-            aspectRatio: !isMobile && g.span === 2 ? '16/7' : '16/9',
-            borderRadius: 10,
-            fontSize: 11,
-            color: 'var(--bi-primary-800)',
-          }}
-        >
-          FOTO REALE · {g.label}
-        </div>
-      ))}
-    </div>
-  </Section>
+    <Section bg="var(--bi-surface)" id="galleria">
+      <SectionHeading title="Galleria" />
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : isCompact ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+          gap: 12,
+        }}
+      >
+        {GALLERIA.map((g, i) => (
+          <div
+            key={i}
+            className="placeholder-img"
+            style={{
+              gridColumn: isMobile ? 'span 1' : `span ${Math.min(g.span, 3)}`,
+              aspectRatio: !isMobile && g.span === 2 ? '16/7' : '16/9',
+              borderRadius: 10,
+              fontSize: 11,
+              color: 'var(--bi-primary-800)',
+            }}
+          >
+            FOTO REALE · {g.label}
+          </div>
+        ))}
+      </div>
+    </Section>
   );
 };
 
@@ -1035,7 +1092,7 @@ const PageMaresca = () => (
       ]}
     />
 
-    {/* ── 3. Hero — Nome (H1), Descrizione breve, Immagine, Dove, badge PS, CTA anchor ── */}
+    {/* ── 3. Hero — Nome (H1), Descrizione breve, Immagine, Dove ── */}
     <div
       style={{
         position: 'relative',
@@ -1063,10 +1120,6 @@ const PageMaresca = () => (
 
       <div className="container" style={{ position: 'relative', padding: '64px 0 56px' }}>
         <div style={{ maxWidth: 640 }}>
-          <Eyebrow color="rgba(255,255,255,0.75)">
-            Presidio ospedaliero · Distretto 58 · Torre del Greco
-          </Eyebrow>
-
           {/* Campo: Nome della struttura (H1) */}
           <h1
             style={{
@@ -1074,7 +1127,7 @@ const PageMaresca = () => (
               fontSize: 'clamp(32px, 4vw, 56px)',
               fontWeight: 500,
               lineHeight: 1.1,
-              margin: '10px 0 8px',
+              margin: '0 0 8px',
               color: '#fff',
             }}
           >
@@ -1094,7 +1147,14 @@ const PageMaresca = () => (
           >
             P.O. di base con Pronto Soccorso
           </p>
-          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)', margin: '0 0 6px', lineHeight: 1.5 }}>
+          <p
+            style={{
+              fontSize: 15,
+              color: 'rgba(255,255,255,0.85)',
+              margin: '0 0 6px',
+              lineHeight: 1.5,
+            }}
+          >
             L'assistenza ospedaliera viene erogata attraverso:
           </p>
           <ul
@@ -1125,23 +1185,37 @@ const PageMaresca = () => (
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <Icon name="hospital" size={13} />
-              <span><strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>Sede</strong>&nbsp; Via Montedoro, 53 – Torre del Greco</span>
+              <span>
+                <strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>Sede</strong>
+                &nbsp; Via Montedoro, 53 – Torre del Greco
+              </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <Icon name="phone" size={13} />
-              <span><strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>Centralino</strong>&nbsp; 08118431111</span>
+              <span>
+                <strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>
+                  Centralino
+                </strong>
+                &nbsp; 08118431111
+              </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <Icon name="mail" size={13} />
-              <span><strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>Email</strong>&nbsp; potdg.dirs@aslnapoli3sud.it</span>
+              <span>
+                <strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>Email</strong>
+                &nbsp; potdg.dirs@aslnapoli3sud.it
+              </span>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
               <Icon name="mail" size={13} />
-              <span><strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>PEC</strong>&nbsp; potdg.dirs@pec.aslnapoli3sud.it</span>
+              <span>
+                <strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>PEC</strong>
+                &nbsp; potdg.dirs@pec.aslnapoli3sud.it
+              </span>
             </div>
           </div>
 
-          {/* Badge PS cliccabile verso Card Service Pronto Soccorso + CTA scroll-to-anchor */}
+          {/* Link rapidi */}
           <div
             style={{
               display: 'flex',
@@ -1150,24 +1224,6 @@ const PageMaresca = () => (
               flexWrap: 'wrap',
             }}
           >
-            <a
-              href="#servizi"
-              style={{
-                padding: '6px 14px',
-                borderRadius: 99,
-                background: '#C62828',
-                color: '#fff',
-                fontWeight: 700,
-                fontSize: 12,
-                letterSpacing: 0.5,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 6,
-              }}
-            >
-              PS attivo 24/7 — vedi stato in tempo reale →
-            </a>
             <a
               href="#dove"
               style={{
