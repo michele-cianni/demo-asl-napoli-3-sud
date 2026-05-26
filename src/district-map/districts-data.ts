@@ -31,6 +31,7 @@ export const DISTRETTI: Distretto[] = [
       'Comiziano',
       'Roccarainola',
       'Tufino',
+      'Visciano',
     ],
   },
   {
