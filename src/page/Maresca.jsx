@@ -113,37 +113,36 @@ const ACHIBlock = () => (
   <Section bg="var(--bi-bg-alt)" id="a-chi-e-rivolto">
     <div style={{ maxWidth: 720 }}>
       <SectionHeading eyebrow="Struttura" title="A chi è rivolto" />
-      <p
-        style={{
-          fontSize: 16,
-          color: 'var(--bi-ink-700)',
-          lineHeight: 1.7,
-          margin: '0 0 20px',
-        }}
-      >
-        L'Ospedale Maresca è aperto a tutti i cittadini del territorio ASL Napoli 3 Sud e della
-        Regione Campania per prestazioni di ricovero, emergenza, specialistica ambulatoriale e
-        diagnostica per immagini.
+      <p style={{ fontSize: 16, color: 'var(--bi-ink-700)', lineHeight: 1.7, margin: '0 0 16px' }}>
+        Il Presidio Ospedaliero di Torre del Greco garantisce assistenza sanitaria di qualità a cittadini
+        italiani e stranieri, residenti e non, rispettando sempre la dignità della persona.
+      </p>
+      <p style={{ fontSize: 16, color: 'var(--bi-ink-700)', lineHeight: 1.7, margin: '0 0 16px' }}>
+        Grazie alle Unità Operative di Degenza e ai Servizi Diagnostici moderni, l'ospedale offre cure
+        mediche, diagnosi accurate e percorsi terapeutici integrati per pazienti di tutte le età.
+      </p>
+      <p style={{ fontSize: 16, color: 'var(--bi-ink-700)', lineHeight: 1.7, margin: '0 0 20px' }}>
+        I presidi ospedalieri rappresentano un punto di riferimento per la salute del territorio, con
+        personale qualificato, tecnologie avanzate e servizi organizzati per garantire cure sicure,
+        tempestive e accessibili.
       </p>
       <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-        {['Tutti i cittadini', 'Anziani', 'Donne', 'Bambini', 'Persone con disabilità'].map(
-          (chip) => (
-            <span
-              key={chip}
-              style={{
-                padding: '6px 14px',
-                borderRadius: 99,
-                background: 'var(--bi-primary-050)',
-                color: 'var(--bi-primary-800)',
-                fontSize: 13,
-                fontWeight: 600,
-                border: '1px solid var(--bi-primary-100)',
-              }}
-            >
-              {chip}
-            </span>
-          )
-        )}
+        {['Tutti i cittadini', 'Anziani', 'Donne', 'Bambini', 'Persone con disabilità'].map((chip) => (
+          <span
+            key={chip}
+            style={{
+              padding: '6px 14px',
+              borderRadius: 99,
+              background: 'var(--bi-primary-050)',
+              color: 'var(--bi-primary-800)',
+              fontSize: 13,
+              fontWeight: 600,
+              border: '1px solid var(--bi-primary-100)',
+            }}
+          >
+            {chip}
+          </span>
+        ))}
       </div>
     </div>
   </Section>
@@ -829,33 +828,64 @@ const PageMaresca = () => (
             Ospedale Maresca
           </h1>
 
-          {/* Campo: Descrizione breve (max 160 caratteri) */}
+          {/* Campo: Tipo presidio + servizi erogati */}
           <p
             style={{
-              fontSize: 16,
-              color: 'rgba(255,255,255,0.85)',
-              margin: '0 0 12px',
-              lineHeight: 1.5,
-              maxWidth: 520,
+              fontSize: 13,
+              fontWeight: 700,
+              letterSpacing: 0.4,
+              color: 'rgba(255,255,255,0.6)',
+              margin: '0 0 6px',
+              textTransform: 'uppercase',
             }}
           >
-            Presidio ospedaliero di I livello con Pronto Soccorso attivo 24/7, 12 reparti clinici e
-            diagnostica avanzata al servizio del territorio vesuviano.
+            P.O. di base con Pronto Soccorso
           </p>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.85)', margin: '0 0 6px', lineHeight: 1.5 }}>
+            L'assistenza ospedaliera viene erogata attraverso:
+          </p>
+          <ul
+            style={{
+              margin: '0 0 16px',
+              paddingLeft: 20,
+              fontSize: 15,
+              color: 'rgba(255,255,255,0.85)',
+              lineHeight: 1.8,
+            }}
+          >
+            <li>Ricovero ordinario</li>
+            <li>Ricovero a ciclo diurno</li>
+            <li>Specialistica ambulatoriale</li>
+            <li>Pronto soccorso</li>
+          </ul>
 
-          {/* Campo: Dove — indirizzo breve */}
+          {/* Campo: Dove — indirizzo e contatti rapidi */}
           <div
             style={{
               display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              fontSize: 14,
+              flexDirection: 'column',
+              gap: 4,
+              fontSize: 13,
               color: 'rgba(255,255,255,0.72)',
               marginBottom: 24,
             }}
           >
-            <Icon name="hospital" size={14} />
-            Via Montedoro 53, 80059 Torre del Greco (NA)
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Icon name="hospital" size={13} />
+              <span><strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>Sede</strong>&nbsp; Via Montedoro, 53 – Torre del Greco</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Icon name="phone" size={13} />
+              <span><strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>Centralino</strong>&nbsp; 08118431111</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Icon name="mail" size={13} />
+              <span><strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>Email</strong>&nbsp; potdg.dirs@aslnapoli3sud.it</span>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Icon name="mail" size={13} />
+              <span><strong style={{ color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>PEC</strong>&nbsp; potdg.dirs@pec.aslnapoli3sud.it</span>
+            </div>
           </div>
 
           {/* Badge PS cliccabile verso Card Service Pronto Soccorso + CTA scroll-to-anchor */}
