@@ -723,10 +723,10 @@ const ResponsabileBlock = () => (
       </div>
       <div>
         <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--bi-ink-900)' }}>
-          Dott. Mario Borrelli
+          Dott.ssa Alessandra Gimigliano
         </div>
         <div style={{ fontSize: 14, color: 'var(--bi-ink-500)', marginTop: 4 }}>
-          Direttore Sanitario — Ospedale Maresca
+          Direzione medica di presidio — Ospedale Maresca
         </div>
         <a
           href="#"
